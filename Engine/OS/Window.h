@@ -1,0 +1,61 @@
+#ifndef __AE_OS_WINDOW__
+#define __AE_OS_WINDOW__
+
+#include "Anima/Anima.h"
+#include "Anima/OS/WindowDesc.h"
+
+#include "Anima/Graphics/Device/Context.h"
+
+#include <string>
+
+namespace AE
+{
+	namespace Graphics
+	{
+		class Manager;
+
+		namespace Device
+		{
+			class Context;
+		}
+	}
+
+	namespace OS
+	{
+		class AE_DECLSPEC Window
+		{
+		public:
+			Window(const std::string &windowTitle, const AE::OS::WindowDesc &windowDesc);
+			Window(AE::uint externalWindowId) : mId(externalWindowId), mIsExternal(true) {}
+			virtual ~Window() {}
+
+			virtual void					attachDeviceContext(AE::Graphics::Device::Context *deviceContext);
+			virtual void					close() = 0;
+			AE::Graphics::ColorFormat		getColorFormat() { return mColorFormat; }
+			AE::Graphics::Device::Context*	getDeviceContext() { return mDeviceContext; }
+			AE::Math::Point2<AE::uint>		getDimensions() { return mDimensions; }
+			AE::uint8						getId() { return mId; }
+			//AE::Input::Context*			getInputContext() { return mInputContext; }
+			AE::Math::Point2<AE::int32>		getPosition() { return mPosition; }
+			const std::string&				getTitle() { return mWindowTitle; }
+			virtual size_t					getWindowHandle() = 0;
+			bool							isFullScreen() { assert(mDeviceContext); return mDeviceContext->isFullScreen(); }
+			virtual void                	render() = 0;
+			void							setFullScreen(bool isFullScreen) { assert(mDeviceContext); mDeviceContext->setFullScreen(isFullScreen); }
+			virtual void					show() = 0;
+
+		protected:
+			AE::Graphics::ColorFormat		mColorFormat;
+			AE::Graphics::Device::Context	*mDeviceContext;
+			AE::Math::Point2<AE::uint>		mDimensions;
+			AE::uint						mId;
+			//AE::Input::Context			*mInputContext;
+			bool							mIsExternal;
+			bool							mIsFullScreen;
+			AE::Math::Point2<AE::int32>		mPosition;
+			std::string						mWindowTitle;
+		};
+	}
+}
+
+#endif
