@@ -9,10 +9,10 @@ namespace AE
 	{
 		struct KeyInfo
 		{
-			KeyInfo(AE::Input::KeyValue kv) : keyValue(kv) {}
+			KeyInfo(AE::Input::KeyCode kc) : keyCode(kc) {}
 			virtual ~KeyInfo() {}
 
-			AE::Input::KeyValue keyValue;
+			AE::Input::KeyCode keyCode;
 		};
 	}
 }

@@ -7,14 +7,39 @@ add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
+add_library(AnimaCore STATIC
+	Anima/Plugin.h
+	Anima/Plugin.cpp
+	Anima/PluginGroup.h
+	Anima/PluginGroup.cpp
+	Anima/PluginManager.h
+	Anima/PluginManager.cpp
+	Anima/PluginRoot.h
+	Anima/PluginRoot.cpp)
+	
+add_library(EventCore STATIC
+	Anima/OS/Event.h
+	Anima/OS/EventManager.h
+	Anima/OS/EventQueue.h
+	Anima/OS/EventQueue.cpp)
+target_link_libraries(EventCore AnimaCore)
+
 add_library(WindowCore STATIC
-	Engine/OS/EventQueue.h
-	Engine/OS/EventQueue.cpp
-	Engine/OS/Window.h
-	Engine/OS/Window.cpp
-	Engine/OS/WindowDesc.h
-	Engine/OS/WindowManager.h
-	Engine/OS/WindowManager.cpp)
+	Anima/OS/EventQueue.h
+	Anima/OS/EventQueue.cpp
+	Anima/OS/Window.h
+	Anima/OS/Window.cpp
+	Anima/OS/WindowDesc.h
+	Anima/OS/WindowManager.h
+	Anima/OS/WindowManager.cpp)
+target_link_libraries(WindowCore AnimaCore)
+
+add_library(EventSdl STATIC
+	Plugins/OS/EventSdl/EventManagerSdl.h
+	Plugins/OS/EventSdl/EventManagerSdl.cpp
+	Plugins/OS/EventSdl/EventQueueSdl.h
+	Plugins/OS/EventSdl/EventQueueSdl.cpp)
+target_link_libraries(EventSdl EventCore)
 	
 add_library(WindowSdl
 	Plugins/OS/WindowSdl/EventQueueSdl.h

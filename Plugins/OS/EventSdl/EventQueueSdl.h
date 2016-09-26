@@ -1,10 +1,10 @@
-#ifndef __AE_OS_EVENT_QUEUE_SDL__
-#define __AE_OS_EVENT_QUEUE_SDL__
+#ifndef __AE_OS_EVENT_QUEUE_WIN__
+#define __AE_OS_EVENT_QUEUE_WIN__
 
-#include "Anima/OS/EventQueue.h"
-#include "Anima/Platform.h"
+#include "../AnimaOSEventQueue.h"
+#include "Anima/AnimaPlatform.h"
 
-#include "Dependencies/SDL2-2.0.4/include/SDL.h"
+#include "SDL.h"
 
 #include <list>
 

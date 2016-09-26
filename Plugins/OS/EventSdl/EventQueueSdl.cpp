@@ -5,8 +5,8 @@
 #include "WindowManagerSdl.h"
 
 //#include "AnimaGraphicsManager.h"
-#include "Anima/Input/KeyInfo.h"
-#include "Anima/OS/Event.h"
+#include "Anima/Input/AnimaInputKeyInfo.h"
+#include "Anima/OS/AnimaOSEvent.h"
 
 #include <cassert>
 

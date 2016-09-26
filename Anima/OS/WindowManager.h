@@ -4,7 +4,7 @@
 #include "Anima/OS/EventQueue.h"
 //#include "Anima/Graphics/Enums.h"
 #include "Anima/Math/Point2.h"
-#include "Anima/OS/Enums.h"
+//#include "Anima/OS/Enums.h"
 #include "Anima/OS/WindowDesc.h"
 #include "Anima/Platform.h"
 #include "Anima/Plugin.h"

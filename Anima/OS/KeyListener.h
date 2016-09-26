@@ -2,7 +2,7 @@
 #define __AE_OS_KEY_LISTENER__
 
 #include "Anima/OS/Event.h"
-#include "Anima/Input/AnimaInputKeyInfo.h"
+#include "Anima/Input/KeyInfo.h"
 
 namespace AE
 {
