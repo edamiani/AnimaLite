@@ -31,6 +31,8 @@ namespace AE
 			virtual void unregisterMouseListener(AE::OS::MouseListener *mouseListener) { if(mEventQueue) mEventQueue->unregisterMouseListener(mouseListener); }
 			virtual void unregisterWindowListener(AE::OS::WindowListener *windowListener) { if(mEventQueue) mEventQueue->unregisterWindowListener(windowListener); }
 
+			AE::OS::EventQueue* getEventQueue() { return mEventQueue; }
+
 		protected:
 			//AE::OS::WindowMetrics mWindowMetrics;
 			AE::OS::EventQueue *mEventQueue = nullptr;

@@ -15,10 +15,8 @@ namespace AE
 		class EventManagerSdl : public AE::OS::EventManager
 		{
 		public:
-			EventManagerSdl() { mEventQueue = new AE::OS::EventQueueSdl(); }
-			virtual ~EventManagerSdl() { if(mEventQueue) delete mEventQueue; }
-
-			bool handleEvents();
+			EventManagerSdl();
+			virtual ~EventManagerSdl();
 		};
 	}
 }

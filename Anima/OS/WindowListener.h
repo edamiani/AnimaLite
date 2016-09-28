@@ -2,12 +2,14 @@
 #define __AE_OS_WINDOW_LISTENER__
 
 #include "Anima/Math/Point2.h"
-#include "Anima/OS/Window.h"
+//#include "Anima/OS/Window.h"
 
 namespace AE
 {
 	namespace OS
 	{
+		class Window;
+
 		class WindowListener
 		{
 		public:

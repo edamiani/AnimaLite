@@ -1,12 +1,12 @@
 //#include "../include/AnimaOSProcessManagerWin32.h"
 //#include "../include/AnimaOSProcessWin32.h"
-#include "EventQueueSdl.h"
-#include "WindowSdl.h"
-#include "WindowManagerSdl.h"
+#include "Plugins/OS/EventSdl/EventQueueSdl.h"
+//#include "WindowSdl.h"
+//#include "WindowManagerSdl.h"
 
 //#include "AnimaGraphicsManager.h"
-#include "Anima/Input/AnimaInputKeyInfo.h"
-#include "Anima/OS/AnimaOSEvent.h"
+#include "Anima/Input/KeyInfo.h"
+#include "Anima/OS/Event.h"
 
 #include <cassert>
 
@@ -16,20 +16,23 @@ namespace AE
 	{
 		EventQueueSdl::EventQueueSdl()
 		{
+			
 		}
 
 		EventQueueSdl::~EventQueueSdl()
 		{
+			mKeyListeners.clear();
+			mMouseListeners.clear();
 			mWindowListeners.clear();
 		}
 
-		bool EventQueueSdl::getNextEvent(AE::OS::Event *eventContainer)
+		bool EventQueueSdl::getNextEvent()
 		{
-			SDL_Event event;
+			SDL_Event event[1];
 
-			if(SDL_PollEvent(&event))
+			if(SDL_PeepEvents(event, 1, SDL_GETEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT) > 0)
 			{
-				onEvent(&event);
+				onEvent(event);
 
 				return true;
 			}
@@ -65,114 +68,49 @@ namespace AE
 			}
 		}
 
-		void EventQueueSdl::onEvent(SDL_Event *event)
+		bool EventQueueSdl::pollEvents()
+		{
+			SDL_Event event;
+
+			while(SDL_PollEvent(&event))
+			{
+				if(!onEvent(&event))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		bool EventQueueSdl::onEvent(SDL_Event *event)
 		{
 			if(event->type == SDL_WINDOWEVENT) 
 			{
 				SDL_Window *sdlWindow = SDL_GetWindowFromID(event->window.windowID);
-				AE::OS::WindowSdl *window = reinterpret_cast<AE::OS::WindowSdl *>(SDL_GetWindowData(sdlWindow, "AnimaWindow"));
+				AE::OS::Window *window = reinterpret_cast<AE::OS::Window *>(SDL_GetWindowData(sdlWindow, "AnimaWindow"));
 
 				switch(event->window.event)
 				{
-					/*case WM_CHAR:
-					{
-						std::list<AE::OS::KeyListener *>::iterator i;
-						for(i = mKeyListeners.begin(); i != mKeyListeners.end(); i++)
-						{
-							wchar_t character = (wchar_t)wParam;
-
-							AE::OS::EventKeyTranslation keyEvent(window, character);
-							(*i)->onKeyTranslation(keyEvent);
-						}
-						break;
-					}*/
-
 					case SDL_WINDOWEVENT_CLOSE:
 					{
 						std::list<AE::OS::WindowListener *>::iterator i;
 						for(i = mWindowListeners.begin(); i != mWindowListeners.end(); i++)
+						{
 							(*i)->onClose(window);
-						break;
+						}
+						return true;
 					}
-
-					//case WM_DESTROY:
-					//	::PostQuitMessage(0);
-					//	break;
-
-					//case WM_DISPLAYCHANGE:
-					//	//if(window) window->onDisplayChange();
-					//	break;
-
-					//case WM_KEYDOWN:
-					//{
-					//	std::list<AE::OS::KeyListener *>::iterator i;
-					//	for(i = mKeyListeners.begin(); i != mKeyListeners.end(); i++)
-					//	{
-					//		AE::Input::KeyInfo keyInfo = AE::Input::KeyInfo((AE::Input::KeyValue)wParam);
-					//		AE::OS::EventKeyboard keyEvent(AE::OS::EST_KEY_DOWN, window, keyInfo);
-					//		(*i)->onKeyDown(keyEvent);
-					//	}
-					//	break;
-					//}
-
-					//case WM_PAINT:
-					//	if(window) window->render();
-					//	break;
-
-					//case WM_SIZE:
-					//	//if(window) window->onResize();
-					//	break;
-
-					//case WM_MOUSEMOVE:
-					//{
-					//	// TODO Fix the parameters!!!
-					//	AE::OS::EventMouse mouseEvent(AE::OS::EST_MOUSE_AXES, window, 0, AE::Math::Point2<AE::int32>(0, 0));
-					//	std::list<AE::OS::MouseListener *>::iterator i;
-					//	for(i = mMouseListeners.begin(); i != mMouseListeners.end(); i++)
-					//		(*i)->onMouseMove(mouseEvent);
-					//	break;
-					//}
-
-					//case WM_LBUTTONUP:
-					//	break;
-
-					//case WM_SETFOCUS:
-					//{
-					//	std::list<AE::OS::WindowListener *>::iterator i;
-					//	for(i = mWindowListeners.begin(); i != mWindowListeners.end(); i++)
-					//		(*i)->onGainFocus(window);
-					//	break;
-					//}
-
-					//case WM_KILLFOCUS:
-					//{
-					//	std::list<AE::OS::WindowListener *>::iterator i;
-					//	for(i = mWindowListeners.begin(); i != mWindowListeners.end(); i++)
-					//		(*i)->onLostFocus(window);
-					//	break;
-					//}
-
-					//case WM_SHOWWINDOW:
-					//{
-					//	if(wParam == TRUE) // Window shown
-					//	{
-					//		WINDOWINFO windowInfo;
-					//		windowInfo.cbSize = sizeof(WINDOWINFO);
-					//		GetWindowInfo(hWnd, &windowInfo);
-
-					//		AE::Math::Point2<AE::int32> topLeft = AE::Math::Point2<AE::int32>(windowInfo.rcWindow.left, windowInfo.rcWindow.top);
-					//		AE::Math::Point2<AE::uint> dimensions = AE::Math::Point2<AE::uint>(windowInfo.rcWindow.right - windowInfo.rcWindow.left, windowInfo.rcWindow.bottom - windowInfo.rcWindow.top);
-					//		std::list<AE::OS::WindowListener *>::iterator i;
-					//		for(i = mWindowListeners.begin(); i != mWindowListeners.end(); i++)
-					//			(*i)->onRestore(window, topLeft, dimensions);
-					//	}
-					//	else // Window hidden
-					//	{
-					//	}
-					//	break;
-					//}
+					default:
+						return true;
 				}
 			}
+			else if(event->type == SDL_QUIT)
+			{
+				return false;
+			}
+
+			return true;
 		}
 	}
 }

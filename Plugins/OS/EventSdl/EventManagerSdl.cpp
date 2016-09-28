@@ -10,25 +10,45 @@ namespace AE
 {
 	namespace OS
 	{
-		//std::list<AE::OS::KeyListener *> EventManagerSdl::mKeyListeners;
-		//std::list<AE::OS::MouseListener *> EventManagerSdl::mMouseListeners;
-
-		bool handleEvents()
+		EventManagerSdl::EventManagerSdl()
 		{
-			SDL_Event *event;
-			while(SDL_PollEvent(event))
+			if(!SDL_WasInit(SDL_INIT_EVENTS))
 			{
-				if(event->type == SDL_WINDOWEVENT)
-				{
-					switch(event->window.type)
-					{
-					case SDL_WINDOWEVENT_CLOSE:
-						//for(auto window : mWin)
-						break;
-					}
-				}
+				SDL_InitSubSystem(SDL_INIT_EVENTS);
+			}
+
+			mEventQueue = new AE::OS::EventQueueSdl();
+		}
+
+		EventManagerSdl::~EventManagerSdl()
+		{
+			if(SDL_WasInit(SDL_INIT_EVENTS))
+			{
+				SDL_QuitSubSystem(SDL_INIT_EVENTS);
+			}
+
+			if(mEventQueue)
+			{
+				delete mEventQueue;
 			}
 		}
+
+		//bool handleEvents()
+		//{
+		//	SDL_Event *event;
+		//	while(SDL_PollEvent(event))
+		//	{
+		//		if(event->type == SDL_WINDOWEVENT)
+		//		{
+		//			switch(event->window.type)
+		//			{
+		//			case SDL_WINDOWEVENT_CLOSE:
+		//				//for(auto window : mWin)
+		//				break;
+		//			}
+		//		}
+		//	}
+		//}
 
 		/*LRESULT WINAPI EventManagerWin32::MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		{

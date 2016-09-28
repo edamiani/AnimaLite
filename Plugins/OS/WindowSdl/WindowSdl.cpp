@@ -7,20 +7,25 @@ namespace AE
 {
 	namespace OS
 	{
-		WindowSdl::WindowSdl(const std::string &windowTitle, const AE::OS::WindowDesc &windowDesc)
-			: Window(windowTitle, windowDesc)
+		WindowSdl::WindowSdl(AE::uint id, const std::string &windowTitle, AE::OS::WindowDesc &windowDesc)
+			: Window(id, windowTitle, windowDesc)
 		{
 			mIsFullScreen = false;
 
-			mWindow = SDL_CreateWindow(windowTitle.c_str(), windowDesc.position.x, windowDesc.position.y,
-									   windowDesc.dimensions.x, windowDesc.dimensions.y, SDL_WINDOW_HIDDEN);
+			mWindow = SDL_CreateWindow(windowTitle.c_str(), 
+									   static_cast<int>(windowDesc.position.x()), static_cast<int>(windowDesc.position.y()),
+									   static_cast<int>(windowDesc.dimensions.x()), static_cast<int>(windowDesc.dimensions.y()), 
+									   SDL_WINDOW_HIDDEN);
 
 			SDL_SetWindowData(mWindow, "AnimaWindow", this);
 		}
 
 		WindowSdl::~WindowSdl()
 		{
-			SDL_DestroyWindow(mWindow);
+			if(mWindow)
+			{
+				SDL_DestroyWindow(mWindow);
+			}
 		}
 
 		size_t WindowSdl::getWindowHandle()

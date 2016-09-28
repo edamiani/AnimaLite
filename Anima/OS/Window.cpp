@@ -8,8 +8,8 @@ namespace AE
 {
 	namespace OS
 	{
-		Window::Window(const std::string &windowTitle, const AE::OS::WindowDesc &windowDesc)
-				: mWindowTitle(windowTitle), mIsExternal(false), mIsFullScreen(false)
+		Window::Window(AE::uint id, const std::string &windowTitle, AE::OS::WindowDesc &windowDesc)
+				: mId(id), mWindowTitle(windowTitle), mIsExternal(false), mIsFullScreen(false)
 		{
 			mDimensions = windowDesc.dimensions;
 			mPosition = windowDesc.position;

@@ -41,14 +41,14 @@ namespace AE
 			virtual AE::OS::Window*			createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc) = 0;
 			virtual AE::OS::Window*			createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext) = 0;
 			virtual void 					destroyWindow(AE::OS::Window *window) = 0;
-			AE::OS::EventQueue*				getEventQueue() { return mEventQueue; }
+			//AE::OS::EventQueue*				getEventQueue() { return mEventQueue; }
 			std::list<AE::OS::Window *>&	getWindowList() { return mWindows; }
 
 
 		protected:
 			static AE::OS::WindowManager	*mInstance;
 
-			AE::OS::EventQueue				*mEventQueue;
+			//AE::OS::EventQueue				*mEventQueue;
 			std::list<AE::OS::Window *>		mWindows;
 		};
 	}

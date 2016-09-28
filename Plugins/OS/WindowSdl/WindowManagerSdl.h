@@ -6,8 +6,6 @@
 #include "Anima/Platform.h"
 #include "Anima/Types.h"
 
-//#include "SDL.h"
-
 #include <list>
 
 namespace AE
@@ -37,6 +35,7 @@ namespace AE
 			void destroyWindow(AE::OS::Window *window);
 
 		private:
+			AE::uint8 mCurrentId = 0;
 		};
 	}
 }

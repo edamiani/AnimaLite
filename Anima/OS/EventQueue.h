@@ -20,8 +20,9 @@ namespace AE
 			EventQueue() {}
 			virtual ~EventQueue();
 
-			virtual bool getNextEvent(AE::OS::Event *eventContainer) = 0;
+			virtual bool getNextEvent() = 0;
 			virtual bool peekNextEvent() = 0;
+			virtual bool pollEvents() = 0;
 			virtual void registerKeyListener(AE::OS::KeyListener *keyListener);
 			virtual void registerMouseListener(AE::OS::MouseListener *mouseListener);
 			virtual void registerWindowListener(AE::OS::WindowListener *windowListener);

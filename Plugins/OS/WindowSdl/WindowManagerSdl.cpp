@@ -33,11 +33,11 @@ namespace AE
 		bool WindowManagerSdl::install(AE::uint options)
 		{
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
-			SDL_InitSubSystem(SDL_INIT_EVENTS);
+			//SDL_InitSubSystem(SDL_INIT_EVENTS);
 
 			if(mParent != 0)
 			{
-				mEventQueue = new AE::OS::EventQueueSdl();
+				//mEventQueue = new AE::OS::EventQueueSdl();
 
 				mIsInstalled = true;
 
@@ -49,18 +49,18 @@ namespace AE
 
 		bool WindowManagerSdl::uninstall()
 		{
-			delete mEventQueue;
-			mEventQueue = 0;
+			//delete mEventQueue;
+			//mEventQueue = 0;
 
 			if(SDL_WasInit(SDL_INIT_VIDEO))
 			{
 				SDL_QuitSubSystem(SDL_INIT_VIDEO);
 			}
 
-			if(SDL_WasInit(SDL_INIT_EVENTS))
+			/*if(SDL_WasInit(SDL_INIT_EVENTS))
 			{
 				SDL_QuitSubSystem(SDL_INIT_EVENTS);
-			}
+			}*/
 
 			mIsInstalled = false;
 
@@ -69,7 +69,7 @@ namespace AE
 
 		AE::OS::Window* WindowManagerSdl::createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc)
 		{
-			AE::OS::Window *window = new AE::OS::WindowSdl(windowTitle, windowDesc);
+			AE::OS::Window *window = new AE::OS::WindowSdl(mCurrentId++, windowTitle, windowDesc);
 			mWindows.push_back(window);
 
 			/*AE::Graphics::Device::ContextDesc contextDesc;
@@ -96,7 +96,9 @@ namespace AE
 			for(i = mWindows.begin(); i != mWindows.end(); i++)
 			{
 				if(*i == window)
+				{
 					delete window;
+				}
 			}
 		}
 	}

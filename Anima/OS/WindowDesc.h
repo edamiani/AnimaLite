@@ -3,6 +3,7 @@
 
 #include "Anima/Graphics/Enums.h"
 #include "Anima/Math/Point2.h"
+#include "Anima/Math/Vector2.h"
 #include "Anima/Types.h"
 
 // TODO remove context attributes
@@ -21,14 +22,15 @@ namespace AE
 	{
 		struct WindowDesc
 		{
-			WindowDesc() : deviceDriverNumber(0), dimensions(AE::Math::Point2<AE::uint>(0, 0)), fullScreen(false), 
+			WindowDesc() : deviceDriverNumber(0), dimensions(AE::Math::Vector2(0, 0)), fullScreen(false), 
 				mColorFormat(AE::Graphics::CF_X8R8G8B8), mColorDepth(32),
-				position(AE::Math::Point2<AE::int32>(0, 0)) {  }
+				position(AE::Math::Vector2(0, 0)) {  }
 
 			AE::uint					deviceDriverNumber;
-			AE::Math::Point2<AE::uint>	dimensions;
+			AE::Math::Vector2			dimensions;
 			bool						fullScreen;
-			AE::Math::Point2<AE::int32>	position;
+			AE::Math::Vector2			position;
+			std::string					title;
 
 			WindowDesc & operator=(WindowDesc &rhs)
 			{

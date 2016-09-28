@@ -23,13 +23,15 @@ namespace AE
 		class AE_DECLSPEC WindowSdl : public Window
 		{
 		public:
-			WindowSdl(const std::string &windowTitle, const AE::OS::WindowDesc &windowDesc);
+			WindowSdl(AE::uint id, const std::string &windowTitle, AE::OS::WindowDesc &windowDesc);
 			~WindowSdl();
 
 			void	close() { ::DestroyWindow(mWindowHandle); }
 			size_t	getWindowHandle();
 			void	render();
 			void	show() { SDL_ShowWindow(mWindow); }
+
+			void	onClose(AE::OS::Window *window) { if(window->getId() == mId) SDL_DestroyWindow(mWindow); }
 
 			HWND _getWindowHandle() { return mWindowHandle; }
 			HINSTANCE _getHInstance() { return mHInstance; }
