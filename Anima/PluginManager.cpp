@@ -3,7 +3,7 @@
 #include "Anima/Exception.h"
 #include "Anima/PluginRoot.h"
 
-AE::PluginManager* AE::PluginManager::mInstance = 0;
+AE::PluginManager* AE::PluginManager::mInstance = nullptr;
 
 namespace AE
 {
@@ -20,7 +20,9 @@ namespace AE
 	AE::PluginManager* PluginManager::initialize()
 	{
 		if(!mInstance)
+		{
 			mInstance = new AE::PluginManager();
+		}
 
 		return mInstance;
 	}
@@ -65,28 +67,5 @@ namespace AE
 			return 0;
 
 		return mRegisteredPlugins[pluginName];
-	}
-
-	AE::Plugin* PluginManager::registerPlugin(const std::string &pluginName, AE::Plugin *plugin)
-	{
-		if(mRegisteredPlugins.find(pluginName) != mRegisteredPlugins.end())
-			return 0;
-
-		mRegisteredPlugins[pluginName] = plugin;
-
-		return plugin;
-	}
-
-	void PluginManager::unregisterPlugin(const std::string &pluginName)
-	{
-		std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.find(pluginName);
-
-		if(i == mRegisteredPlugins.end())
-			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginManager::unregisterPlugin(): there is no plugin registered with this name.");
-
-		if((*i).second->isInstalled())
-			(*i).second->uninstall();
-
-		mRegisteredPlugins.erase(i);
 	}
 }

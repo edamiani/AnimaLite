@@ -17,6 +17,9 @@ namespace AE
 		public:
 			EventManagerSdl();
 			virtual ~EventManagerSdl();
+
+			bool install(AE::uint options);
+			bool uninstall();
 		};
 	}
 }

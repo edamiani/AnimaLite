@@ -16,7 +16,6 @@ namespace AE
 	{
 		WindowManagerSdl::WindowManagerSdl()
 		{
-			mInstance = this;
 		}
 
 		WindowManagerSdl::~WindowManagerSdl()
@@ -26,19 +25,14 @@ namespace AE
 			{
 				delete *i;
 			}
-
-			mInstance = 0;
 		}
 
 		bool WindowManagerSdl::install(AE::uint options)
 		{
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
-			//SDL_InitSubSystem(SDL_INIT_EVENTS);
 
 			if(mParent != 0)
 			{
-				//mEventQueue = new AE::OS::EventQueueSdl();
-
 				mIsInstalled = true;
 
 				return true;
@@ -49,18 +43,10 @@ namespace AE
 
 		bool WindowManagerSdl::uninstall()
 		{
-			//delete mEventQueue;
-			//mEventQueue = 0;
-
 			if(SDL_WasInit(SDL_INIT_VIDEO))
 			{
 				SDL_QuitSubSystem(SDL_INIT_VIDEO);
 			}
-
-			/*if(SDL_WasInit(SDL_INIT_EVENTS))
-			{
-				SDL_QuitSubSystem(SDL_INIT_EVENTS);
-			}*/
 
 			mIsInstalled = false;
 

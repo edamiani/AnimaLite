@@ -1,6 +1,6 @@
 #include "Anima/OS/WindowManager.h"
 
-AE::OS::WindowManager* AE::OS::WindowManager::mInstance = 0;
+//AE::OS::WindowManager* AE::OS::WindowManager::mInstance = 0;
 
 namespace AE
 {

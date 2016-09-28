@@ -47,8 +47,6 @@ add_library(AeEventCore STATIC
 target_link_libraries(AeEventCore AeCore)
 
 add_library(AeWindowCore STATIC
-	Anima/OS/EventQueue.h
-	Anima/OS/EventQueue.cpp
 	Anima/OS/Window.h
 	Anima/OS/Window.cpp
 	Anima/OS/WindowDesc.h
@@ -64,8 +62,6 @@ add_library(AeEventSdl STATIC
 target_link_libraries(AeEventSdl AeEventCore "${SDL_LIB}")
 	
 add_library(AeWindowSdl STATIC
-	Plugins/OS/WindowSdl/EventQueueSdl.h
-	Plugins/OS/WindowSdl/EventQueueSdl.cpp
 	Plugins/OS/WindowSdl/WindowSdl.h 
 	Plugins/OS/WindowSdl/WindowSdl.cpp
 	Plugins/OS/WindowSdl/WindowManagerSdl.h
