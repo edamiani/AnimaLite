@@ -19,6 +19,7 @@ add_library(AnimaCore STATIC
 	
 add_library(EventCore STATIC
 	Anima/OS/Event.h
+	Anima/OS/EventListener.h
 	Anima/OS/EventManager.h
 	Anima/OS/EventQueue.h
 	Anima/OS/EventQueue.cpp)

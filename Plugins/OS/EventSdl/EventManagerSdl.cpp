@@ -1,8 +1,3 @@
-//#include "AnimaOSProcessManagerWin32.h"
-//#include "AnimaOSProcessWin32.h"
-//#include "AnimaOSEventManagerWin32.h"
-//#include "AnimaOSWindowWin32.h"
-//#include "AnimaGraphicsManager.h"
 #include "Plugins/OS/EventSdl/EventManagerSdl.h"
 
 #include "Anima/Input/KeyInfo.h"
@@ -15,47 +10,23 @@ namespace AE
 {
 	namespace OS
 	{
-		std::list<AE::OS::KeyListener *> EventManagerSdl::mKeyListeners;
-		std::list<AE::OS::MouseListener *> EventManagerSdl::mMouseListeners;
-
-		EventManagerSdl::EventManagerSdl()
-		{
-			AE::OS::EventManager::mInstance = this;
-		}
-
-		EventManagerSdl::~EventManagerSdl()
-		{
-			mKeyListeners.clear();
-			mMouseListeners.clear();
-			AE::OS::EventManager::mInstance = 0;
-		}
-
-		void EventManagerSdl::registerKeyListener(AE::OS::KeyListener *keyListener)
-		{
-			mKeyListeners.push_back(keyListener);
-		}
-		
-		void EventManagerSdl::registerMouseListener(AE::OS::MouseListener *mouseListener)
-		{
-			mMouseListeners.push_back(mouseListener);
-		}
-
-		void EventManagerSdl::unregisterKeyListener(AE::OS::KeyListener *keyListener)
-		{
-			mKeyListeners.remove(keyListener);
-		}
-		
-		void EventManagerSdl::unregisterMouseListener(AE::OS::MouseListener *mouseListener)
-		{
-			mMouseListeners.remove(mouseListener);
-		}
+		//std::list<AE::OS::KeyListener *> EventManagerSdl::mKeyListeners;
+		//std::list<AE::OS::MouseListener *> EventManagerSdl::mMouseListeners;
 
 		bool handleEvents()
 		{
 			SDL_Event *event;
 			while(SDL_PollEvent(event))
 			{
-
+				if(event->type == SDL_WINDOWEVENT)
+				{
+					switch(event->window.type)
+					{
+					case SDL_WINDOWEVENT_CLOSE:
+						//for(auto window : mWin)
+						break;
+					}
+				}
 			}
 		}
 
