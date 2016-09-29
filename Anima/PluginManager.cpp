@@ -54,7 +54,7 @@ namespace AE
 
 		for(i = mRegisteredPlugins.begin(); i != mRegisteredPlugins.end(); i++)
 		{
-			if((*i).second->getType() == pluginType && (*i).second->isInstalled())
+			if((*i).second->GetType() == pluginType && (*i).second->IsInstalled())
 				return (*i).second;
 		}
 

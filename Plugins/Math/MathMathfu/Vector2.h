@@ -59,8 +59,12 @@ namespace AE
 			{
 				return static_cast<AE::Real>(mathfu::DotProductHelper(mVector, rhs.mVector));
 			}
-			
 
+			AE::Real length()
+			{
+				return static_cast<AE::Real>(mVector.Length());
+			}
+			
 			friend Vector2;
 
 		private:

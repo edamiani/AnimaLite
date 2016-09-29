@@ -17,12 +17,12 @@ namespace AE
 
 	PluginGroup::~PluginGroup()
 	{
-		uninstall();
+		Uninstall();
 	}
 
 	AE::Plugin* PluginGroup::attach(AE::Plugin *pluginToAttach)
 	{
-		pluginToAttach->setParent(this);
+		pluginToAttach->SetParent(this);
 
 		mChildren.push_back(pluginToAttach);
 
@@ -31,7 +31,7 @@ namespace AE
 
 	AE::Plugin* PluginGroup::attachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions)
 	{
-		pluginToAttach->setParent(this);
+		pluginToAttach->SetParent(this);
 
 		mChildren.push_back(pluginToAttach);
 
@@ -48,7 +48,7 @@ namespace AE
 		if(!plugin)
 			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginGroup::detach(): there is no plugin with such name.");
 
-		if(plugin->getParent() != this)
+		if(plugin->GetParent() != this)
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detach(): this plugin is not attached as a child.");
 
 		mChildren.remove(plugin);
@@ -56,7 +56,7 @@ namespace AE
 
 	void PluginGroup::detach(AE::Plugin *child)
 	{
-		if(child->getParent() != this)
+		if(child->GetParent() != this)
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detach(): this plugin is not attached as a child.");
 
 		mChildren.remove(child);
@@ -69,10 +69,10 @@ namespace AE
 		if(!plugin)
 			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginGroup::detachAndUninstall(): there is no plugin with such name.");
 
-		if(plugin->getParent() != this)
+		if(plugin->GetParent() != this)
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detachAndUninstall(): this plugin is not attached as a child.");
 		
-		if(plugin->isInstalled())
+		if(plugin->IsInstalled())
 			plugin->uninstall();
 
 		mChildren.remove(plugin);
@@ -80,10 +80,10 @@ namespace AE
 
 	void PluginGroup::detachAndUninstall(AE::Plugin *child)
 	{
-		if(child->getParent() != this)
+		if(child->GetParent() != this)
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detachAndUninstall(): this plugin is not attached as a child.");
 		
-		if(child->isInstalled())
+		if(child->IsInstalled())
 			child->uninstall();
 
 		mChildren.remove(child);
@@ -97,20 +97,20 @@ namespace AE
 
 		for(i = mChildren.begin(); i != mChildren.end(); i++)
 		{
-			if((*i)->getType() == pluginType)
+			if((*i)->GetType() == pluginType)
 				return (*i);
 		}
 
 		return 0;
 	}
 
-	bool PluginGroup::install(AE::uint options)
+	bool PluginGroup::Install(AE::uint options)
 	{
 		std::list<AE::Plugin *>::iterator i;
 
 		for(i = mChildren.begin(); i != mChildren.end(); i++)
 		{
-			if(!(*i)->isInstalled())
+			if(!(*i)->IsInstalled())
 				(*i)->install(options);
 		}
 
@@ -119,13 +119,13 @@ namespace AE
 		return true;
 	}
 
-	bool PluginGroup::uninstall()
+	bool PluginGroup::Uninstall()
 	{
 		std::list<AE::Plugin *>::iterator i;
 
 		for(i = mChildren.begin(); i != mChildren.end(); i++)
 		{
-			if((*i)->isInstalled())
+			if((*i)->IsInstalled())
 				(*i)->uninstall();
 
 			delete (*i);

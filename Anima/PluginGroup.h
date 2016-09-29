@@ -21,8 +21,8 @@ namespace AE
 		void				detachAndUninstall(std::string const &pluginName);
 		void				detachAndUninstall(AE::Plugin *child);
 		AE::Plugin*			getChildByType(AE::PluginType pluginType);
-		virtual bool		install(AE::uint options);
-		virtual bool		uninstall();
+		virtual bool		Install(AE::uint options);
+		virtual bool		Uninstall();
 
 	protected:
 		std::list<AE::Plugin *> mChildren;

@@ -48,7 +48,7 @@ namespace AE
 				throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginManager::unregisterPlugin(): there is no plugin registered with this name.");
 			}*/
 
-			if((*i).second->isInstalled())
+			if((*i).second->IsInstalled())
 			{
 				(*i).second->uninstall();
 			}

@@ -15,7 +15,6 @@ namespace AE
 		PT_ANIMATION_MANAGER,
 		PT_AUDIO_MANAGER,
 		PT_DATABASE_MANAGER,
-		PT_EVENT_MANAGER,
 		PT_FONT_MANAGER,
 		PT_GRAPHICS_MANAGER,
 		PT_GRAPHICS_DEVICE_MANAGER,
@@ -27,6 +26,7 @@ namespace AE
 		PT_NATURE_MANAGER,
 		PT_NETWORK_MANAGER,
 		PT_OS_MANAGER,
+		PT_OS_EVENT_MANAGER,
 		PT_OS_TIMER_MANAGER,
 		PT_OS_WINDOW_MANAGER,
 		PT_PHYSICS_MANAGER,
@@ -43,16 +43,24 @@ namespace AE
 	class Plugin
 	{
 	public:
-		Plugin(AE::PluginType pluginType);
-		virtual ~Plugin();
+		Plugin(AE::PluginType pluginType) 
+			: mPluginType(pluginType), mIsAttached(false), mIsInstalled(false), mParent(0) {}
 
-		AE::Plugin*		getParent() { return mParent; }
-		AE::PluginType	getType() { return mPluginType; }
-		virtual bool	install(AE::uint options) = 0;
-		bool			isAttached() { return mIsAttached; }
-		bool			isInstalled() { return mIsInstalled; }
-		void			setParent(AE::Plugin *parent) { mParent = parent; }
-		virtual bool	uninstall() = 0;
+		virtual ~Plugin()
+		{
+			if(mParent)
+			{
+				mParent = 0;
+			}
+		}
+
+		AE::Plugin*		GetParent() { return mParent; }
+		AE::PluginType	GetType() { return mPluginType; }
+		virtual bool	Install(AE::uint options) = 0;
+		bool			IsAttached() { return mIsAttached; }
+		bool			IsInstalled() { return mIsInstalled; }
+		void			SetParent(AE::Plugin *parent) { mParent = parent; }
+		virtual bool	Uninstall() = 0;
 
 	protected:
 		bool			mIsAttached;

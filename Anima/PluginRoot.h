@@ -23,8 +23,8 @@ namespace AE
 	protected:
 		PluginRoot();
 
-		bool install(AE::uint options) { return true; }
-		bool uninstall() { return true; }
+		bool Install(AE::uint options) { return true; }
+		bool Uninstall() { return true; }
 	};
 }
 
