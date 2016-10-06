@@ -27,7 +27,7 @@ namespace AE
 			}
 		}
 
-		bool WindowManagerSdl::install(AE::uint options)
+		bool WindowManagerSdl::Install(AE::uint options)
 		{
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
 
@@ -41,7 +41,7 @@ namespace AE
 				return false;
 		}
 
-		bool WindowManagerSdl::uninstall()
+		bool WindowManagerSdl::Uninstall()
 		{
 			if(SDL_WasInit(SDL_INIT_VIDEO))
 			{

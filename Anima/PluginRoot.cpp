@@ -37,7 +37,7 @@ namespace AE
 
 		mChildren.push_back(pluginToAttach);
 
-		pluginToAttach->install(installOptions);
+		pluginToAttach->Install(installOptions);
 
 		return pluginToAttach;
 	}
@@ -50,7 +50,9 @@ namespace AE
 			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginRoot::detach(): there is no plugin with this name attached as a root's child.");
 
 		if(plugin->IsInstalled())
-			plugin->uninstall();
+		{
+			plugin->Uninstall();
+		}
 
 		mChildren.remove(plugin);
 	}

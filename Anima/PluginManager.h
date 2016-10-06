@@ -26,7 +26,7 @@ namespace AE
 		AE::PluginGroup*				getRoot() { return mRoot; }
 
 		template<class T>
-		T* registerPlugin(const std::string &pluginName)
+		T* RegisterPlugin(const std::string &pluginName)
 		{
 			if(mRegisteredPlugins.find(pluginName) != mRegisteredPlugins.end())
 				return 0;
@@ -37,7 +37,7 @@ namespace AE
 		}
 
 		template<class T>
-		void unregisterPlugin(const std::string &pluginName)
+		void UnregisterPlugin(const std::string &pluginName)
 		{
 			std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.find(pluginName);
 
@@ -50,7 +50,7 @@ namespace AE
 
 			if((*i).second->IsInstalled())
 			{
-				(*i).second->uninstall();
+				(*i).second->Uninstall();
 			}
 
 			delete (*i).second;

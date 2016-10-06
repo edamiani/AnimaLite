@@ -7,22 +7,29 @@ option(Anima_Temp "Build DLLs?")
 option(AnimaMath_Mathfu "Uses mathfu as the math library" ON)
 option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 
+add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
+include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
+include_directories("${PROJECT_BINARY_DIR}/Dependencies/allegro/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/dependencies/vectorial/include")
 
 if(Anima_BuildSharedLibs)
 	set(SDL_LIB SDL2)
+	set(ALLEGRO_LIB allegro-static)
 else()
 	set(SDL_LIB SDL2-static)
+	set(ALLEGRO_LIB allegro)
 endif()
 
 if(AnimaMath_Mathfu)
 	file(WRITE Anima/Math/Vector2.h "#ifndef __AE_MATH_VECTOR2__\n#define __AE_MATH_VECTOR2__\n\n#include \"Plugins/Math/MathMathfu/Vector2.h\"\n\n#endif")
+	
+	file(WRITE Anima/Math/Vector3.h "#ifndef __AE_MATH_VECTOR3__\n#define __AE_MATH_VECTOR3__\n\n#include \"Plugins/Math/MathMathfu/Vector3.h\"\n\n#endif")
 endif()
 
 add_library(AeCore STATIC
@@ -53,6 +60,37 @@ add_library(AeWindowCore STATIC
 	Anima/OS/WindowManager.h
 	Anima/OS/WindowManager.cpp)
 target_link_libraries(AeWindowCore AeCore)
+
+add_library(AeGraphicsDeviceCore STATIC
+	Anima/Graphics/Device/Context.h
+	Anima/Graphics/Device/ContextDesc.h
+	Anima/Graphics/Device/Driver.h
+	Anima/Graphics/Device/Driver.cpp
+	Anima/Graphics/Device/IndexBuffer.h
+	Anima/Graphics/Device/Manager.h
+	Anima/Graphics/Device/Manager.cpp
+	Anima/Graphics/Device/VertexBuffer.h)
+target_link_libraries(AeGraphicsDeviceCore AeCore)
+
+add_library(AeGraphicsDeviceAllegro STATIC
+	Plugins/Graphics/Device/Allegro/ColorBufferAllegro.h
+	Plugins/Graphics/Device/Allegro/ColorBufferAllegro.cpp
+	Plugins/Graphics/Device/Allegro/ContextAllegro.h
+	Plugins/Graphics/Device/Allegro/ContextAllegro.cpp
+	Plugins/Graphics/Device/Allegro/DriverAllegro.h
+	Plugins/Graphics/Device/Allegro/DriverAllegro.cpp
+	Plugins/Graphics/Device/Allegro/ManagerAllegro.h
+	Plugins/Graphics/Device/Allegro/ManagerAllegro.cpp)
+target_link_libraries(AeGraphicsDeviceAllegro AeGraphicsDeviceCore "${ALLEGRO_LIB}")
+
+add_library(AeGraphicsDeviceSdl STATIC
+	Plugins/Graphics/Device/Sdl/ContextSdl.h
+	Plugins/Graphics/Device/Sdl/ContextSdl.cpp
+	Plugins/Graphics/Device/Sdl/DriverSdl.h
+	Plugins/Graphics/Device/Sdl/DriverSdl.cpp
+	Plugins/Graphics/Device/Sdl/ManagerSdl.h
+	Plugins/Graphics/Device/Sdl/ManagerSdl.cpp)
+target_link_libraries(AeGraphicsDeviceSdl AeGraphicsDeviceCore)
 
 add_library(AeEventSdl STATIC
 	Plugins/OS/EventSdl/EventManagerSdl.h

@@ -35,7 +35,7 @@ namespace AE
 
 		mChildren.push_back(pluginToAttach);
 
-		bool result = pluginToAttach->install(installOptions);
+		bool result = pluginToAttach->Install(installOptions);
 		assert(result);
 
 		return pluginToAttach;
@@ -46,10 +46,14 @@ namespace AE
 		AE::Plugin *plugin = AE::PluginManager::getInstance()->find(pluginName);
 
 		if(!plugin)
+		{
 			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginGroup::detach(): there is no plugin with such name.");
+		}
 
 		if(plugin->GetParent() != this)
+		{
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detach(): this plugin is not attached as a child.");
+		}
 
 		mChildren.remove(plugin);
 	}
@@ -57,7 +61,9 @@ namespace AE
 	void PluginGroup::detach(AE::Plugin *child)
 	{
 		if(child->GetParent() != this)
+		{
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detach(): this plugin is not attached as a child.");
+		}
 
 		mChildren.remove(child);
 	}
@@ -67,13 +73,19 @@ namespace AE
 		AE::Plugin *plugin = AE::PluginManager::getInstance()->find(pluginName);
 
 		if(!plugin)
+		{
 			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginGroup::detachAndUninstall(): there is no plugin with such name.");
+		}
 
 		if(plugin->GetParent() != this)
+		{
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detachAndUninstall(): this plugin is not attached as a child.");
+		}
 		
 		if(plugin->IsInstalled())
-			plugin->uninstall();
+		{
+			plugin->Uninstall();
+		}
 
 		mChildren.remove(plugin);
 	}
@@ -81,10 +93,14 @@ namespace AE
 	void PluginGroup::detachAndUninstall(AE::Plugin *child)
 	{
 		if(child->GetParent() != this)
+		{
 			throw AE::Exception(AE::ET_NOT_RELATED, "AE::PluginGroup::detachAndUninstall(): this plugin is not attached as a child.");
+		}
 		
 		if(child->IsInstalled())
-			child->uninstall();
+		{
+			child->Uninstall();
+		}
 
 		mChildren.remove(child);
 	}
@@ -111,7 +127,9 @@ namespace AE
 		for(i = mChildren.begin(); i != mChildren.end(); i++)
 		{
 			if(!(*i)->IsInstalled())
-				(*i)->install(options);
+			{
+				(*i)->Install(options);
+			}
 		}
 
 		mIsInstalled = true;
@@ -126,7 +144,9 @@ namespace AE
 		for(i = mChildren.begin(); i != mChildren.end(); i++)
 		{
 			if((*i)->IsInstalled())
-				(*i)->uninstall();
+			{
+				(*i)->Uninstall();
+			}
 
 			delete (*i);
 		}

@@ -5,7 +5,7 @@
 #include "Anima/Graphics/Color.h"
 #include "Anima/Graphics/Enums.h"
 #include "Anima/Graphics/SurfaceDesc.h"
-#include "Anima/Math/Point2.h"
+#include "Anima/Math/Vector2.h"
 
 namespace AE
 {
@@ -14,28 +14,28 @@ namespace AE
 		class Surface
 		{
 		public:
-			Surface(const AE::Math::Point2<AE::uint> &dimensions) : 
+			Surface(const AE::Math::Vector2 &dimensions) : 
 			  mDimensions(dimensions), mUsesColorKey(false) { }
 			virtual ~Surface() { }
 
-			virtual void				blit(void *source, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::int32> &position) = 0;
-			virtual void				blit(AE::Graphics::Surface *source, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::int32> &position) = 0;
+			virtual void				blit(void *source, const AE::Math::Vector2 &dimensions, const AE::Math::Vector2 &position) = 0;
+			virtual void				blit(AE::Graphics::Surface *source, const AE::Math::Vector2 &dimensions, const AE::Math::Vector2 &position) = 0;
 			virtual void				clear(const AE::Graphics::Color &backgroundColor) = 0;
 			AE::uint8					getColorDepth() { return mPixelFormat.colorDepth; }
 			AE::Graphics::Color&		getColorKey() { return mColorKey; }
 			virtual void*				getData() = 0;
-			virtual AE::Math::Point2<AE::uint>	
+			virtual AE::Math::Vector2	
 										getDimensions() { return mDimensions; }
 			AE::Graphics::SurfaceFormat getFormat() { return mSurfaceFormat; }
 			virtual void				lock(AE::Graphics::LockType lockType) = 0;
-			virtual void				plot(const AE::Graphics::Color &color, const AE::Math::Point2<AE::int32> &position) = 0;
-			virtual void				plot32(const AE::uint32 color, const AE::Math::Point2<AE::int32> &position) = 0;
+			virtual void				plot(const AE::Graphics::Color &color, const AE::Math::Vector2 &position) = 0;
+			virtual void				plot32(const AE::uint32 color, const AE::Math::Vector2 &position) = 0;
 			void						setColorKey(const AE::Graphics::Color &colorKey) { mColorKey = colorKey; mUsesColorKey = true; }
 			virtual void				unlock() = 0;
 
-			virtual void				_blit(AE::Graphics::Surface *source, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::int32> &position) = 0;
-			virtual void				_blitAlpha(void *source, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::int32> &position) = 0;
-			virtual void				_blitNoAlpha(void *source, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::int32> &position) = 0;
+			virtual void				_blit(AE::Graphics::Surface *source, const AE::Math::Vector2 &dimensions, const AE::Math::Vector2 &position) = 0;
+			virtual void				_blitAlpha(void *source, const AE::Math::Vector2 &dimensions, const AE::Math::Vector2 &position) = 0;
+			virtual void				_blitNoAlpha(void *source, const AE::Math::Vector2 &dimensions, const AE::Math::Vector2 &position) = 0;
 
 			struct PixelFormat
 			{
@@ -49,7 +49,7 @@ namespace AE
 		protected:
 			AE::Graphics::AllocationType	mAllocationType;
 			AE::Graphics::Color				mColorKey;
-			AE::Math::Point2<AE::uint>		mDimensions;
+			AE::Math::Vector2		mDimensions;
 			AE::Graphics::Device::PixelBufferType
 											mPixelBufferType;
 			PixelFormat						mPixelFormat;

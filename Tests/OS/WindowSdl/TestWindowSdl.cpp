@@ -4,10 +4,10 @@ int main(int argc, char* args[])
 {
 	AE::PluginManager *pluginManager = AE::PluginManager::initialize();
 
-	auto *eventManager = pluginManager->registerPlugin<AE::OS::EventManagerSdl>("EventSdl");
+	auto *eventManager = pluginManager->RegisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 	eventManager->install(AE::NO_OPTIONS);
 
-	auto *windowManager = pluginManager->registerPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
+	auto *windowManager = pluginManager->RegisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
 	windowManager->install(AE::NO_OPTIONS);
 
 	AE::OS::WindowDesc windowDesc;
@@ -25,10 +25,10 @@ int main(int argc, char* args[])
 	while(eventQueue->pollEvents()) { }
 
 	windowManager->uninstall();
-	pluginManager->unregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
+	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
 
 	eventManager->uninstall();
-	pluginManager->unregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
+	pluginManager->UnregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 
 	return 0;
 }

@@ -2,7 +2,7 @@
 
 namespace AE
 {
-	Plugin::Plugin(AE::PluginType pluginType)
+	/*Plugin::Plugin(AE::PluginType pluginType)
 		: mPluginType(pluginType), mIsAttached(false), mIsInstalled(false), mParent(0)
 	{
 	}
@@ -11,5 +11,5 @@ namespace AE
 	{
 		if(mParent)
 			mParent = 0;
-	}
+	}*/
 }

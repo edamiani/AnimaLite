@@ -217,6 +217,7 @@ namespace AE
 				DT_D3D9,
 				DT_D3D10,
 				DT_D3D11,
+				DT_GL,
 				DT_GL_15,
 				DT_GL_20,
 				DT_GL_21,

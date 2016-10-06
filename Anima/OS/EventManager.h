@@ -17,7 +17,7 @@ namespace AE
 		class EventManager : public AE::Plugin
 		{
 		public:
-								EventManager() : Plugin(AE::PT_EVENT_MANAGER) {}
+								EventManager() : Plugin(AE::PT_OS_EVENT_MANAGER) {}
 			virtual				~EventManager() {}
 
 			virtual bool		install(AE::uint options) = 0;

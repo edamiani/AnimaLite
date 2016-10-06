@@ -69,7 +69,19 @@ namespace AE
 
 		private:
 			mathfu::Vector<AE::Real, 2> mVector;
+
+			/*static const Vector2 Vector2::ZERO;
+			static const Vector2 Vector2::UNIT_X;
+			static const Vector2 Vector2::UNIT_Y;
+			static const Vector2 Vector2::NEGATIVE_UNIT_X;
+			static const Vector2 Vector2::NEGATIVE_UNIT_Y;*/
 		};
+
+		/*const Vector2 Vector2::ZERO(0, 0);
+		const Vector2 Vector2::UNIT_X(1, 0);
+		const Vector2 Vector2::UNIT_Y(0, 1);
+		const Vector2 Vector2::NEGATIVE_UNIT_X(-1, 0);
+		const Vector2 Vector2::NEGATIVE_UNIT_Y(0, -1);*/
 	}
 }
 

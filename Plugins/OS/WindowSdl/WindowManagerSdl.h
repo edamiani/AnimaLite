@@ -27,8 +27,8 @@ namespace AE
 			//WindowManagerSdl(AE::Graphics::Device::Manager *deviceManager);
 			~WindowManagerSdl();
 
-			bool install(AE::uint options);
-			bool uninstall();
+			bool Install(AE::uint options);
+			bool Uninstall();
 
 			AE::OS::Window* createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc);
 			AE::OS::Window* createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext);
