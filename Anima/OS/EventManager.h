@@ -20,11 +20,11 @@ namespace AE
 								EventManager() : Plugin(AE::PT_OS_EVENT_MANAGER) {}
 			virtual				~EventManager() {}
 
-			virtual bool		install(AE::uint options) = 0;
+			virtual bool		Install(AE::uint options) = 0;
 			virtual void		registerKeyListener(AE::OS::KeyListener *keyListener) { if(mEventQueue) mEventQueue->registerKeyListener(keyListener); }
 			virtual void		registerMouseListener(AE::OS::MouseListener *mouseListener) { if(mEventQueue) mEventQueue->registerMouseListener(mouseListener); }
 			virtual void		registerWindowListener(AE::OS::WindowListener *windowListener) { if(mEventQueue) mEventQueue->registerWindowListener(windowListener); }
-			virtual bool		uninstall() = 0;
+			virtual bool		Uninstall() = 0;
 			virtual void		unregisterKeyListener(AE::OS::KeyListener *keyListener) { if(mEventQueue) mEventQueue->unregisterKeyListener(keyListener); }
 			virtual void		unregisterMouseListener(AE::OS::MouseListener *mouseListener) { if(mEventQueue) mEventQueue->unregisterMouseListener(mouseListener); }
 			virtual void		unregisterWindowListener(AE::OS::WindowListener *windowListener) { if(mEventQueue) mEventQueue->unregisterWindowListener(windowListener); }

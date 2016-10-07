@@ -1,9 +1,7 @@
 #include "WindowManagerSdl.h"
 
 #include "EventQueueSdl.h"
-#include "WindowSdl.h"
-
-#include <cassert>
+#include "Plugins/OS/WindowSdl/WindowSdl.h"
 
 namespace AE
 {
@@ -20,17 +18,14 @@ namespace AE
 
 		WindowManagerSdl::~WindowManagerSdl()
 		{
-			std::list<AE::OS::Window *>::iterator i;
-			for(i = mWindows.begin(); i != mWindows.end(); i++)
+			for(auto *window : mWindows)
 			{
-				delete *i;
+				delete window;
 			}
 		}
 
 		bool WindowManagerSdl::Install(AE::uint options)
 		{
-			SDL_InitSubSystem(SDL_INIT_VIDEO);
-
 			if(mParent != 0)
 			{
 				mIsInstalled = true;
@@ -43,19 +38,14 @@ namespace AE
 
 		bool WindowManagerSdl::Uninstall()
 		{
-			if(SDL_WasInit(SDL_INIT_VIDEO))
-			{
-				SDL_QuitSubSystem(SDL_INIT_VIDEO);
-			}
-
 			mIsInstalled = false;
 
 			return true;
 		}
 
-		AE::OS::Window* WindowManagerSdl::createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc)
+		AE::OS::Window* WindowManagerSdl::createWindow(AE::OS::WindowDesc &windowDesc)
 		{
-			AE::OS::Window *window = new AE::OS::WindowSdl(mCurrentId++, windowTitle, windowDesc);
+			AE::OS::Window *window = new AE::OS::WindowSdl(mCurrentId++, windowDesc);
 			mWindows.push_back(window);
 
 			/*AE::Graphics::Device::ContextDesc contextDesc;
@@ -67,9 +57,9 @@ namespace AE
 			return window;
 		}
 
-		AE::OS::Window* WindowManagerSdl::createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext)
+		AE::OS::Window* WindowManagerSdl::createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext)
 		{
-			AE::OS::Window *window = createWindow(windowTitle, windowDesc);
+			AE::OS::Window *window = createWindow(windowDesc);
 
 			window->attachDeviceContext(deviceContext);
 
@@ -78,10 +68,9 @@ namespace AE
 
 		void WindowManagerSdl::destroyWindow(AE::OS::Window *window)
 		{
-			std::list<AE::OS::Window *>::iterator i;
-			for(i = mWindows.begin(); i != mWindows.end(); i++)
+			for(auto *w : mWindows)
 			{
-				if(*i == window)
+				if(w == window)
 				{
 					delete window;
 				}

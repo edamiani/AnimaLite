@@ -18,7 +18,7 @@ namespace AE
 			
 		}
 
-		bool EventManagerSdl::install(AE::uint options)
+		bool EventManagerSdl::Install(AE::uint options)
 		{
 			if(!SDL_WasInit(SDL_INIT_EVENTS))
 			{
@@ -30,7 +30,7 @@ namespace AE
 			return true;
 		}
 
-		bool EventManagerSdl::uninstall()
+		bool EventManagerSdl::Uninstall()
 		{
 			if(SDL_WasInit(SDL_INIT_EVENTS))
 			{

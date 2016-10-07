@@ -5,10 +5,10 @@ int main(int argc, char* args[])
 	AE::PluginManager *pluginManager = AE::PluginManager::initialize();
 
 	auto *eventManager = pluginManager->RegisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
-	eventManager->install(AE::NO_OPTIONS);
+	eventManager->Install(AE::NO_OPTIONS);
 
 	auto *windowManager = pluginManager->RegisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
-	windowManager->install(AE::NO_OPTIONS);
+	windowManager->Install(AE::NO_OPTIONS);
 
 	AE::OS::WindowDesc windowDesc;
 	windowDesc.dimensions = AE::Math::Vector2(640, 480);
@@ -24,10 +24,10 @@ int main(int argc, char* args[])
 
 	while(eventQueue->pollEvents()) { }
 
-	windowManager->uninstall();
+	windowManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
 
-	eventManager->uninstall();
+	eventManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 
 	return 0;

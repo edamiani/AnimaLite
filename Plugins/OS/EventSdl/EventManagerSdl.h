@@ -18,8 +18,8 @@ namespace AE
 			EventManagerSdl();
 			virtual ~EventManagerSdl();
 
-			bool install(AE::uint options);
-			bool uninstall();
+			bool Install(AE::uint options);
+			bool Uninstall();
 		};
 	}
 }

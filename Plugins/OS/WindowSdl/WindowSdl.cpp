@@ -1,5 +1,4 @@
 #include "WindowSdl.h"
-//#include "EventQueueSdl.h"
 
 #include <cassert>
 
@@ -7,12 +6,12 @@ namespace AE
 {
 	namespace OS
 	{
-		WindowSdl::WindowSdl(AE::uint id, const std::string &windowTitle, AE::OS::WindowDesc &windowDesc)
-			: Window(id, windowTitle, windowDesc)
+		WindowSdl::WindowSdl(AE::uint id, AE::OS::WindowDesc &windowDesc)
+			: Window(id, windowDesc)
 		{
 			mIsFullScreen = false;
 
-			mWindow = SDL_CreateWindow(windowTitle.c_str(), 
+			mWindow = SDL_CreateWindow(windowDesc.title.c_str(), 
 									   static_cast<int>(windowDesc.position.x()), static_cast<int>(windowDesc.position.y()),
 									   static_cast<int>(windowDesc.dimensions.x()), static_cast<int>(windowDesc.dimensions.y()), 
 									   SDL_WINDOW_HIDDEN);
@@ -26,21 +25,6 @@ namespace AE
 			{
 				SDL_DestroyWindow(mWindow);
 			}
-		}
-
-		size_t WindowSdl::getWindowHandle()
-		{
-			/*size_t winHandle;
-			HWND *pHwnd = (HWND*)(&winHandle);
-			*pHwnd = mWindowHandle;
-			return winHandle;*/
-
-			return 0;
-		}
-
-		void WindowSdl::render()
-		{
-
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace AE
 		class AE_DECLSPEC Window : public AE::OS::WindowListener
 		{
 		public:
-			Window(AE::uint id, const std::string &windowTitle, AE::OS::WindowDesc &windowDesc);
+			Window(AE::uint id, AE::OS::WindowDesc &windowDesc);
 			Window(AE::uint externalWindowId) : mId(externalWindowId), mIsExternal(true) {}
 			virtual ~Window() {}
 
