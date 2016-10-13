@@ -85,24 +85,63 @@ namespace AE
 
 		bool EventQueueSdl::onEvent(SDL_Event *event)
 		{
+			SDL_Window *sdlWindow = SDL_GetWindowFromID(event->window.windowID);
+			AE::OS::Window *window = reinterpret_cast<AE::OS::Window *>(SDL_GetWindowData(sdlWindow, "AnimaWindow"));
+
 			if(event->type == SDL_WINDOWEVENT) 
 			{
-				SDL_Window *sdlWindow = SDL_GetWindowFromID(event->window.windowID);
-				AE::OS::Window *window = reinterpret_cast<AE::OS::Window *>(SDL_GetWindowData(sdlWindow, "AnimaWindow"));
-
 				switch(event->window.event)
 				{
 					case SDL_WINDOWEVENT_CLOSE:
 					{
-						std::list<AE::OS::WindowListener *>::iterator i;
-						for(i = mWindowListeners.begin(); i != mWindowListeners.end(); i++)
+						for(auto *listener : mWindowListeners)
 						{
-							(*i)->onClose(window);
+							listener->onClose(window);
 						}
 						return true;
 					}
 					default:
 						return true;
+				}
+			}
+			else if(event->type == SDL_KEYDOWN)
+			{
+				for(auto *listener : mKeyListeners)
+				{
+					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_DOWN, window, AE::Input::KeyInfo(AE::Input::KC_0));
+					listener->onKeyDown(keyEvent);
+				}
+			}
+			else if(event->type == SDL_KEYUP)
+			{
+				for(auto *listener : mKeyListeners)
+				{
+					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_UP, window, AE::Input::KeyInfo(AE::Input::KC_0));
+					listener->onKeyUp(keyEvent);
+				}
+			}
+			else if(event->type == SDL_MOUSEBUTTONDOWN)
+			{
+				for(auto *listener : mMouseListeners)
+				{
+					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_BUTTON_DOWN, window, 0, AE::Math::Point2<AE::int32>(0, 0));
+					listener->onButtonDown(mouseEvent);
+				}
+			}
+			else if(event->type == SDL_MOUSEBUTTONUP)
+			{
+				for(auto *listener : mMouseListeners)
+				{
+					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_BUTTON_UP, window, 0, AE::Math::Point2<AE::int32>(0, 0));
+					listener->onButtonUp(mouseEvent);
+				}
+			}
+			else if(event->type == SDL_MOUSEMOTION)
+			{
+				for(auto *listener : mMouseListeners)
+				{
+					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_MOVE, window, 0, AE::Math::Point2<AE::int32>(0, 0));
+					listener->onMouseMove(mouseEvent);
 				}
 			}
 			else if(event->type == SDL_QUIT)

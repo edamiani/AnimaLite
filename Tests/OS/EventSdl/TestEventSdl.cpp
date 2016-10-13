@@ -1,5 +1,33 @@
 #include "TestEventSdl.h"
 
+#include <iostream>
+#include <memory>
+
+void TestListener::onKeyDown(const AE::OS::EventKeyboard &event)
+{
+	std::cout << "onKeyDown!" << std::endl;
+}
+
+void TestListener::onKeyUp(const AE::OS::EventKeyboard &event)
+{
+	std::cout << "onKeyUp!" << std::endl;
+}
+
+void TestListener::onButtonDown(const AE::OS::EventMouse &event)
+{
+	std::cout << "onButtonDown!" << std::endl;
+}
+
+void TestListener::onButtonUp(const AE::OS::EventMouse &event)
+{
+	std::cout << "onButtonUp!" << std::endl;
+}
+
+void TestListener::onMouseMove(const AE::OS::EventMouse &event)
+{
+	std::cout << "onMouseMove!" << std::endl;
+}
+
 int main(int argc, char* args[])
 {
 	AE::PluginManager *pluginManager = AE::PluginManager::initialize();
@@ -17,7 +45,11 @@ int main(int argc, char* args[])
 
 	auto *window = windowManager->createWindow(windowDesc);
 
+	std::unique_ptr<TestListener> testListener = std::make_unique<TestListener>();
+
 	eventManager->registerWindowListener(window);
+	eventManager->registerKeyListener(testListener.get());
+	eventManager->registerMouseListener(testListener.get());
 
 	window->show();
 

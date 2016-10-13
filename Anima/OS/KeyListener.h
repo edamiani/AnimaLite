@@ -20,7 +20,6 @@ namespace AE
 
 			// Keyboard events
 			virtual void onKeyDown(const AE::OS::EventKeyboard &event) { }
-			virtual void onKeyTranslation(const AE::OS::EventKeyTranslation &event) { }
 			virtual void onKeyUp(const AE::OS::EventKeyboard &event) { }
 		};
 	}
