@@ -27,7 +27,7 @@ namespace AE
 			~WindowSdl();
 
 			void	close() { SDL_DestroyWindow(mWindow); }
-			size_t	getWindowHandle();
+			//size_t	getWindowHandle();
 			void	show() { SDL_ShowWindow(mWindow); }
 
 			void	onClose(AE::OS::Window *window) { if(window->getId() == mId) SDL_DestroyWindow(mWindow); }

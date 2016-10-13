@@ -124,4 +124,9 @@ add_executable(TestWindowSdl
 	Tests/OS/WindowSdl/TestWindowSdl.cpp)
 target_link_libraries(TestWindowSdl AeEventSdl AeWindowSdl SDL2main)
 
+add_executable(TestEventSdl 
+	Tests/OS/EventSdl/TestEventSdl.h
+	Tests/OS/EventSdl/TestEventSdl.cpp)
+target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
+
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

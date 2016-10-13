@@ -33,9 +33,8 @@ namespace AE
 			//AE::Input::Context*			getInputContext() { return mInputContext; }
 			AE::Math::Vector2				getPosition() { return mPosition; }
 			const std::string&				getTitle() { return mWindowTitle; }
-			virtual size_t					getWindowHandle() = 0;
+			//virtual size_t					getWindowHandle() = 0;
 			bool							isFullScreen() { assert(mDeviceContext); return mDeviceContext->isFullScreen(); }
-			virtual void                	render() = 0;
 			void							setFullScreen(bool isFullScreen) { assert(mDeviceContext); mDeviceContext->setFullScreen(isFullScreen); }
 			virtual void					show() = 0;
 

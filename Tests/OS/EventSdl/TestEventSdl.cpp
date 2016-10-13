@@ -1,4 +1,4 @@
-#include "TestWindowSdl.h"
+#include "TestEventSdl.h"
 
 int main(int argc, char* args[])
 {
@@ -13,6 +13,7 @@ int main(int argc, char* args[])
 	AE::OS::WindowDesc windowDesc;
 	windowDesc.dimensions = AE::Math::Vector2(640, 480);
 	windowDesc.position = AE::Math::Vector2(50, 50);
+	windowDesc.title = "Window Test";
 
 	auto *window = windowManager->createWindow(windowDesc);
 

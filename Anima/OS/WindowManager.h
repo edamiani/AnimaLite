@@ -30,8 +30,8 @@ namespace AE
 			WindowManager() : AE::Plugin(AE::PT_OS_WINDOW_MANAGER) {}
 			virtual ~WindowManager();
 
-			virtual AE::OS::Window*			createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc) = 0;
-			virtual AE::OS::Window*			createWindow(const std::string &windowTitle, AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext) = 0;
+			virtual AE::OS::Window*			createWindow(AE::OS::WindowDesc &windowDesc) = 0;
+			virtual AE::OS::Window*			createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext) = 0;
 			virtual void 					destroyWindow(AE::OS::Window *window) = 0;
 			std::list<AE::OS::Window *>&	getWindowList() { return mWindows; }
 
