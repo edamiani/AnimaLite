@@ -35,6 +35,7 @@ namespace AE
 				virtual bool						beginRendering(const AE::Graphics::Color &clearColor) = 0;
 				virtual void						draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
 				virtual void						draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) = 0;
+				virtual void						drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color) = 0;
 				virtual void						endRendering() = 0;
 				AE::Graphics::Device::Driver*		getDeviceDriver() { return mDeviceDriver; }
 				AE::Graphics::Device::FrameBuffer*	getFrameBuffer() { return mFrameBuffer; }

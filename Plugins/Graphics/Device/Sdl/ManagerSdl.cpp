@@ -1,11 +1,10 @@
-#include "ManagerGL15_Sdl.h"
-
-#include "Anima/Graphics/Device/GL15/DriverGL15.h"
-#include "Anima/Graphics/Device/GL15/PixelBufferFactoryGL15.h"
+#include "ManagerSdl.h"
 
 #include "Anima/Exception.h"
 #include "Anima/Graphics/Enums.h"
 #include "Anima/Graphics/Device/PixelBufferDesc.h"
+
+#include "DriverSdl.h"
 
 #include <cassert>
 #include <string.h>
@@ -18,7 +17,7 @@ namespace AE
 	{
 		namespace Device
 		{
-			ManagerGL15::ManagerGL15()
+			ManagerSdl::ManagerSdl()
 			{
 				mInstance = this;
 
@@ -26,11 +25,22 @@ namespace AE
 				{
 					SDL_InitSubSystem(SDL_INIT_VIDEO);
 				}
+
+				mNumOfDrivers = SDL_GetNumVideoDrivers();
+				for(AE::uint i = 0; i < mNumOfDrivers; i++)
+				{
+					mDeviceDrivers[i] = new AE::Graphics::Device::DriverSdl(i);
+				}
 			}
 
-			ManagerGL15::~ManagerGL15()
+			ManagerSdl::~ManagerSdl()
 			{
 				mInstance = 0;
+
+				for(AE::uint i = 0; i < mNumOfDrivers; i++)
+				{ 
+					delete mDeviceDrivers[i];
+				}
 
 				if(SDL_WasInit(SDL_INIT_VIDEO))
 				{
@@ -38,11 +48,11 @@ namespace AE
 				}
 			}
 
-			bool ManagerGL15::install(AE::uint options)
+			bool ManagerSdl::Install(AE::uint options)
 			{
 				if(mParent != 0)
 				{
-					mPixelBufferFactory = new AE::Graphics::Device::PixelBufferFactoryGL15();
+					//mPixelBufferFactory = new AE::Graphics::Device::PixelBufferFactoryGL15();
 
 					mIsInstalled = true;
 
@@ -52,14 +62,14 @@ namespace AE
 					return false;
 			}
 
-			bool ManagerGL15::uninstall()
+			bool ManagerSdl::Uninstall()
 			{
-				delete mPixelBufferFactory;
+				//delete mPixelBufferFactory;
 
 				return true;
 			}
 
-			AE::Graphics::Device::Driver* ManagerGL15::acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
+			AE::Graphics::Device::Driver* ManagerSdl::acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
 			{
 				// TODO implement adapter counting
 				/*if(mDeviceDrivers.find(graphicsDeviceNumber) != mDeviceDrivers.end())
@@ -67,74 +77,9 @@ namespace AE
 				else if(graphicsDeviceNumber >= mAdapters.size())
 					throw AE::Exception(AE::ET_NOT_FOUND, "AE::Graphics::ManagerAllegro::acquireDeviceDriver(): graphicsDeviceNumber exceeds the number of existing devices.");*/
 
-				mDeviceDrivers[graphicsDeviceNumber] = new AE::Graphics::Device::DriverGL15(graphicsDeviceNumber);
+				//mDeviceDrivers[graphicsDeviceNumber] = new AE::Graphics::Device::DriverSdl(graphicsDeviceNumber);
 
 				return mDeviceDrivers[graphicsDeviceNumber];
-			}
-
-			bool ManagerGL15::_checkOpenGLExtension(char* extensionName)
-			{
-				// get the list of supported extensions
-				char* extensionList = (char*) glGetString(GL_EXTENSIONS);
-				size_t error = glGetError();
-
-				if (!extensionName || !extensionList)
-					return false;
-
-				while (*extensionList)
-				{
-					// find the length of the first extension substring
-					unsigned int firstExtensionLength = strcspn(extensionList, " ");
-
-					if (strlen(extensionName) == firstExtensionLength &&
-						strncmp(extensionName, extensionList, firstExtensionLength) == 0)
-					{
-						return true;
-					}
-
-					// move to the next substring
-					extensionList += firstExtensionLength + 1;
-				}
-				return false;
-			}
-
-			void ManagerGL15::_initializeExtensions()
-			{
-				if(_checkOpenGLExtension("GL_EXT_draw_range_elements"))
-				{
-					glDrawRangeElements = (PFNGLDRAWRANGEELEMENTSPROC) wglGetProcAddress("glDrawRangeElementsEXT");
-				}
-
-				if(_checkOpenGLExtension("GL_EXT_multi_draw_arrays"))
-				{
-					glMultiDrawArrays = (PFNGLMULTIDRAWARRAYSPROC) wglGetProcAddress("glMultiDrawArraysEXT");
-					glMultiDrawElements = (PFNGLMULTIDRAWELEMENTSPROC) wglGetProcAddress("glMultiDrawElementsEXT");
-				}
-
-				if(_checkOpenGLExtension("GL_ARB_multitexture"))
-				{
-					glClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) wglGetProcAddress("glClientActiveTextureARB");
-				}
-
-				if(_checkOpenGLExtension("GL_ARB_window_pos"))
-				{
-					glWindowPos2i = (PFNGLWINDOWPOS2IPROC) wglGetProcAddress("glWindowPos2iARB");
-				}
-
-				if(_checkOpenGLExtension("GL_ARB_vertex_buffer_object"))
-				{
-					glBindBuffer = (PFNGLBINDBUFFERPROC) wglGetProcAddress("glBindBuffer123");
-					glDeleteBuffers = (PFNGLDELETEBUFFERSPROC) wglGetProcAddress("glDeleteBuffersARB");
-					glGenBuffers = (PFNGLGENBUFFERSPROC) wglGetProcAddress("glGenBuffersARB");
-					glIsBuffer = (PFNGLISBUFFERPROC) wglGetProcAddress("glIsBufferARB");
-					glBufferData = (PFNGLBUFFERDATAPROC) wglGetProcAddress("glBufferDataARB");
-					glBufferSubData = (PFNGLBUFFERSUBDATAPROC) wglGetProcAddress("glBufferSubDataARB");
-					glGetBufferSubData = (PFNGLGETBUFFERSUBDATAPROC) wglGetProcAddress("glGetBufferSubDataARB");
-					glMapBuffer = (PFNGLMAPBUFFERPROC) wglGetProcAddress("glMapBufferARB");
-					glUnmapBuffer = (PFNGLUNMAPBUFFERPROC) wglGetProcAddress("glUnmapBufferARB");
-					glGetBufferParameteriv = (PFNGLGETBUFFERPARAMETERIVPROC) wglGetProcAddress("glGetBufferParameterivARB");
-					glGetBufferPointerv = (PFNGLGETBUFFERPOINTERVPROC) wglGetProcAddress("glGetBufferPointervARB");
-				}
 			}
 		}
 	}

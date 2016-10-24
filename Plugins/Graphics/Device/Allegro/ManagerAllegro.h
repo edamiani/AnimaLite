@@ -26,8 +26,8 @@ namespace AE
 				ManagerAllegro();
 				virtual ~ManagerAllegro();
 
-				bool install(AE::uint options);
-				bool uninstall();
+				bool Install(AE::uint options);
+				bool Uninstall();
 
 				AE::Graphics::Device::Driver* acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType);
 				//AE::Graphics::Device::Context* createDeviceContext(AE::Graphics::Device::Driver *devicedriver, const AE::Math::Point2 &dimensions, AE::Graphics::Device::ContextOption deviceContextOptions, const std::string &contextName = "");

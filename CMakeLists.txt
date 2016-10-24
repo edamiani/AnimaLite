@@ -7,7 +7,7 @@ option(Anima_Temp "Build DLLs?")
 option(AnimaMath_Mathfu "Uses mathfu as the math library" ON)
 option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 
-add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
+#add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
 
@@ -83,6 +83,10 @@ add_library(AeGraphicsDeviceAllegro STATIC
 	Plugins/Graphics/Device/Allegro/ManagerAllegro.cpp)
 target_link_libraries(AeGraphicsDeviceAllegro AeGraphicsDeviceCore "${ALLEGRO_LIB}")
 
+if(NOT Anima_BuildSharedLibs)
+	target_compile_definitions(AeGraphicsDeviceAllegro PRIVATE ALLEGRO_STATICLINK)
+endif()
+
 add_library(AeGraphicsDeviceSdl STATIC
 	Plugins/Graphics/Device/Sdl/ContextSdl.h
 	Plugins/Graphics/Device/Sdl/ContextSdl.cpp
@@ -128,5 +132,10 @@ add_executable(TestEventSdl
 	Tests/OS/EventSdl/TestEventSdl.h
 	Tests/OS/EventSdl/TestEventSdl.cpp)
 target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
+
+add_executable(TestGraphicsDeviceAllegro 
+	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
+	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
+target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSdl AeEventSdl AeWindowSdl SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

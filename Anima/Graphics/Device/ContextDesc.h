@@ -3,7 +3,7 @@
 
 #include "Anima/Types.h"
 #include "Anima/Graphics/Enums.h"
-#include "Anima/Math/Point2.h"
+#include "Anima/Math/Vector2.h"
 
 namespace AE
 {
@@ -21,7 +21,7 @@ namespace AE
 				ContextDesc()
 					: dimensions(0, 0), fullScreen(false), parentWindow(0) {  }
 
-				ContextDesc(AE::Graphics::ColorFormat _colorFormat, AE::Math::Point2<AE::uint> _dimensions)
+				ContextDesc(AE::Graphics::ColorFormat _colorFormat, AE::Math::Vector2 _dimensions)
 					: dimensions(_dimensions), mColorFormat(_colorFormat)
 				{
 					switch(mColorFormat)
@@ -40,9 +40,9 @@ namespace AE
 					}
 				}
 
-				AE::Math::Point2<AE::uint>	dimensions;
-				bool						fullScreen;
-				AE::OS::Window				*parentWindow;
+				AE::Math::Vector2	dimensions;
+				bool				fullScreen;
+				AE::OS::Window		*parentWindow;
 
 				ContextDesc & operator=(ContextDesc &rhs)
 				{

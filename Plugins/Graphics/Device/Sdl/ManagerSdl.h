@@ -1,10 +1,9 @@
-#ifndef __AE_GRAPHICS_DEVICE_MANAGER_GL15_SDL__
-#define __AE_GRAPHICS_DEVICE_MANAGER_GL15_SDL__
+#ifndef __AE_GRAPHICS_DEVICE_MANAGER_SDL__
+#define __AE_GRAPHICS_DEVICE_MANAGER_SDL__
 
 #include "Anima/Graphics/Device/Manager.h"
 
 #include "Anima/Platform.h"
-#include "Anima/Graphics/Device/GL15/GLHeaders.h"
 #include "Anima/Graphics/Device/Driver.h"
 #include "Anima/Graphics/Device/Context.h"
 
@@ -20,22 +19,21 @@ namespace AE
 		{
 			class Driver;
 
-			class ManagerGL15 : public AE::Graphics::Device::Manager
+			class ManagerSdl : public AE::Graphics::Device::Manager
 			{
 			public:
-				ManagerGL15();
-				virtual ~ManagerGL15();
+				ManagerSdl();
+				virtual ~ManagerSdl();
 
-				bool			install(AE::uint options);
-				bool			uninstall();
+				bool			Install(AE::uint options);
+				bool			Uninstall();
 
 				AE::Graphics::Device::Driver*
 								acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType = AE::Graphics::Device::DT_NONE);
 
-				void			_initializeExtensions();
-
-			protected:
-				bool			_checkOpenGLExtension(char* extensionName);
+			private:
+				std::vector<char *>		mDrivers;
+				AE::uint				mNumOfDrivers;
 			};
 		}
 	}

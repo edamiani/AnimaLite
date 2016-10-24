@@ -33,6 +33,7 @@ namespace AE
 			//AE::Input::Context*			getInputContext() { return mInputContext; }
 			AE::Math::Vector2				getPosition() { return mPosition; }
 			const std::string&				getTitle() { return mWindowTitle; }
+			AE::int8*						getType() { return mType; }
 			//virtual size_t					getWindowHandle() = 0;
 			bool							isFullScreen() { assert(mDeviceContext); return mDeviceContext->isFullScreen(); }
 			void							setFullScreen(bool isFullScreen) { assert(mDeviceContext); mDeviceContext->setFullScreen(isFullScreen); }
@@ -49,6 +50,7 @@ namespace AE
 			bool							mIsExternal;
 			bool							mIsFullScreen;
 			AE::Math::Vector2				mPosition;
+			AE::int8						mType[8];
 			std::string						mWindowTitle;
 		};
 	}

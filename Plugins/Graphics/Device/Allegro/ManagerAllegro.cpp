@@ -4,14 +4,7 @@
 #include "Anima/Graphics/Enums.h"
 #include "Anima/OS/Window.h"
 #include "Plugins/Graphics/Device/Allegro/DriverAllegro.h"
-
-//#ifdef AE_PLATFORM_ALLEGRO_DX9
-//	#include "../include/AnimaGraphicsDeviceContextAllegroDX9.h"
-//#else
-	#include "Plugins/Graphics/Device/Allegro/ContextAllegro.h"
-//#endif
-
-//AE::Graphics::Device::ManagerAllegro* AE::Singleton<AE::Graphics::Device::ManagerAllegro>::mInstance = 0;
+#include "Plugins/Graphics/Device/Allegro/ContextAllegro.h"
 
 namespace AE
 {
@@ -29,10 +22,10 @@ namespace AE
 				mInstance = 0;
 			}
 
-			bool ManagerAllegro::install(AE::uint options)
+			bool ManagerAllegro::Install(AE::uint options)
 			{
-				//if(!al_is_system_installed())
-					//al_init();
+				if(!al_is_system_installed())
+					al_init();
 				//al_get_monitor_info(graphicsDeviceNumber, &mMonitorInfo);
 
 				mIsInstalled = true;
@@ -40,7 +33,7 @@ namespace AE
 				return true;
 			}
 
-			bool ManagerAllegro::uninstall()
+			bool ManagerAllegro::Uninstall()
 			{
 				mIsInstalled = false;
 

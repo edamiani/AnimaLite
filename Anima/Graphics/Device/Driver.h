@@ -29,10 +29,11 @@ namespace AE
 			class Driver
 			{
 			public:
-				Driver(AE::uint deviceId, AE::Graphics::Device::DriverType driverType) 
+				Driver(AE::uint deviceId, AE::Graphics::Device::DriverType driverType)
 					: mBufferIdCount(-1), mDeviceId(deviceId), mType(driverType), mRenderablePixelBufferId(0) {}
 				~Driver() {}
 
+				virtual AE::Graphics::Device::Context*		createDeviceContext(AE::OS::Window *window, const std::string &contextName = "") = 0;
 				virtual AE::Graphics::Device::Context*		createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "") = 0;
 				virtual AE::Graphics::Device::IndexBuffer*	createEmptyIndexBuffer() = 0;
 				virtual AE::Graphics::Device::VertexBuffer*	createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) = 0;
