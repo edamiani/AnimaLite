@@ -9,21 +9,23 @@ option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 
 #add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
+add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SFML")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
-include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
-include_directories("${PROJECT_BINARY_DIR}/Dependencies/allegro/include")
+#include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
+#include_directories("${PROJECT_BINARY_DIR}/Dependencies/allegro/include")
+include_directories("${PROJECT_SOURCE_DIR}/Dependencies/SFML/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/dependencies/vectorial/include")
 
 if(Anima_BuildSharedLibs)
 	set(SDL_LIB SDL2)
-	set(ALLEGRO_LIB allegro-static)
+	#set(ALLEGRO_LIB allegro-static)
 else()
 	set(SDL_LIB SDL2-static)
-	set(ALLEGRO_LIB allegro)
+	#set(ALLEGRO_LIB allegro)
 endif()
 
 if(AnimaMath_Mathfu)
@@ -96,6 +98,15 @@ add_library(AeGraphicsDeviceSdl STATIC
 	Plugins/Graphics/Device/Sdl/ManagerSdl.cpp)
 target_link_libraries(AeGraphicsDeviceSdl AeGraphicsDeviceCore)
 
+add_library(AeGraphicsDeviceSfml STATIC
+	Plugins/Graphics/Device/Sfml/ContextSfml.h
+	Plugins/Graphics/Device/Sfml/ContextSfml.cpp
+	Plugins/Graphics/Device/Sfml/DriverSfml.h
+	Plugins/Graphics/Device/Sfml/DriverSfml.cpp
+	Plugins/Graphics/Device/Sfml/ManagerSfml.h
+	Plugins/Graphics/Device/Sfml/ManagerSfml.cpp)
+target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore)
+
 add_library(AeEventSdl STATIC
 	Plugins/OS/EventSdl/EventManagerSdl.h
 	Plugins/OS/EventSdl/EventManagerSdl.cpp
@@ -136,6 +147,6 @@ target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
 add_executable(TestGraphicsDeviceAllegro 
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSdl AeEventSdl AeWindowSdl SDL2main)
+target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSdl AeEventSdl AeWindowSdl SDL2main sfml-graphics)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)
