@@ -38,6 +38,7 @@ namespace AE
 			void			_setSdlWindow(SDL_Window *window) { mWindow = window; }
 
 		protected:
+			SDL_SysWMinfo	mSysInfo;
 			SDL_Window		*mWindow;
 		};
 	}

@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-#include "Dependencies/SDL2-2.0.4/include/SDL.h"
+#include "SFML/Graphics.hpp"
 
 namespace AE
 {
@@ -24,16 +24,16 @@ namespace AE
 			class PixelBuffer;
 			class VertexBuffer;
 
-			class DriverSdl : public AE::Graphics::Device::Driver
+			class DriverSfml : public AE::Graphics::Device::Driver
 			{
 			public:
-				DriverSdl(AE::uint deviceId, AE::Graphics::Device::DriverType driverType = AE::Graphics::Device::DT_NONE) 
+				DriverSfml(AE::uint deviceId, AE::Graphics::Device::DriverType driverType = AE::Graphics::Device::DT_NONE) 
 					: Driver(deviceId, driverType), mBufferIdCount(-1), mDeviceId(deviceId), mType(driverType), mRenderablePixelBufferId(0) 
 				{
-					mDriverName = const_cast<char *>(SDL_GetVideoDriver(deviceId));
+					mDriverName = "Unknown";
 				}
 
-				~DriverSdl() {}
+				~DriverSfml() {}
 
 				AE::Graphics::Device::Context*				createDeviceContext(AE::OS::Window *window, const std::string &contextName = "");
 				AE::Graphics::Device::Context*				createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");

@@ -38,7 +38,7 @@ int main(int argc, char* args[])
 	auto *windowManager = pluginManager->RegisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
 	windowManager->Install(AE::NO_OPTIONS);
 
-	auto *deviceManager = pluginManager->RegisterPlugin<AE::Graphics::Device::ManagerSdl>("GraphicsSdl");
+	auto *deviceManager = pluginManager->RegisterPlugin<AE::Graphics::Device::ManagerSfml>("GraphicsSfml");
 	deviceManager->Install(AE::NO_OPTIONS);
 
 	AE::OS::WindowDesc windowDesc;
@@ -68,7 +68,7 @@ int main(int argc, char* args[])
 	{ 
 		deviceContext->beginRendering(AE::Graphics::Color(128, 0, 0, 255));
 
-		deviceContext->drawLine(AE::Math::Vector2(10, 10), AE::Math::Vector2(200, 200), AE::Graphics::Color(0, 255, 128));
+		//deviceContext->drawLine(AE::Math::Vector2(10, 10), AE::Math::Vector2(200, 200), AE::Graphics::Color(0, 255, 128));
 
 		deviceContext->endRendering();
 	}
@@ -80,7 +80,7 @@ int main(int argc, char* args[])
 	pluginManager->UnregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 
 	deviceManager->Uninstall();
-	pluginManager->UnregisterPlugin<AE::Graphics::Device::ManagerSdl>("GraphicsSdl");
+	pluginManager->UnregisterPlugin<AE::Graphics::Device::ManagerSfml>("GraphicsSfml");
 
 	return 0;
 }

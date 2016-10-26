@@ -105,7 +105,8 @@ add_library(AeGraphicsDeviceSfml STATIC
 	Plugins/Graphics/Device/Sfml/DriverSfml.cpp
 	Plugins/Graphics/Device/Sfml/ManagerSfml.h
 	Plugins/Graphics/Device/Sfml/ManagerSfml.cpp)
-target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore)
+target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore sfml-graphics)
+target_compile_definitions(AeGraphicsDeviceSfml PRIVATE SFML_STATIC)
 
 add_library(AeEventSdl STATIC
 	Plugins/OS/EventSdl/EventManagerSdl.h
@@ -147,6 +148,6 @@ target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
 add_executable(TestGraphicsDeviceAllegro 
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSdl AeEventSdl AeWindowSdl SDL2main sfml-graphics)
+target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSfml AeEventSdl AeWindowSdl SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

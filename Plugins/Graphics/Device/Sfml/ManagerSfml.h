@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include "SFML/Graphics.hpp"
+
 namespace AE
 {
 	namespace Graphics
@@ -19,11 +21,11 @@ namespace AE
 		{
 			class Driver;
 
-			class ManagerSdl : public AE::Graphics::Device::Manager
+			class ManagerSfml : public AE::Graphics::Device::Manager
 			{
 			public:
-				ManagerSdl();
-				virtual ~ManagerSdl();
+				ManagerSfml();
+				virtual ~ManagerSfml();
 
 				bool			Install(AE::uint options);
 				bool			Uninstall();

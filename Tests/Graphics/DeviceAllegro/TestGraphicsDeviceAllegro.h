@@ -6,7 +6,7 @@
 #include "Anima/OS/KeyListener.h"
 #include "Anima/OS/MouseListener.h"
 
-#include "Plugins/Graphics/Device/Sdl/ManagerSdl.h"
+#include "Plugins/Graphics/Device/Sfml/ManagerSfml.h"
 
 #include "Plugins/OS/EventSdl/EventManagerSdl.h"
 #include "Plugins/OS/WindowSdl/WindowSdl.h"

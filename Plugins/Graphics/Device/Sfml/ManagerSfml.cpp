@@ -1,15 +1,13 @@
-#include "ManagerSdl.h"
+#include "ManagerSfml.h"
 
 #include "Anima/Exception.h"
 #include "Anima/Graphics/Enums.h"
 #include "Anima/Graphics/Device/PixelBufferDesc.h"
 
-#include "DriverSdl.h"
+#include "DriverSfml.h"
 
 #include <cassert>
 #include <string.h>
-
-#include "Dependencies/SDL2-2.0.4/include/SDL.h"
 
 namespace AE
 {
@@ -17,38 +15,23 @@ namespace AE
 	{
 		namespace Device
 		{
-			ManagerSdl::ManagerSdl()
+			ManagerSfml::ManagerSfml()
 			{
 				mInstance = this;
 
-				if(!SDL_WasInit(SDL_INIT_VIDEO))
-				{
-					SDL_InitSubSystem(SDL_INIT_VIDEO);
-				}
-
-				mNumOfDrivers = SDL_GetNumVideoDrivers();
-				for(AE::uint i = 0; i < mNumOfDrivers; i++)
-				{
-					mDeviceDrivers[i] = new AE::Graphics::Device::DriverSdl(i);
-				}
+				// SFML doesn't have multimonitor support
+				mNumOfDrivers = 1;
+				mDeviceDrivers[0] = new AE::Graphics::Device::DriverSfml(0);
 			}
 
-			ManagerSdl::~ManagerSdl()
+			ManagerSfml::~ManagerSfml()
 			{
 				mInstance = 0;
 
-				for(AE::uint i = 0; i < mNumOfDrivers; i++)
-				{ 
-					delete mDeviceDrivers[i];
-				}
-
-				if(SDL_WasInit(SDL_INIT_VIDEO))
-				{
-					SDL_QuitSubSystem(SDL_INIT_VIDEO);
-				}
+				delete mDeviceDrivers[0];
 			}
 
-			bool ManagerSdl::Install(AE::uint options)
+			bool ManagerSfml::Install(AE::uint options)
 			{
 				if(mParent != 0)
 				{
@@ -62,14 +45,14 @@ namespace AE
 					return false;
 			}
 
-			bool ManagerSdl::Uninstall()
+			bool ManagerSfml::Uninstall()
 			{
 				//delete mPixelBufferFactory;
 
 				return true;
 			}
 
-			AE::Graphics::Device::Driver* ManagerSdl::acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
+			AE::Graphics::Device::Driver* ManagerSfml::acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
 			{
 				// TODO implement adapter counting
 				/*if(mDeviceDrivers.find(graphicsDeviceNumber) != mDeviceDrivers.end())

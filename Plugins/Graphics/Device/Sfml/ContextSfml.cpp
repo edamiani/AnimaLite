@@ -1,17 +1,7 @@
 #include "ContextSfml.h"
 
-//#include "../AnimaGraphicsDeviceContextSfml.h"
-//#include "Anima/Graphics/Device/GL15/DriverGL15.h"
-//#include "Anima/Graphics/Device/GL15/ManagerGL15.h"
-//#include "Anima/Graphics/Device/GL15/PipelineGL15.h"
-//#include "Anima/Graphics/Device/GL15/FrameBufferGL15.h"
-//#include "Anima/Graphics/Device/GL15/StageInput2dGL15.h"
-//#include "Anima/Graphics/Device/GL15/VertexBufferGL.h"
-
 #include "Anima/Platform.h"
 #include "Anima/Graphics/Device/PixelBufferDesc.h"
-
-#include "Plugins/OS/WindowSdl/WindowSdl.h"
 
 #include <cassert>
 #include <cstring>
@@ -26,7 +16,7 @@ namespace AE
 			ContextSfml::ContextSfml(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver) 
 				: Context(deviceDriver)
 			{
-				AE::OS::Window *window = static_cast<AE::OS::WindowSdl *>(contextDesc.parentWindow);
+				AE::OS::Window *window = contextDesc.parentWindow;
 
 				mInnerWindow.create(window->getHandle());
 
@@ -35,34 +25,32 @@ namespace AE
 
 			ContextSfml::~ContextSfml()
 			{
-				SDL_DestroyRenderer(mRenderer);
+
 			}
 
 			bool ContextSfml::beginRendering()
 			{
-				SDL_RenderClear(mRenderer);
+				mInnerWindow.clear();
 
 				return true;
 			}
 
 			bool ContextSfml::beginRendering(const AE::Graphics::Color &clearColor)
 			{
-				SDL_SetRenderDrawColor(mRenderer, clearColor.R, clearColor.G, clearColor.B, clearColor.A);
-
-				SDL_RenderClear(mRenderer);
+				mInnerWindow.clear(sf::Color(clearColor.R, clearColor.G, clearColor.B, clearColor.A));
 
 				return true;
 			}
 
 			void ContextSfml::drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
 			{
-				SDL_SetRenderDrawColor(mRenderer, color.R, color.G, color.B, color.A);
-				SDL_RenderDrawLine(mRenderer, start.x(), start.y(), end.x(), end.y());
+				//SDL_SetRenderDrawColor(mRenderer, color.R, color.G, color.B, color.A);
+				//SDL_RenderDrawLine(mRenderer, start.x(), start.y(), end.x(), end.y());
 			}
 
 			void ContextSfml::endRendering()
 			{
-				SDL_RenderPresent(mRenderer);
+				mInnerWindow.display();
 			}
 
 			void ContextSfml::render()

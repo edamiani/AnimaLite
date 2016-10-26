@@ -34,17 +34,17 @@ namespace AE
 
 		WindowHandle WindowSdl::getHandle()
 		{
-			SDL_SysWMinfo sysInfo;
-			SDL_GetWindowWMInfo(mWindow, &sysInfo);
+			SDL_VERSION(&mSysInfo.version);
+			SDL_GetWindowWMInfo(mWindow, &mSysInfo);
 
 #if defined(AE_PLATFORM_WIN32)
-			return sysInfo.info.win.window;
+			return mSysInfo.info.win.window;
 
 #elif defined(AE_PLATFORM_LINUX)
-			return sysInfo.info.x11.window;
+			return mSysInfo.info.x11.window;
 
 #elif defined(AE_PLATFORM_OSX)
-			return sysInfo.info.cocoa.window;
+			return mSysInfo.cocoa.window;
 
 #endif
 		}
