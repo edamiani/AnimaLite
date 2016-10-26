@@ -17,6 +17,16 @@ namespace AE
 
 	namespace OS
 	{
+#if defined(AE_PLATFORM_WIN32)
+		typedef HWND WindowHandle;
+
+#elif defined(AE_PLATFORM_LINUX)
+		typedef unsigned long WindowHandle;
+
+#elif defined(AE_PLATFORM_OSX)
+		typedef void* WindowHandle;
+
+#endif
 		class AE_DECLSPEC Window : public AE::OS::WindowListener
 		{
 		public:
@@ -29,12 +39,12 @@ namespace AE
 			AE::Graphics::ColorFormat		getColorFormat() { return mColorFormat; }
 			AE::Graphics::Device::Context*	getDeviceContext() { return mDeviceContext; }
 			AE::Math::Vector2				getDimensions() { return mDimensions; }
+			virtual WindowHandle			getHandle() = 0;
 			AE::uint8						getId() { return mId; }
 			//AE::Input::Context*			getInputContext() { return mInputContext; }
 			AE::Math::Vector2				getPosition() { return mPosition; }
 			const std::string&				getTitle() { return mWindowTitle; }
 			AE::int8*						getType() { return mType; }
-			//virtual size_t					getWindowHandle() = 0;
 			bool							isFullScreen() { assert(mDeviceContext); return mDeviceContext->isFullScreen(); }
 			void							setFullScreen(bool isFullScreen) { assert(mDeviceContext); mDeviceContext->setFullScreen(isFullScreen); }
 			virtual void					show() = 0;

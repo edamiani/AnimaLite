@@ -31,5 +31,22 @@ namespace AE
 				SDL_DestroyWindow(mWindow);
 			}
 		}
+
+		WindowHandle WindowSdl::getHandle()
+		{
+			SDL_SysWMinfo sysInfo;
+			SDL_GetWindowWMInfo(mWindow, &sysInfo);
+
+#if defined(AE_PLATFORM_WIN32)
+			return sysInfo.info.win.window;
+
+#elif defined(AE_PLATFORM_LINUX)
+			return sysInfo.info.x11.window;
+
+#elif defined(AE_PLATFORM_OSX)
+			return sysInfo.info.cocoa.window;
+
+#endif
+		}
 	}
 }

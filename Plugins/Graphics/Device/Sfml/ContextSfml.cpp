@@ -1,6 +1,6 @@
-#include "ContextSdl.h"
+#include "ContextSfml.h"
 
-//#include "../AnimaGraphicsDeviceContextSdl.h"
+//#include "../AnimaGraphicsDeviceContextSfml.h"
 //#include "Anima/Graphics/Device/GL15/DriverGL15.h"
 //#include "Anima/Graphics/Device/GL15/ManagerGL15.h"
 //#include "Anima/Graphics/Device/GL15/PipelineGL15.h"
@@ -23,37 +23,29 @@ namespace AE
 	{
 		namespace Device
 		{
-			ContextSdl::ContextSdl(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver) 
+			ContextSfml::ContextSfml(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver) 
 				: Context(deviceDriver)
 			{
 				AE::OS::Window *window = static_cast<AE::OS::WindowSdl *>(contextDesc.parentWindow);
 
-				if(strcmp(window->getType(), "SDL") == 0)
-				{
-					SDL_Window *sdlWindow = static_cast<AE::OS::WindowSdl *>(window)->_getSdlWindow();
-					mRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
-				}
-				else
-				{
-					/// TODO
-				}
+				mInnerWindow.create(window->getHandle());
 
 				contextDesc.parentWindow->attachDeviceContext(this);
 			}
 
-			ContextSdl::~ContextSdl()
+			ContextSfml::~ContextSfml()
 			{
 				SDL_DestroyRenderer(mRenderer);
 			}
 
-			bool ContextSdl::beginRendering()
+			bool ContextSfml::beginRendering()
 			{
 				SDL_RenderClear(mRenderer);
 
 				return true;
 			}
 
-			bool ContextSdl::beginRendering(const AE::Graphics::Color &clearColor)
+			bool ContextSfml::beginRendering(const AE::Graphics::Color &clearColor)
 			{
 				SDL_SetRenderDrawColor(mRenderer, clearColor.R, clearColor.G, clearColor.B, clearColor.A);
 
@@ -62,22 +54,22 @@ namespace AE
 				return true;
 			}
 
-			void ContextSdl::drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
+			void ContextSfml::drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
 			{
 				SDL_SetRenderDrawColor(mRenderer, color.R, color.G, color.B, color.A);
 				SDL_RenderDrawLine(mRenderer, start.x(), start.y(), end.x(), end.y());
 			}
 
-			void ContextSdl::endRendering()
+			void ContextSfml::endRendering()
 			{
 				SDL_RenderPresent(mRenderer);
 			}
 
-			void ContextSdl::render()
+			void ContextSfml::render()
 			{
 			}
 
-			void ContextSdl::setFullScreen(bool isFullScreen)
+			void ContextSfml::setFullScreen(bool isFullScreen)
 			{
 				if(mIsFullScreen)
 				{
@@ -92,7 +84,7 @@ namespace AE
 				}
 			}
 
-			void ContextSdl::setParentWindow(AE::OS::Window *parentWindow)
+			void ContextSfml::setParentWindow(AE::OS::Window *parentWindow)
 			{
 				mParentWindow = parentWindow;
 

@@ -1,5 +1,5 @@
-#ifndef __AE_GRAPHICS_DEVICE_CONTEXT_SDL__
-#define __AE_GRAPHICS_DEVICE_CONTEXT_SDL__
+#ifndef __AE_GRAPHICS_DEVICE_CONTEXT_SFML__
+#define __AE_GRAPHICS_DEVICE_CONTEXT_SFML__
 
 #include "Anima/Graphics/Device/Context.h"
 
@@ -7,7 +7,7 @@
 #include "Anima/Graphics/Device/ContextDesc.h"
 #include "Anima/OS/Window.h"
 
-#include "Dependencies/SDL2-2.0.4/include/SDL.h"
+#include "SFML/Graphics.hpp"
 
 #include <vector>
 
@@ -17,11 +17,11 @@ namespace AE
 	{
 		namespace Device
 		{
-			class ContextSdl : public AE::Graphics::Device::Context
+			class ContextSfml : public AE::Graphics::Device::Context
 			{
 			public:
-				ContextSdl(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver);
-				virtual ~ContextSdl();
+				ContextSfml(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver);
+				virtual ~ContextSfml();
 
 				bool beginRendering();
 				bool beginRendering(const AE::Graphics::Color &clearColor);
@@ -36,7 +36,8 @@ namespace AE
 				void setParentWindow(AE::OS::Window *parentWindow);
 
 			protected:
-				SDL_Renderer *mRenderer;
+				sf::Context mContext;
+				sf::RenderWindow mInnerWindow;
 			};
 		}
 	}
