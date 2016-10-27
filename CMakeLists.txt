@@ -68,10 +68,14 @@ add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/ContextDesc.h
 	Anima/Graphics/Device/Driver.h
 	Anima/Graphics/Device/Driver.cpp
+	Anima/Graphics/Device/FragmentShader.h
 	Anima/Graphics/Device/IndexBuffer.h
 	Anima/Graphics/Device/Manager.h
 	Anima/Graphics/Device/Manager.cpp
-	Anima/Graphics/Device/VertexBuffer.h)
+	Anima/Graphics/Device/Pipeline.h
+	Anima/Graphics/Device/Shader.h
+	Anima/Graphics/Device/VertexBuffer.h
+	Anima/Graphics/Device/VertexShader.h)
 target_link_libraries(AeGraphicsDeviceCore AeCore)
 
 add_library(AeGraphicsDeviceAllegro STATIC
