@@ -40,6 +40,7 @@ namespace AE
 				virtual void								destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
 				AE::Graphics::Device::Context*				getDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
 				AE::uint									getDeviceId() { return mDeviceId; }
+				AE::Graphics::Device::Pipeline*				getPipeline() { return mPipeline; }
 				AE::Graphics::Device::DriverType			getType() { return mType; }
 
 			protected:
@@ -47,6 +48,7 @@ namespace AE
 				std::vector<AE::Graphics::Device::Context *> 
 															mDeviceContexts;
 				AE::uint									mDeviceId;
+				Pipeline									*mPipeline;
 				AE::uint									mRenderablePixelBufferId;
 				AE::Graphics::Device::DriverType			mType;
 			};

@@ -18,7 +18,10 @@ namespace AE
 			{
 				AE::OS::Window *window = contextDesc.parentWindow;
 
-				mInnerWindow.create(window->getHandle());
+				sf::ContextSettings settings;
+				settings.majorVersion = 3;
+				settings.minorVersion = 1;
+				mInnerWindow.create(window->getHandle(), settings);
 
 				contextDesc.parentWindow->attachDeviceContext(this);
 			}

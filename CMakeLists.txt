@@ -63,6 +63,16 @@ add_library(AeWindowCore STATIC
 	Anima/OS/WindowManager.cpp)
 target_link_libraries(AeWindowCore AeCore)
 
+add_library(AeGraphicsCore STATIC
+	Anima/Graphics/Image.h
+	Anima/Graphics/Manager.h)
+target_link_libraries(AeGraphicsCore AeCore)
+
+add_library(AeGraphicsSfml STATIC
+	Plugins/Graphics/Sfml/ImageSfml.h
+	Plugins/Graphics/Sfml/ImageSfml.cpp)
+target_link_libraries(AeGraphicsSfml AeGraphicsCore sfml-graphics)
+
 add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/Context.h
 	Anima/Graphics/Device/ContextDesc.h
@@ -70,8 +80,9 @@ add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/Driver.cpp
 	Anima/Graphics/Device/FragmentShader.h
 	Anima/Graphics/Device/IndexBuffer.h
-	Anima/Graphics/Device/Manager.h
 	Anima/Graphics/Device/Manager.cpp
+	Anima/Graphics/Device/Manager.h
+	Anima/Graphics/Device/Pipeline.cpp
 	Anima/Graphics/Device/Pipeline.h
 	Anima/Graphics/Device/Shader.h
 	Anima/Graphics/Device/VertexBuffer.h
@@ -108,7 +119,11 @@ add_library(AeGraphicsDeviceSfml STATIC
 	Plugins/Graphics/Device/Sfml/DriverSfml.h
 	Plugins/Graphics/Device/Sfml/DriverSfml.cpp
 	Plugins/Graphics/Device/Sfml/ManagerSfml.h
-	Plugins/Graphics/Device/Sfml/ManagerSfml.cpp)
+	Plugins/Graphics/Device/Sfml/ManagerSfml.cpp
+	Plugins/Graphics/Device/Sfml/PipelineSfml.h
+	Plugins/Graphics/Device/Sfml/PipelineSfml.cpp
+	Plugins/Graphics/Device/Sfml/ShaderSfml.h
+	Plugins/Graphics/Device/Sfml/ShaderSfml.cpp)
 target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore sfml-graphics)
 target_compile_definitions(AeGraphicsDeviceSfml PRIVATE SFML_STATIC)
 
@@ -152,6 +167,6 @@ target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
 add_executable(TestGraphicsDeviceAllegro 
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSfml AeEventSdl AeWindowSdl SDL2main)
+target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSfml AeGraphicsSfml AeEventSdl AeWindowSdl SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

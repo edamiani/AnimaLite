@@ -4,9 +4,9 @@
 #include "Anima/Graphics/Device/ContextDesc.h"
 #include "Anima/Graphics/Device/Driver.h"
 #include "Anima/Graphics/Enums.h"
-//#include "Anima/Math/Vector2.h"
 
-//#include <list>
+#include "PipelineSfml.h"
+
 #include <string>
 #include <vector>
 
@@ -31,6 +31,7 @@ namespace AE
 					: Driver(deviceId, driverType), mBufferIdCount(-1), mDeviceId(deviceId), mType(driverType), mRenderablePixelBufferId(0) 
 				{
 					mDriverName = "Unknown";
+					mPipeline = new PipelineSfml();
 				}
 
 				~DriverSfml() {}
