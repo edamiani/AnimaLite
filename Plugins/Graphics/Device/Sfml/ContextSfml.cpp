@@ -23,6 +23,11 @@ namespace AE
 				sf::ContextSettings settings;
 				settings.majorVersion = 3;
 				settings.minorVersion = 1;
+				settings.antialiasingLevel = 0;
+				settings.depthBits = 24;
+				settings.stencilBits = 8;
+				settings.attributeFlags |= sf::ContextSettings::Core;
+
 				mInnerWindow.create(window->getHandle(), settings);
 
 				contextDesc.parentWindow->attachDeviceContext(this);
@@ -47,10 +52,9 @@ namespace AE
 				return true;
 			}
 
-			void ContextSfml::draw(const AE::Graphics::Device::Texture &texture, const AE::Math::Vector2 position)
+			void ContextSfml::draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position)
 			{
-				//AE::Graphics::Device::Texture temp = texture;
-				sf::Texture *sfmlTexture = reinterpret_cast<AE::Graphics::Device::TextureSfml &>(const_cast<AE::Graphics::Device::Texture &>(texture)).getSfmlTexturePtr();
+				sf::Texture *sfmlTexture = reinterpret_cast<AE::Graphics::Device::TextureSfmlPtr &>(const_cast<AE::Graphics::Device::TexturePtr &>(texture))->getSfmlTexturePtr();
 
 				sf::Vertex quadVertices[4];
 
@@ -67,7 +71,6 @@ namespace AE
 				sf::RenderStates renderStates;
 				renderStates.texture = sfmlTexture;
 				mInnerWindow.draw(quadVertices, 4, sf::Quads, renderStates);
-				//mInnerWindow.draw(quadVertices, 4, sf::Quads);
 			}
 
 			void ContextSfml::drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)

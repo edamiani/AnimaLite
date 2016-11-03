@@ -40,6 +40,7 @@ namespace AE
 				AE::Graphics::Device::Context*				createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");
 				AE::Graphics::Device::IndexBuffer*			createEmptyIndexBuffer() { return nullptr; }
 				AE::Graphics::Device::VertexBuffer*			createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) { return nullptr; }
+				AE::Graphics::Device::TexturePtr			createTexture(const AE::Math::Vector2 &dimensions, void *data = nullptr, bool hasMipMap = false);
 				void										destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
 				AE::Graphics::Device::Context*				getDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
 				AE::uint									getDeviceId() { return mDeviceId; }

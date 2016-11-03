@@ -2,6 +2,7 @@
 #define __AE_GRAPHICS_DEVICE_DRIVER__
 
 #include "Anima/Graphics/Device/ContextDesc.h"
+#include "Anima/Graphics/Device/Texture.h"
 #include "Anima/Graphics/Enums.h"
 //#include "Anima/Math/Vector2.h"
 
@@ -37,6 +38,7 @@ namespace AE
 				virtual AE::Graphics::Device::Context*		createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "") = 0;
 				virtual AE::Graphics::Device::IndexBuffer*	createEmptyIndexBuffer() = 0;
 				virtual AE::Graphics::Device::VertexBuffer*	createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) = 0;
+				virtual TexturePtr							createTexture(const AE::Math::Vector2 &dimensions, void *data = nullptr, bool hasMipMap = false) = 0;
 				virtual void								destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
 				AE::Graphics::Device::Context*				getDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
 				AE::uint									getDeviceId() { return mDeviceId; }

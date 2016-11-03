@@ -6,6 +6,21 @@ namespace AE
 	{
 		namespace Device
 		{
+			TextureSfml::TextureSfml(const AE::Math::Vector2 &dimensions, void *data, bool hasMipMap)
+			{
+				mSfmlTexture.create(dimensions.x(), dimensions.y());
+
+				if(data != nullptr)
+				{
+					mSfmlTexture.update(static_cast<sf::Uint8 *>(data));
+				}
+
+				if(hasMipMap)
+				{
+					mSfmlTexture.generateMipmap();
+				}
+			}
+
 			TextureSfml::TextureSfml(const AE::Graphics::Image &image)
 			{
 				void *data = image.getData();

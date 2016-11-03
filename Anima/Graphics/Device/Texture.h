@@ -3,6 +3,8 @@
 
 #include "Anima/Graphics/Image/Image.h"
 
+#include <memory>
+
 namespace AE
 {
 	namespace Graphics
@@ -11,13 +13,12 @@ namespace AE
 		{
 			class Texture
 			{
-			private:
-
-
 			public:
 				Texture() {}
-				~Texture() {}
+				virtual ~Texture() {}
 			};
+
+			typedef std::unique_ptr<AE::Graphics::Device::Texture> TexturePtr;
 		}
 	}
 }

@@ -5,6 +5,8 @@
 
 #include "SFML/Graphics.hpp"
 
+#include <memory>
+
 namespace AE
 {
 	namespace Graphics
@@ -17,6 +19,7 @@ namespace AE
 				sf::Texture		mSfmlTexture;
 
 			public:
+				TextureSfml(const AE::Math::Vector2 &dimensions, void *data = nullptr, bool hasMipMap = false);
 				TextureSfml(const AE::Graphics::Image &image);
 				~TextureSfml();
 
@@ -24,6 +27,8 @@ namespace AE
 				const sf::Texture&	getSfmlTexture() const { return mSfmlTexture; }
 				sf::Texture*		getSfmlTexturePtr() { return &mSfmlTexture; }
 			};
+
+			typedef std::unique_ptr<AE::Graphics::Device::TextureSfml> TextureSfmlPtr;
 		}
 	}
 }

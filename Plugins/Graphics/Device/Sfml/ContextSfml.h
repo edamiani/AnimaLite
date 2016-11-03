@@ -26,7 +26,7 @@ namespace AE
 
 				bool beginRendering();
 				bool beginRendering(const AE::Graphics::Color &clearColor);
-				void draw(const AE::Graphics::Device::Texture &texture, const AE::Math::Vector2 position);
+				void draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position);
 				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
 				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
 				void drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);

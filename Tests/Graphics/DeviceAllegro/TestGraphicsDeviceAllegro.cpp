@@ -70,9 +70,8 @@ int main(int argc, char* args[])
 
 	AE::OS::EventQueue *eventQueue = eventManager->getEventQueue();
 
-	//auto image = imageManager->createImage("Gandalf.png");
-	AE::Graphics::ImageSfml image("Gandalf.png");
-	AE::Graphics::Device::TextureSfml texture(image);
+	auto image = imageManager->createImage("Gandalf.png");
+	auto texture = deviceDriver->createTexture(image->getDimensions(), image->getData());
 
 	while(eventQueue->pollEvents()) 
 	{ 

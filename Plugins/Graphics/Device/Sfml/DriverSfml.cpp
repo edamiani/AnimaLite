@@ -2,7 +2,8 @@
 
 #include "Anima/OS/Window.h"
 
-#include "ContextSfml.h"
+#include "Plugins/Graphics/Device/Sfml/ContextSfml.h"
+#include "Plugins/Graphics/Device/Sfml/TextureSfml.h"
 
 namespace AE
 {
@@ -24,6 +25,11 @@ namespace AE
 			AE::Graphics::Device::Context* DriverSfml::createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName)
 			{
 				return nullptr;
+			}
+
+			AE::Graphics::Device::TexturePtr DriverSfml::createTexture(const AE::Math::Vector2 &dimensions, void *data, bool hasMipMap)
+			{
+				return std::make_unique<AE::Graphics::Device::TextureSfml>(dimensions, data, hasMipMap);
 			}
 		}
 	}
