@@ -11,14 +11,15 @@ option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SFML")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
+#add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/DevIL/DevIL")
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
 #include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
-#include_directories("${PROJECT_BINARY_DIR}/Dependencies/allegro/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/SFML/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/dependencies/vectorial/include")
+#include_directories("${PROJECT_SOURCE_DIR}/Dependencies/DevIL/DevIL/include")
 
 if(Anima_BuildSharedLibs)
 	set(SDL_LIB SDL2)
@@ -63,15 +64,12 @@ add_library(AeWindowCore STATIC
 	Anima/OS/WindowManager.cpp)
 target_link_libraries(AeWindowCore AeCore)
 
-add_library(AeGraphicsCore STATIC
-	Anima/Graphics/Image.h
-	Anima/Graphics/Manager.h)
-target_link_libraries(AeGraphicsCore AeCore)
-
-add_library(AeGraphicsSfml STATIC
-	Plugins/Graphics/Sfml/ImageSfml.h
-	Plugins/Graphics/Sfml/ImageSfml.cpp)
-target_link_libraries(AeGraphicsSfml AeGraphicsCore sfml-graphics)
+add_library(AeGraphicsImageSfml STATIC
+	Plugins/Graphics/Image/Sfml/ImageManagerSfml.h
+	Plugins/Graphics/Image/Sfml/ImageManagerSfml.cpp
+	Plugins/Graphics/Image/Sfml/ImageSfml.h
+	Plugins/Graphics/Image/Sfml/ImageSfml.cpp)
+target_link_libraries(AeGraphicsImageSfml sfml-graphics)
 
 add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/Context.h
@@ -85,6 +83,7 @@ add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/Pipeline.cpp
 	Anima/Graphics/Device/Pipeline.h
 	Anima/Graphics/Device/Shader.h
+	Anima/Graphics/Device/Texture.h
 	Anima/Graphics/Device/VertexBuffer.h
 	Anima/Graphics/Device/VertexShader.h)
 target_link_libraries(AeGraphicsDeviceCore AeCore)
@@ -123,7 +122,9 @@ add_library(AeGraphicsDeviceSfml STATIC
 	Plugins/Graphics/Device/Sfml/PipelineSfml.h
 	Plugins/Graphics/Device/Sfml/PipelineSfml.cpp
 	Plugins/Graphics/Device/Sfml/ShaderSfml.h
-	Plugins/Graphics/Device/Sfml/ShaderSfml.cpp)
+	Plugins/Graphics/Device/Sfml/ShaderSfml.cpp
+	Plugins/Graphics/Device/Sfml/TextureSfml.h
+	Plugins/Graphics/Device/Sfml/TextureSfml.cpp)
 target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore sfml-graphics)
 target_compile_definitions(AeGraphicsDeviceSfml PRIVATE SFML_STATIC)
 
@@ -167,6 +168,6 @@ target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
 add_executable(TestGraphicsDeviceAllegro 
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSfml AeGraphicsSfml AeEventSdl AeWindowSdl SDL2main)
+target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSfml AeGraphicsImageSfml AeEventSdl AeWindowSdl SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

@@ -1,5 +1,8 @@
 #include "TestGraphicsDeviceAllegro.h"
 
+#include "Plugins/Graphics/Device/Sfml/TextureSfml.h"
+#include "Plugins/Graphics/Image/Sfml/ImageSfml.h"
+
 #include <iostream>
 #include <memory>
 
@@ -41,6 +44,9 @@ int main(int argc, char* args[])
 	auto *deviceManager = pluginManager->RegisterPlugin<AE::Graphics::Device::ManagerSfml>("GraphicsSfml");
 	deviceManager->Install(AE::NO_OPTIONS);
 
+	auto *imageManager = pluginManager->RegisterPlugin<AE::Graphics::ImageManagerSfml>("ImageManagerSfml");
+	imageManager->Install(AE::NO_OPTIONS);
+
 	AE::OS::WindowDesc windowDesc;
 	windowDesc.dimensions = AE::Math::Vector2(640, 480);
 	windowDesc.position = AE::Math::Vector2(50, 50);
@@ -64,11 +70,16 @@ int main(int argc, char* args[])
 
 	AE::OS::EventQueue *eventQueue = eventManager->getEventQueue();
 
+	//auto image = imageManager->createImage("Gandalf.png");
+	AE::Graphics::ImageSfml image("Gandalf.png");
+	AE::Graphics::Device::TextureSfml texture(image);
+
 	while(eventQueue->pollEvents()) 
 	{ 
 		deviceContext->beginRendering(AE::Graphics::Color(128, 0, 0, 255));
 
-		//deviceContext->drawLine(AE::Math::Vector2(10, 10), AE::Math::Vector2(200, 200), AE::Graphics::Color(0, 255, 128));
+		deviceContext->draw(texture, AE::Math::Vector2(50, 50));
+		//deviceContext->drawQuad(AE::Math::Vector2(50, 50), AE::Math::Vector2(500, 500), texture);
 
 		deviceContext->endRendering();
 	}

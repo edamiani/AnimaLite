@@ -3,6 +3,7 @@
 
 #include "Anima/Types.h"
 #include "Anima/Graphics/Surface.h"
+#include "Anima/Graphics/Device/Texture.h"
 
 #include <vector>
 
@@ -34,8 +35,10 @@ namespace AE
 				virtual bool						beginRendering() = 0;
 				virtual bool						beginRendering(const AE::Graphics::Color &clearColor) = 0;
 				virtual void						draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
+				virtual void						draw(const AE::Graphics::Device::Texture &texture, const AE::Math::Vector2 position) = 0;
 				virtual void						draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) = 0;
 				virtual void						drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color) = 0;
+				virtual void						drawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture) = 0;
 				virtual void						endRendering() = 0;
 				AE::Graphics::Device::Driver*		getDeviceDriver() { return mDeviceDriver; }
 				AE::Graphics::Device::FrameBuffer*	getFrameBuffer() { return mFrameBuffer; }

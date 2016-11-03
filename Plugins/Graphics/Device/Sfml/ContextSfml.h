@@ -5,6 +5,7 @@
 
 #include "Anima/Platform.h"
 #include "Anima/Graphics/Device/ContextDesc.h"
+#include "Anima/Graphics/Device/Texture.h"
 #include "Anima/OS/Window.h"
 
 #include "SFML/Graphics.hpp"
@@ -25,19 +26,20 @@ namespace AE
 
 				bool beginRendering();
 				bool beginRendering(const AE::Graphics::Color &clearColor);
-				//AE::uint createDrawingContext(AE::OS::Window *window, AE::Graphics::SurfaceFormat surfaceFormat);
-				//AE::Graphics::Surface* createOffscreenSurface(const AE::Math::Point2 &dimensions, AE::Graphics::SurfaceFormat surfaceFormat, bool usesVideoMemory);
+				void draw(const AE::Graphics::Device::Texture &texture, const AE::Math::Vector2 position);
 				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
 				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
 				void drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);
+				void drawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture);
 				void endRendering();
 				void render();
 				void setFullScreen(bool isFullScreen);
 				void setParentWindow(AE::OS::Window *parentWindow);
 
 			protected:
-				sf::Context mContext;
+				sf::Context mSfmlContext;
 				sf::RenderWindow mInnerWindow;
+				sf::Vertex mQuadVertices[4];
 			};
 		}
 	}

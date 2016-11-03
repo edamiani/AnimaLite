@@ -3,7 +3,7 @@
 
 #include "Anima/Graphics/ColorBuffer.h"
 #include "Anima/Graphics/Enums.h"
-#include "Anima/Graphics/ImageDesc.h"
+#include "Anima/Graphics/Image/ImageDesc.h"
 #include "Anima/Graphics/Enums.h"
 #include "Anima/Math/Vector2.h"
 #include "Anima/Types.h"
@@ -17,6 +17,7 @@ namespace AE
 		class Image
 		{
 		protected:
+			void						*mData;
 			AE::Math::Vector2			mDimensions;
 			std::string					mFile;
 			AE::Graphics::ImageType		mImageType;
@@ -25,12 +26,13 @@ namespace AE
 			Image(const std::string &filename) :
 				mFile(filename) {}
 
-			Image(AE::Math::Vector2 &dimensions) :
+			Image(const AE::Math::Vector2 &dimensions) :
 				mDimensions(dimensions) {}
-			
-			virtual ~Image() 
-			{
-			}
+
+			virtual ~Image() {}
+
+			void* getData() const { return mData; }
+			AE::Math::Vector2 getDimensions() const { return mDimensions; }
 		};
 	}
 }

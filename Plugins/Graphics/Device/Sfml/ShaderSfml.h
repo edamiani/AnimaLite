@@ -21,6 +21,8 @@ namespace AE
 			public:
 				ShaderSfml(ShaderType type, const std::string &shaderCode);
 				~ShaderSfml();
+
+				sf::Shader& getSfmlShader() { return mSfmlShader; }
 			};
 		}
 	}

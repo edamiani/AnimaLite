@@ -3,8 +3,8 @@
 
 #include "Anima/Graphics/ColorBuffer.h"
 #include "Anima/Graphics/Enums.h"
-#include "Anima/Graphics/Image.h"
-#include "Anima/Graphics/ImageDesc.h"
+#include "Anima/Graphics/Image/Image.h"
+#include "Anima/Graphics/Image/ImageDesc.h"
 #include "Anima/Graphics/Enums.h"
 #include "Anima/Math/Vector2.h"
 #include "Anima/Types.h"
@@ -17,14 +17,14 @@ namespace AE
 {
 	namespace Graphics
 	{
-		class ImageSfml : public Image
+		class ImageSfml : public AE::Graphics::Image
 		{
 		protected:
 			sf::Image mSfmlImage;
 
 		public:
-			ImageSfml(const std::string &file);
-			ImageSfml(AE::Math::Vector2 &dimensions);			
+			ImageSfml(const std::string &filename);
+			ImageSfml(const AE::Math::Vector2 &dimensions);
 			~ImageSfml();
 		};
 	}

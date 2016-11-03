@@ -7,6 +7,7 @@
 #include "Anima/OS/MouseListener.h"
 
 #include "Plugins/Graphics/Device/Sfml/ManagerSfml.h"
+#include "Plugins/Graphics/Image/Sfml/ImageManagerSfml.h"
 
 #include "Plugins/OS/EventSdl/EventManagerSdl.h"
 #include "Plugins/OS/WindowSdl/WindowSdl.h"

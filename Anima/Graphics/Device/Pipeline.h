@@ -24,6 +24,9 @@ namespace AE
 				Pipeline();
 				~Pipeline();
 
+				Shader* getDefaultFragmentShader() { return mDefaultFragmentShader; }
+				Shader* getDefaultVertexShader() { return mDefaultVertexShader; }
+
 				void setFragmentShader(Shader *fragmentShader) 
 				{ 
 					assert(fragmentShader->getType() == AE::Graphics::Device::ST_FRAGMENT);

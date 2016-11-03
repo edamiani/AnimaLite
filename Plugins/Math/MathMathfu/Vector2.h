@@ -24,8 +24,24 @@ namespace AE
 				mVector[1] = y;
 			}
 
-			inline AE::Real x() { return mVector[0]; }
-			inline AE::Real y() { return mVector[1]; }
+			inline AE::Real	x() const { return mVector[0]; }
+			inline AE::Real	y() const { return mVector[1]; }
+
+			AE::Real dot(const Vector2 &rhs)
+			{
+				return static_cast<AE::Real>(mathfu::DotProductHelper(mVector, rhs.mVector));
+			}
+
+			AE::Real length()
+			{
+				return static_cast<AE::Real>(mVector.Length());
+			}
+
+			void set(AE::Real x, AE::Real y)
+			{
+				mVector[0] = x;
+				mVector[1] = y;
+			}
 
 			inline AE::Math::Vector2 operator + (const AE::Math::Vector2 &rhs)
 			{
@@ -53,17 +69,7 @@ namespace AE
 			inline bool operator != (const AE::Math::Vector2 &rhs)
 			{
 				return !(mVector[0] == rhs.mVector[0] && mVector[1] == rhs.mVector[1]);
-			}
-
-			AE::Real dot(const Vector2 &rhs)
-			{
-				return static_cast<AE::Real>(mathfu::DotProductHelper(mVector, rhs.mVector));
-			}
-
-			AE::Real length()
-			{
-				return static_cast<AE::Real>(mVector.Length());
-			}
+			}			
 			
 			friend Vector2;
 
