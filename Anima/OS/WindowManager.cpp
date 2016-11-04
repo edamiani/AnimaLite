@@ -8,7 +8,7 @@ namespace AE
 	{
 		WindowManager::~WindowManager()
 		{
-			mWindows.clear();
+			//mWindows.clear();
 		}
 	}
 }

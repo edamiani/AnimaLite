@@ -30,8 +30,8 @@ namespace AE
 			bool Install(AE::uint options);
 			bool Uninstall();
 
-			AE::OS::Window* createWindow(AE::OS::WindowDesc &windowDesc);
-			AE::OS::Window* createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext);
+			AE::OS::WindowPtr createWindow(AE::OS::WindowDesc &windowDesc);
+			AE::OS::WindowPtr createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext);
 			void destroyWindow(AE::OS::Window *window);
 
 		private:

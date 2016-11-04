@@ -6,6 +6,7 @@
 #include "Anima/OS/WindowDesc.h"
 #include "Anima/Graphics/Device/Context.h"
 
+#include <memory>
 #include <string>
 
 namespace AE
@@ -63,6 +64,8 @@ namespace AE
 			AE::int8						mType[8];
 			std::string						mWindowTitle;
 		};
+
+		typedef std::unique_ptr<AE::OS::Window> WindowPtr;
 	}
 }
 
