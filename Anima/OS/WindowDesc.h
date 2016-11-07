@@ -65,7 +65,7 @@ namespace AE
 			}
 
 			AE::uint8					getColorDepth() { return mColorDepth; }
-			AE::Graphics::ColorFormat	getColorFormat() { return mColorFormat; }
+			AE::Graphics::ColorFormat	GetColorFormat() { return mColorFormat; }
 
 		private:
 			AE::uint8					mColorDepth;

@@ -23,9 +23,9 @@ namespace AE
 				TextureSfml(const AE::Graphics::Image &image);
 				~TextureSfml();
 
-				sf::Texture&		getSfmlTexture() { return mSfmlTexture; }
-				const sf::Texture&	getSfmlTexture() const { return mSfmlTexture; }
-				sf::Texture*		getSfmlTexturePtr() { return &mSfmlTexture; }
+				sf::Texture&		GetSfmlTexture() { return mSfmlTexture; }
+				const sf::Texture&	GetSfmlTexture() const { return mSfmlTexture; }
+				sf::Texture*		GetSfmlTexturePtr() { return &mSfmlTexture; }
 			};
 
 			typedef std::unique_ptr<AE::Graphics::Device::TextureSfml> TextureSfmlPtr;

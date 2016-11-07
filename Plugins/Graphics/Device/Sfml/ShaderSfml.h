@@ -22,7 +22,7 @@ namespace AE
 				ShaderSfml(ShaderType type, const std::string &shaderCode);
 				~ShaderSfml();
 
-				sf::Shader& getSfmlShader() { return mSfmlShader; }
+				sf::Shader& GetSfmlShader() { return mSfmlShader; }
 			};
 		}
 	}

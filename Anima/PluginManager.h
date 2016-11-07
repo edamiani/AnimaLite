@@ -16,19 +16,19 @@ namespace AE
 	public:
 		~PluginManager();
 
-		static AE::PluginManager*		getInstance() { assert(mInstance != nullptr); return mInstance; }
-		static AE::PluginManager*		initialize();
-		static void						shutdown();
+		static AE::PluginManager*		GetInstance() { assert(mInstance != nullptr); return mInstance; }
+		static AE::PluginManager*		Initialize();
+		static void						Shutdown();
 
-		AE::Plugin*						find(const std::string &pluginName);
-		AE::Plugin*						getInstalledPluginByType(AE::PluginType pluginType);
-		AE::Plugin*						getPluginByName(const std::string &pluginName);
-		AE::PluginGroup*				getRoot() { return mRoot; }
+		AE::Plugin*						Find(const std::string &pluginName);
+		AE::Plugin*						GetInstalledPluginByType(AE::PluginType pluginType);
+		AE::Plugin*						GetPluginByName(const std::string &pluginName);
+		AE::PluginGroup*				GetRoot() { return mRoot; }
 
 		template<class T>
 		T* RegisterPlugin(const std::string &pluginName)
 		{
-			if(mRegisteredPlugins.find(pluginName) != mRegisteredPlugins.end())
+			if(mRegisteredPlugins.Find(pluginName) != mRegisteredPlugins.end())
 				return 0;
 
 			mRegisteredPlugins[pluginName] = new T();
@@ -39,7 +39,7 @@ namespace AE
 		template<class T>
 		void UnregisterPlugin(const std::string &pluginName)
 		{
-			std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.find(pluginName);
+			std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.Find(pluginName);
 
 			assert(i != mRegisteredPlugins.end());
 

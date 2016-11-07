@@ -20,7 +20,7 @@ namespace AE
 		Uninstall();
 	}
 
-	AE::Plugin* PluginGroup::attach(AE::Plugin *pluginToAttach)
+	AE::Plugin* PluginGroup::Attach(AE::Plugin *pluginToAttach)
 	{
 		pluginToAttach->SetParent(this);
 
@@ -29,7 +29,7 @@ namespace AE
 		return pluginToAttach;
 	}
 
-	AE::Plugin* PluginGroup::attachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions)
+	AE::Plugin* PluginGroup::AttachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions)
 	{
 		pluginToAttach->SetParent(this);
 
@@ -41,9 +41,9 @@ namespace AE
 		return pluginToAttach;
 	}
 
-	void PluginGroup::detach(const std::string &pluginName)
+	void PluginGroup::Detach(const std::string &pluginName)
 	{
-		AE::Plugin *plugin = AE::PluginManager::getInstance()->find(pluginName);
+		AE::Plugin *plugin = AE::PluginManager::GetInstance()->Find(pluginName);
 
 		if(!plugin)
 		{
@@ -58,7 +58,7 @@ namespace AE
 		mChildren.remove(plugin);
 	}
 
-	void PluginGroup::detach(AE::Plugin *child)
+	void PluginGroup::Detach(AE::Plugin *child)
 	{
 		if(child->GetParent() != this)
 		{
@@ -68,9 +68,9 @@ namespace AE
 		mChildren.remove(child);
 	}
 
-	void PluginGroup::detachAndUninstall(const std::string &pluginName)
+	void PluginGroup::DetachAndUninstall(const std::string &pluginName)
 	{
-		AE::Plugin *plugin = AE::PluginManager::getInstance()->find(pluginName);
+		AE::Plugin *plugin = AE::PluginManager::GetInstance()->Find(pluginName);
 
 		if(!plugin)
 		{
@@ -90,7 +90,7 @@ namespace AE
 		mChildren.remove(plugin);
 	}
 
-	void PluginGroup::detachAndUninstall(AE::Plugin *child)
+	void PluginGroup::DetachAndUninstall(AE::Plugin *child)
 	{
 		if(child->GetParent() != this)
 		{
@@ -105,7 +105,7 @@ namespace AE
 		mChildren.remove(child);
 	}
 
-	AE::Plugin* PluginGroup::getChildByType(AE::PluginType pluginType)
+	AE::Plugin* PluginGroup::GetChildByType(AE::PluginType pluginType)
 	{
 		assert(pluginType != AE::PT_ALL && pluginType != AE::PT_GROUP && pluginType != AE::PT_IRRELEVANT && pluginType != AE::PT_ROOT);
 

@@ -29,7 +29,7 @@ namespace AE
 				bool Install(AE::uint options);
 				bool Uninstall();
 
-				AE::Graphics::Device::Driver* acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType);
+				AE::Graphics::Device::Driver* AcquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType);
 				//AE::Graphics::Device::Context* createDeviceContext(AE::Graphics::Device::Driver *devicedriver, const AE::Math::Point2 &dimensions, AE::Graphics::Device::ContextOption deviceContextOptions, const std::string &contextName = "");
 
 			protected:

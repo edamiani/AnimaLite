@@ -52,7 +52,7 @@ namespace AE
 				return true;
 			}
 
-			AE::Graphics::Device::Driver* ManagerSfml::acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
+			AE::Graphics::Device::Driver* ManagerSfml::AcquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
 			{
 				// TODO implement adapter counting
 				/*if(mDeviceDrivers.find(graphicsDeviceNumber) != mDeviceDrivers.end())

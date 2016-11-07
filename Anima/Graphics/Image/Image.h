@@ -31,8 +31,8 @@ namespace AE
 
 			virtual ~Image() {}
 
-			void* getData() const { return mData; }
-			AE::Math::Vector2 getDimensions() const { return mDimensions; }
+			void* GetData() const { return mData; }
+			AE::Math::Vector2 GetDimensions() const { return mDimensions; }
 		};
 	}
 }

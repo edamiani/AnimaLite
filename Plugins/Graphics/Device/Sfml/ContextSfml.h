@@ -24,17 +24,17 @@ namespace AE
 				ContextSfml(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver);
 				virtual ~ContextSfml();
 
-				bool beginRendering();
-				bool beginRendering(const AE::Graphics::Color &clearColor);
-				void draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position);
-				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
-				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
-				void drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);
-				void drawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture);
-				void endRendering();
-				void render();
-				void setFullScreen(bool isFullScreen);
-				void setParentWindow(AE::OS::Window *parentWindow);
+				bool BeginRendering();
+				bool BeginRendering(const AE::Graphics::Color &clearColor);
+				void Draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position);
+				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
+				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
+				void DrawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);
+				void DrawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture);
+				void EndRendering();
+				void Render();
+				void SetFullScreen(bool isFullScreen);
+				void SetParentWindow(AE::OS::Window *parentWindow);
 
 			protected:
 				sf::Context mSfmlContext;

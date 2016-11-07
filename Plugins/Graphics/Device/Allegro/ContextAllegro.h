@@ -31,18 +31,18 @@ namespace AE
 				ContextAllegro(AE::Graphics::Device::Driver *deviceDriver, AE::OS::Window *window);
 				virtual ~ContextAllegro();
 
-				bool beginRendering();
-				bool beginRendering(const AE::Graphics::Color &clearColor);
+				bool BeginRendering();
+				bool BeginRendering(const AE::Graphics::Color &clearColor);
 				//AE::uint createDrawingContext(AE::OS::Window *window, AE::Graphics::SurfaceFormat surfaceFormat);
-				AE::Graphics::Surface* createOffscreenSurface(AE::Math::Vector2 &dimensions, AE::Graphics::SurfaceFormat surfaceFormat, bool usesVideoMemory = true);
-				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
-				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
-				void endRendering();
-				void render();
-				void setFullScreen(bool isFullScreen) {}
+				AE::Graphics::Surface* CreateOffscreenSurface(AE::Math::Vector2 &dimensions, AE::Graphics::SurfaceFormat surfaceFormat, bool usesVideoMemory = true);
+				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
+				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
+				void EndRendering();
+				void Render();
+				void SetFullScreen(bool isFullScreen) {}
 
-				ALLEGRO_DISPLAY* _getAllegroDisplay() { return mAllegroDisplay; }
-				HGLRC& _getWinGlContext() { return mWinGlContext; }
+				ALLEGRO_DISPLAY* _GetAllegroDisplay() { return mAllegroDisplay; }
+				HGLRC& _GetWinGlContext() { return mWinGlContext; }
 
 			protected:
 				ALLEGRO_DISPLAY *mAllegroDisplay;

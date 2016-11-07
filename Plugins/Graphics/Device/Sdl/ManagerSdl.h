@@ -29,7 +29,7 @@ namespace AE
 				bool			Uninstall();
 
 				AE::Graphics::Device::Driver*
-								acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType = AE::Graphics::Device::DT_NONE);
+								AcquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType = AE::Graphics::Device::DT_NONE);
 
 			private:
 				std::vector<char *>		mDrivers;

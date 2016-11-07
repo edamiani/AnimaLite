@@ -2,7 +2,7 @@
 
 int main(int argc, char* args[])
 {
-	AE::PluginManager *pluginManager = AE::PluginManager::initialize();
+	AE::PluginManager *pluginManager = AE::PluginManager::Initialize();
 
 	auto *eventManager = pluginManager->RegisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 	eventManager->Install(AE::NO_OPTIONS);
@@ -14,15 +14,15 @@ int main(int argc, char* args[])
 	windowDesc.dimensions = AE::Math::Vector2(640, 480);
 	windowDesc.position = AE::Math::Vector2(50, 50);
 
-	auto *window = windowManager->createWindow(windowDesc);
+	auto window = windowManager->CreateWindow(windowDesc);
 
-	eventManager->registerWindowListener(window);
+	eventManager->RegisterWindowListener(window);
 
-	window->show();
+	window->Show();
 
-	AE::OS::EventQueue *eventQueue = eventManager->getEventQueue();
+	AE::OS::EventQueue *eventQueue = eventManager->GetEventQueue();
 
-	while(eventQueue->pollEvents()) { }
+	while(eventQueue->PollEvents()) { }
 
 	windowManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");

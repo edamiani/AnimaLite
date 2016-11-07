@@ -22,7 +22,7 @@ namespace AE
 		}*/
 	}
 
-	AE::Plugin* PluginRoot::attach(AE::Plugin *pluginToAttach)
+	AE::Plugin* PluginRoot::Attach(AE::Plugin *pluginToAttach)
 	{
 		pluginToAttach->SetParent(this);
 
@@ -31,7 +31,7 @@ namespace AE
 		return pluginToAttach;
 	}
 
-	AE::Plugin* PluginRoot::attachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions)
+	AE::Plugin* PluginRoot::AttachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions)
 	{
 		pluginToAttach->SetParent(this);
 
@@ -42,9 +42,9 @@ namespace AE
 		return pluginToAttach;
 	}
 
-	void PluginRoot::detach(const std::string &pluginName)
+	void PluginRoot::Detach(const std::string &pluginName)
 	{
-		AE::Plugin *plugin = AE::PluginManager::getInstance()->find(pluginName);
+		AE::Plugin *plugin = AE::PluginManager::GetInstance()->Find(pluginName);
 
 		if(!plugin)
 			throw AE::Exception(AE::ET_NOT_FOUND, "AE::PluginRoot::detach(): there is no plugin with this name attached as a root's child.");

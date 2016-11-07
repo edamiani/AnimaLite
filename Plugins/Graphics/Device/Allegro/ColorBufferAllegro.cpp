@@ -66,19 +66,19 @@ namespace AE
 			{
 			}
 
-			void ColorBufferAllegro::blit(AE::Graphics::ColorBuffer *sourceColorBuffer, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::uint> &position)
+			void ColorBufferAllegro::Blit(AE::Graphics::ColorBuffer *sourceColorBuffer, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::uint> &position)
 			{
 				al_set_target_bitmap(mAllegroBitmap);
-				al_draw_bitmap_region(static_cast<AE::Graphics::Device::ColorBufferAllegro *>(sourceColorBuffer)->_getAllegroBitmap(), 0, 0, dimensions.x, dimensions.y, position.x, position.y, 0);
+				al_draw_bitmap_region(static_cast<AE::Graphics::Device::ColorBufferAllegro *>(sourceColorBuffer)->_GetAllegroBitmap(), 0, 0, dimensions.x, dimensions.y, position.x, position.y, 0);
 			}
 
-			void ColorBufferAllegro::clear(const AE::Graphics::Color &backgroundColor)
+			void ColorBufferAllegro::Clear(const AE::Graphics::Color &backgroundColor)
 			{
 				al_set_target_bitmap(mAllegroBitmap);
 				al_clear_to_color(al_map_rgb(backgroundColor.R, backgroundColor.G, backgroundColor.B));
 			}
 
-			void* ColorBufferAllegro::getData()
+			void* ColorBufferAllegro::GetData()
 			{
 				return 0;
 			}
@@ -88,7 +88,7 @@ namespace AE
 				return AE::Math::Point2<AE::uint>(al_get_bitmap_width(mAllegroBitmap), al_get_bitmap_height(mAllegroBitmap));
 			}
 
-			void* ColorBufferAllegro::lock(AE::Graphics::LockType lockType)
+			void* ColorBufferAllegro::Lock(AE::Graphics::LockType lockType)
 			{
 				AE::uint allegroLockType;
 				switch(lockType)
@@ -111,12 +111,12 @@ namespace AE
 				return lockedRegion;
 			}
 
-			void ColorBufferAllegro::plot(const AE::Graphics::Color &color, const AE::Math::Point2<AE::uint> &position)
+			void ColorBufferAllegro::Plot(const AE::Graphics::Color &color, const AE::Math::Point2<AE::uint> &position)
 			{
 				al_put_pixel(position.x, position.y, al_map_rgb(color.R, color.G, color.B));
 			}
 
-			void ColorBufferAllegro::unlock()
+			void ColorBufferAllegro::Unlock()
 			{
 				al_unlock_bitmap(mAllegroBitmap);
 			}

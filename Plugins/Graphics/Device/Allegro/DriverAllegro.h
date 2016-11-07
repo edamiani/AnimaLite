@@ -22,11 +22,11 @@ namespace AE
 				DriverAllegro(AE::uint deviceId, AE::Graphics::Device::DriverType);
 				~DriverAllegro();
 
-				AE::Graphics::Device::Context*		createDeviceContext(AE::OS::Window *window, const std::string &contextName = "");
-				AE::Graphics::Device::Context*		createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");
-				AE::Graphics::Device::IndexBuffer*	createEmptyIndexBuffer();
-				AE::Graphics::Device::VertexBuffer*	createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency);
-				void								destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer);
+				AE::Graphics::Device::Context*		CreateDeviceContext(AE::OS::Window *window, const std::string &contextName = "");
+				AE::Graphics::Device::Context*		CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");
+				AE::Graphics::Device::IndexBuffer*	CreateEmptyIndexBuffer();
+				AE::Graphics::Device::VertexBuffer*	CreateEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency);
+				void								DestroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer);
 
 			protected:
 				ALLEGRO_MONITOR_INFO mMonitorInfo;

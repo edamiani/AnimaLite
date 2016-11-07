@@ -40,7 +40,7 @@ namespace AE
 				return true;
 			}
 
-			AE::Graphics::Device::Driver* ManagerAllegro::acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
+			AE::Graphics::Device::Driver* ManagerAllegro::AcquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType)
 			{
 				if(mDeviceDrivers.find(graphicsDeviceNumber) != mDeviceDrivers.end())
 					throw AE::Exception(AE::ET_ALREADY_EXISTS, "AE::Graphics::ManagerAllegro::acquireDeviceDriver(): Device driver already acquired.");

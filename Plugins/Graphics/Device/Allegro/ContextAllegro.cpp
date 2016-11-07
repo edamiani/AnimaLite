@@ -52,20 +52,20 @@ namespace AE
 				return 0;
 			}*/
 
-			bool ContextAllegro::beginRendering()
+			bool ContextAllegro::BeginRendering()
 			{
 				al_set_target_backbuffer(mAllegroDisplay);
 				return true;
 			}
 
-			bool ContextAllegro::beginRendering(const AE::Graphics::Color &clearColor)
+			bool ContextAllegro::BeginRendering(const AE::Graphics::Color &clearColor)
 			{
 				al_set_target_backbuffer(mAllegroDisplay);
 				al_clear_to_color(al_map_rgb(clearColor.R, clearColor.G, clearColor.B));
 				return true;
 			}
 
-			AE::Graphics::Surface* ContextAllegro::createOffscreenSurface(AE::Math::Vector2 &dimensions, AE::Graphics::SurfaceFormat surfaceFormat, bool usesVideoMemory)
+			AE::Graphics::Surface* ContextAllegro::CreateOffscreenSurface(AE::Math::Vector2 &dimensions, AE::Graphics::SurfaceFormat surfaceFormat, bool usesVideoMemory)
 			{
 				if(usesVideoMemory)
 				{
@@ -82,12 +82,12 @@ namespace AE
 				return nullptr;
 			}
 
-			void ContextAllegro::endRendering()
+			void ContextAllegro::EndRendering()
 			{
 				al_flip_display();
 			}
 
-			void ContextAllegro::render()
+			void ContextAllegro::Render()
 			{
 			}
 		}

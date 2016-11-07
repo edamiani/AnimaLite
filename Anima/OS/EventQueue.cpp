@@ -1,43 +1,13 @@
 #include "Anima/OS/EventQueue.h"
-/*
-#ifdef AE_PLATFORM_ALLEGRO
-#	include "../include/AnimaOSEventManagerAllegro.h"
-#else
-#	if defined(AE_PLATFORM_WIN32)
-#		include "../include/AnimaOSEventManagerWin32.h"
-#	endif
-#endif
-*/
 
-std::list<AE::OS::KeyListener *> AE::OS::EventQueue::mKeyListeners;
-std::list<AE::OS::MouseListener *> AE::OS::EventQueue::mMouseListeners;
-std::list<AE::OS::WindowListener *> AE::OS::EventQueue::mWindowListeners;
+//std::list<AE::OS::KeyListener *> AE::OS::EventQueue::mKeyListeners;
+//std::list<AE::OS::MouseListener *> AE::OS::EventQueue::mMouseListeners;
+//std::list<AE::OS::WindowListener *> AE::OS::EventQueue::mWindowListeners;
 
 namespace AE
 {
 	namespace OS
 	{
-		/*AE::OS::EventManager* EventManager::initialize()
-		{
-#		ifdef AE_PLATFORM_ALLEGRO
-			mInstance = new AE::OS::EventManagerAllegro();
-#		else
-#			if defined(AE_PLATFORM_WIN32)
-				mInstance = new AE::OS::EventManagerWin32();
-#			endif
-#		endif
-			return mInstance;
-		}*/
-
-		/*void EventManager::shutdown()
-		{
-			if(mInstance)
-			{
-				delete mInstance;
-				mInstance = 0;
-			}
-		}*/
-
 		EventQueue::~EventQueue()
 		{
 			mKeyListeners.clear();
@@ -45,34 +15,34 @@ namespace AE
 			mWindowListeners.clear();
 		}
 
-		void EventQueue::registerKeyListener(AE::OS::KeyListener *keyListener)
+		void EventQueue::RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListenerPtr keyListener)
 		{
-			mKeyListeners.push_back(keyListener);
+			mKeyListeners[listenerName] = std::move(keyListener);
 		}
 		
-		void EventQueue::registerMouseListener(AE::OS::MouseListener *mouseListener)
+		void EventQueue::RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListenerPtr mouseListener)
 		{
-			mMouseListeners.push_back(mouseListener);
+			mMouseListeners[listenerName] = std::move(mouseListener);
 		}
 
-		void EventQueue::registerWindowListener(AE::OS::WindowListener *windowListener)
+		void EventQueue::RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListenerPtr windowListener)
 		{
-			mWindowListeners.push_back(windowListener);
+			mWindowListeners[listenerName] = std::move(windowListener);
 		}
 
-		void EventQueue::unregisterKeyListener(AE::OS::KeyListener *keyListener)
+		void EventQueue::UnregisterKeyListener(const std::string &listenerName)
 		{
-			mKeyListeners.remove(keyListener);
+			//mKeyListeners.remove(keyListener);
 		}
 		
-		void EventQueue::unregisterMouseListener(AE::OS::MouseListener *mouseListener)
+		void EventQueue::UnregisterMouseListener(const std::string &listenerName)
 		{
-			mMouseListeners.remove(mouseListener);
+			//mMouseListeners.remove(mouseListener);
 		}
 
-		void EventQueue::unregisterWindowListener(AE::OS::WindowListener *windowListener)
+		void EventQueue::UnregisterWindowListener(const std::string &listenerName)
 		{
-			mWindowListeners.remove(windowListener);
+			//mWindowListeners.remove(windowListener);
 		}
 	}
 }

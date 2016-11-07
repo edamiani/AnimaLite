@@ -43,16 +43,16 @@ namespace AE
 			return true;
 		}
 
-		AE::OS::WindowPtr WindowManagerSdl::createWindow(AE::OS::WindowDesc &windowDesc)
+		AE::OS::WindowPtr WindowManagerSdl::CreateWindow(AE::OS::WindowDesc &windowDesc)
 		{
 			return std::make_unique<AE::OS::WindowSdl>(mCurrentId++, windowDesc);
 		}
 
-		AE::OS::WindowPtr WindowManagerSdl::createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext)
+		AE::OS::WindowPtr WindowManagerSdl::CreateWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext)
 		{
-			AE::OS::WindowPtr window = createWindow(windowDesc);
+			AE::OS::WindowPtr window = CreateWindow(windowDesc);
 
-			window->attachDeviceContext(deviceContext);
+			window->AttachDeviceContext(deviceContext);
 
 			return window;
 		}

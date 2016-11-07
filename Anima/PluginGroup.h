@@ -14,13 +14,13 @@ namespace AE
 		PluginGroup(AE::PluginType pluginType);
 		virtual ~PluginGroup();
 
-		AE::Plugin*			attach(AE::Plugin *pluginToAttach);
-		AE::Plugin*			attachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions);
-		void				detach(std::string const &pluginName);
-		void				detach(AE::Plugin *child);
-		void				detachAndUninstall(std::string const &pluginName);
-		void				detachAndUninstall(AE::Plugin *child);
-		AE::Plugin*			getChildByType(AE::PluginType pluginType);
+		AE::Plugin*			Attach(AE::Plugin *pluginToAttach);
+		AE::Plugin*			AttachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions);
+		void				Detach(std::string const &pluginName);
+		void				Detach(AE::Plugin *child);
+		void				DetachAndUninstall(std::string const &pluginName);
+		void				DetachAndUninstall(AE::Plugin *child);
+		AE::Plugin*			GetChildByType(AE::PluginType pluginType);
 		virtual bool		Install(AE::uint options);
 		virtual bool		Uninstall();
 

@@ -19,16 +19,16 @@ namespace AE
 			class Shader
 			{
 			private:
-				std::string		mCode;
+				std::string		mSourceCode;
 				ShaderType		mType;
 
 			public:
 				Shader(ShaderType type, const std::string &shaderCode)
-					: mType(type), mCode(shaderCode) {  }
+					: mType(type), mSourceCode(shaderCode) {  }
 				virtual ~Shader() {}
 
-				std::string&	getCode() { return mCode; }
-				ShaderType		getType() { return mType; }
+				std::string&	GetSourceCode() { return mSourceCode; }
+				ShaderType		GetType() { return mType; }
 			};
 		}
 	}

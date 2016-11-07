@@ -18,7 +18,7 @@ namespace AE
 			virtual ~ImageManagerSfml() {}
 
 			std::unique_ptr<AE::Graphics::Image> 
-						createImage(const std::string &filename);
+						CreateImage(const std::string &filename);
 			bool		Install(AE::uint options);
 			bool		Uninstall();
 		};

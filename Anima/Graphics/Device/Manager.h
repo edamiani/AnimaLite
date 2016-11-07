@@ -28,15 +28,15 @@ namespace AE
 				Manager();
 				virtual ~Manager();
 
-				static AE::Graphics::Device::Manager*		getInstance() { assert(mInstance != 0); return mInstance; }
+				static AE::Graphics::Device::Manager*		GetInstance() { assert(mInstance != 0); return mInstance; }
 
-				virtual AE::Graphics::Device::Driver*		acquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType) = 0;
-				AE::Graphics::Device::Driver*				getDeviceDriver(AE::uint graphicsDeviceNumber) { return mDeviceDrivers[graphicsDeviceNumber]; }
-				AE::Graphics::Device::PixelBufferFactory*	getPixelBufferFactory() { return mPixelBufferFactory; }
+				virtual AE::Graphics::Device::Driver*		AcquireDeviceDriver(AE::uint graphicsDeviceNumber, AE::Graphics::Device::DriverType driverType) = 0;
+				AE::Graphics::Device::Driver*				GetDeviceDriver(AE::uint graphicsDeviceNumber) { return mDeviceDrivers[graphicsDeviceNumber]; }
+				AE::Graphics::Device::PixelBufferFactory*	GetPixelBufferFactory() { return mPixelBufferFactory; }
 				
 				/***** Inherited from AE::Plugin
-				virtual bool								install(AE::uint options) = 0;
-				virtual bool								uninstall() = 0;
+				virtual bool								Install(AE::uint options) = 0;
+				virtual bool								Uninstall() = 0;
 				*****/
 
 			protected:

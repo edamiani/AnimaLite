@@ -24,14 +24,13 @@ namespace AE
 		{
 		public:
 			WindowManagerSdl();
-			//WindowManagerSdl(AE::Graphics::Device::Manager *deviceManager);
 			~WindowManagerSdl();
 
 			bool Install(AE::uint options);
 			bool Uninstall();
 
-			AE::OS::WindowPtr createWindow(AE::OS::WindowDesc &windowDesc);
-			AE::OS::WindowPtr createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext);
+			AE::OS::WindowPtr CreateWindow(AE::OS::WindowDesc &windowDesc);
+			AE::OS::WindowPtr CreateWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext);
 			void destroyWindow(AE::OS::Window *window);
 
 		private:

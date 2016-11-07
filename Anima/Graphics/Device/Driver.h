@@ -34,16 +34,16 @@ namespace AE
 					: mBufferIdCount(-1), mDeviceId(deviceId), mType(driverType), mRenderablePixelBufferId(0) {}
 				~Driver() {}
 
-				virtual AE::Graphics::Device::Context*		createDeviceContext(AE::OS::Window *window, const std::string &contextName = "") = 0;
-				virtual AE::Graphics::Device::Context*		createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "") = 0;
-				virtual AE::Graphics::Device::IndexBuffer*	createEmptyIndexBuffer() = 0;
-				virtual AE::Graphics::Device::VertexBuffer*	createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) = 0;
-				virtual TexturePtr							createTexture(const AE::Math::Vector2 &dimensions, void *data = nullptr, bool hasMipMap = false) = 0;
-				virtual void								destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
-				AE::Graphics::Device::Context*				getDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
-				AE::uint									getDeviceId() { return mDeviceId; }
-				AE::Graphics::Device::Pipeline*				getPipeline() { return mPipeline; }
-				AE::Graphics::Device::DriverType			getType() { return mType; }
+				virtual AE::Graphics::Device::Context*		CreateDeviceContext(AE::OS::Window *window, const std::string &contextName = "") = 0;
+				virtual AE::Graphics::Device::Context*		CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "") = 0;
+				virtual AE::Graphics::Device::IndexBuffer*	CreateEmptyIndexBuffer() = 0;
+				virtual AE::Graphics::Device::VertexBuffer*	CreateEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) = 0;
+				virtual TexturePtr							CreateTexture(const AE::Math::Vector2 &dimensions, void *data = nullptr, bool hasMipMap = false) = 0;
+				virtual void								DestroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
+				AE::Graphics::Device::Context*				GetDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
+				AE::uint									GetDeviceId() { return mDeviceId; }
+				AE::Graphics::Device::Pipeline*				GetPipeline() { return mPipeline; }
+				AE::Graphics::Device::DriverType			GetType() { return mType; }
 
 			protected:
 				AE::int32									mBufferIdCount;

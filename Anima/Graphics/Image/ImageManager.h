@@ -17,7 +17,7 @@ namespace AE
 			ImageManager() : Plugin(AE::PT_IMAGE_MANAGER) {}
 			virtual ~ImageManager() {}
 
-			virtual std::unique_ptr<AE::Graphics::Image> createImage(const std::string &filename) = 0;
+			virtual std::unique_ptr<AE::Graphics::Image> CreateImage(const std::string &filename) = 0;
 			virtual bool		Install(AE::uint options) = 0;
 			virtual bool		Uninstall() = 0;
 		};

@@ -4,6 +4,8 @@
 #include "Anima/OS/Event.h"
 #include "Anima/Input/KeyInfo.h"
 
+#include <memory>
+
 namespace AE
 {
 	namespace OS
@@ -19,9 +21,11 @@ namespace AE
 			}
 
 			// Keyboard events
-			virtual void onKeyDown(const AE::OS::EventKeyboard &event) { }
-			virtual void onKeyUp(const AE::OS::EventKeyboard &event) { }
+			virtual void OnKeyDown(const AE::OS::EventKeyboard &event) { }
+			virtual void OnKeyUp(const AE::OS::EventKeyboard &event) { }
 		};
+
+		typedef std::unique_ptr<KeyListener> KeyListenerPtr;
 	}
 }
 

@@ -17,7 +17,7 @@ namespace AE
 		delete mRoot;
 	}
 
-	AE::PluginManager* PluginManager::initialize()
+	AE::PluginManager* PluginManager::Initialize()
 	{
 		if(!mInstance)
 		{
@@ -27,7 +27,7 @@ namespace AE
 		return mInstance;
 	}
 
-	void PluginManager::shutdown()
+	void PluginManager::Shutdown()
 	{
 		if(mInstance)
 		{
@@ -36,7 +36,7 @@ namespace AE
 		}
 	}
 
-	AE::Plugin* PluginManager::find(const std::string &pluginName) 
+	AE::Plugin* PluginManager::Find(const std::string &pluginName) 
 	{
 		std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.find(pluginName);
 
@@ -46,7 +46,7 @@ namespace AE
 			return (*i).second;
 	}
 
-	AE::Plugin* PluginManager::getInstalledPluginByType(AE::PluginType pluginType)
+	AE::Plugin* PluginManager::GetInstalledPluginByType(AE::PluginType pluginType)
 	{
 		assert(pluginType != AE::PT_ALL && pluginType != AE::PT_GROUP && pluginType != AE::PT_IRRELEVANT && pluginType != AE::PT_ROOT);
 
@@ -61,7 +61,7 @@ namespace AE
 		return 0;
 	}
 
-	AE::Plugin* PluginManager::getPluginByName(const std::string &pluginName)
+	AE::Plugin* PluginManager::GetPluginByName(const std::string &pluginName)
 	{
 		if(mRegisteredPlugins.find(pluginName) != mRegisteredPlugins.end())
 			return 0;

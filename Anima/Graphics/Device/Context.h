@@ -32,23 +32,23 @@ namespace AE
 				Context(AE::Graphics::Device::Driver *deviceDriver) : mDeviceDriver(deviceDriver) { }
 				virtual ~Context() { }
 
-				virtual bool						beginRendering() = 0;
-				virtual bool						beginRendering(const AE::Graphics::Color &clearColor) = 0;
-				virtual void						draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
-				virtual void						draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position) = 0;
-				virtual void						draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) = 0;
-				virtual void						drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color) = 0;
-				virtual void						drawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture) = 0;
-				virtual void						endRendering() = 0;
-				AE::Graphics::Device::Driver*		getDeviceDriver() { return mDeviceDriver; }
-				AE::Graphics::Device::FrameBuffer*	getFrameBuffer() { return mFrameBuffer; }
-				AE::OS::Window*						getParentWindow() { return mParentWindow; }
-				AE::Graphics::Device::Pipeline*		getPipeline() { return mPipeline; }
-				bool								isFullScreen() { return mIsFullScreen; }
-				virtual void						render() = 0;
-				virtual void						setFullScreen(bool isFullScreen) = 0;
-				virtual void						setParentWindow(AE::OS::Window *parentWindow) { mParentWindow = parentWindow; }
-				void								setViewport(AE::Graphics::Viewport *viewport) { mViewport = viewport; }
+				virtual bool						BeginRendering() = 0;
+				virtual bool						BeginRendering(const AE::Graphics::Color &clearColor) = 0;
+				virtual void						Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) = 0;
+				virtual void						Draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position) = 0;
+				virtual void						Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) = 0;
+				virtual void						DrawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color) = 0;
+				virtual void						DrawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture) = 0;
+				virtual void						EndRendering() = 0;
+				AE::Graphics::Device::Driver*		GetDeviceDriver() { return mDeviceDriver; }
+				AE::Graphics::Device::FrameBuffer*	GetFrameBuffer() { return mFrameBuffer; }
+				AE::OS::Window*						GetParentWindow() { return mParentWindow; }
+				AE::Graphics::Device::Pipeline*		GetPipeline() { return mPipeline; }
+				bool								IsFullScreen() { return mIsFullScreen; }
+				virtual void						Render() = 0;
+				virtual void						SetFullScreen(bool IsFullScreen) = 0;
+				virtual void						SetParentWindow(AE::OS::Window *parentWindow) { mParentWindow = parentWindow; }
+				void								SetViewport(AE::Graphics::Viewport *viewport) { mViewport = viewport; }
 
 
 			protected:

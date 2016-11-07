@@ -11,23 +11,23 @@ namespace AE
 	{
 		namespace Device
 		{
-			AE::Graphics::Device::Context* DriverSfml::createDeviceContext(AE::OS::Window *window, const std::string &contextName)
+			AE::Graphics::Device::Context* DriverSfml::CreateDeviceContext(AE::OS::Window *window, const std::string &contextName)
 			{
 				AE::Graphics::Device::ContextDesc contextDesc;
 				contextDesc.parentWindow = window;
-				contextDesc.dimensions = window->getDimensions();
+				contextDesc.dimensions = window->GetDimensions();
 
 				auto *deviceContext = new AE::Graphics::Device::ContextSfml(contextDesc, this);
 
 				return deviceContext;
 			}
 
-			AE::Graphics::Device::Context* DriverSfml::createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName)
+			AE::Graphics::Device::Context* DriverSfml::CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName)
 			{
 				return nullptr;
 			}
 
-			AE::Graphics::Device::TexturePtr DriverSfml::createTexture(const AE::Math::Vector2 &dimensions, void *data, bool hasMipMap)
+			AE::Graphics::Device::TexturePtr DriverSfml::CreateTexture(const AE::Math::Vector2 &dimensions, void *data, bool hasMipMap)
 			{
 				return std::make_unique<AE::Graphics::Device::TextureSfml>(dimensions, data, hasMipMap);
 			}

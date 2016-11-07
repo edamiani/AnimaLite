@@ -28,9 +28,9 @@ namespace AE
 				settings.stencilBits = 8;
 				settings.attributeFlags |= sf::ContextSettings::Core;
 
-				mInnerWindow.create(window->getHandle(), settings);
+				mInnerWindow.create(window->GetHandle(), settings);
 
-				contextDesc.parentWindow->attachDeviceContext(this);
+				contextDesc.parentWindow->AttachDeviceContext(this);
 			}
 
 			ContextSfml::~ContextSfml()
@@ -38,23 +38,23 @@ namespace AE
 
 			}
 
-			bool ContextSfml::beginRendering()
+			bool ContextSfml::BeginRendering()
 			{
 				mInnerWindow.clear();
 
 				return true;
 			}
 
-			bool ContextSfml::beginRendering(const AE::Graphics::Color &clearColor)
+			bool ContextSfml::BeginRendering(const AE::Graphics::Color &clearColor)
 			{
 				mInnerWindow.clear(sf::Color(clearColor.R, clearColor.G, clearColor.B, clearColor.A));
 
 				return true;
 			}
 
-			void ContextSfml::draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position)
+			void ContextSfml::Draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position)
 			{
-				sf::Texture *sfmlTexture = reinterpret_cast<AE::Graphics::Device::TextureSfmlPtr &>(const_cast<AE::Graphics::Device::TexturePtr &>(texture))->getSfmlTexturePtr();
+				sf::Texture *sfmlTexture = reinterpret_cast<AE::Graphics::Device::TextureSfmlPtr &>(const_cast<AE::Graphics::Device::TexturePtr &>(texture))->GetSfmlTexturePtr();
 
 				sf::Vertex quadVertices[4];
 
@@ -73,13 +73,13 @@ namespace AE
 				mInnerWindow.draw(quadVertices, 4, sf::Quads, renderStates);
 			}
 
-			void ContextSfml::drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
+			void ContextSfml::DrawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
 			{
 				//SDL_SetRenderDrawColor(mRenderer, color.R, color.G, color.B, color.A);
 				//SDL_RenderDrawLine(mRenderer, start.x(), start.y(), end.x(), end.y());
 			}
 
-			void ContextSfml::drawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture)
+			void ContextSfml::DrawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture)
 			{
 				sf::Vertex quadVertices[4];
 
@@ -95,16 +95,16 @@ namespace AE
 				mInnerWindow.draw(quadVertices, 4, sf::Quads);
 			}
 
-			void ContextSfml::endRendering()
+			void ContextSfml::EndRendering()
 			{
 				mInnerWindow.display();
 			}
 
-			void ContextSfml::render()
+			void ContextSfml::Render()
 			{
 			}
 
-			void ContextSfml::setFullScreen(bool isFullScreen)
+			void ContextSfml::SetFullScreen(bool isFullScreen)
 			{
 				if(mIsFullScreen)
 				{
@@ -119,7 +119,7 @@ namespace AE
 				}
 			}
 
-			void ContextSfml::setParentWindow(AE::OS::Window *parentWindow)
+			void ContextSfml::SetParentWindow(AE::OS::Window *parentWindow)
 			{
 				mParentWindow = parentWindow;
 

@@ -11,6 +11,10 @@
 
 #include <list>
 
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
+
 namespace AE
 {
 	namespace Graphics
@@ -29,16 +33,9 @@ namespace AE
 			WindowManager() : AE::Plugin(AE::PT_OS_WINDOW_MANAGER) {}
 			virtual ~WindowManager();
 
-			virtual AE::OS::WindowPtr		createWindow(AE::OS::WindowDesc &windowDesc) = 0;
-			virtual AE::OS::WindowPtr		createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext) = 0;
-			//virtual AE::OS::Window*			createWindow(AE::OS::WindowDesc &windowDesc) = 0;
-			//virtual AE::OS::Window*			createWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext) = 0;
-			virtual void 					destroyWindow(AE::OS::Window *window) = 0;
-			//std::list<AE::OS::Window *>&	getWindowList() { return mWindows; }
-
-
-		protected:
-			//std::list<AE::OS::Window *>		mWindows;
+			virtual AE::OS::WindowPtr		CreateWindow(AE::OS::WindowDesc &windowDesc) = 0;
+			virtual AE::OS::WindowPtr		CreateWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext) = 0;
+			virtual void 					DestroyWindow(AE::OS::Window *window) = 0;
 		};
 	}
 }

@@ -14,9 +14,9 @@ namespace AE
 	public:
 		~PluginRoot();
 
-		AE::Plugin* attach(AE::Plugin *pluginToAttach);
-		AE::Plugin* attachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions);
-		void detach(const std::string &pluginName);
+		AE::Plugin* Attach(AE::Plugin *pluginToAttach);
+		AE::Plugin* AttachAndInstall(AE::Plugin *pluginToAttach, AE::uint installOptions);
+		void Detach(const std::string &pluginName);
 
 		friend class PluginManager;
 

@@ -28,9 +28,9 @@ namespace AE
 			{
 				AE::OS::Window *window = static_cast<AE::OS::WindowSdl *>(contextDesc.parentWindow);
 
-				if(strcmp(window->getType(), "SDL") == 0)
+				if(strcmp(window->GetType(), "SDL") == 0)
 				{
-					SDL_Window *sdlWindow = static_cast<AE::OS::WindowSdl *>(window)->_getSdlWindow();
+					SDL_Window *sdlWindow = static_cast<AE::OS::WindowSdl *>(window)->_GetSdlWindow();
 					mRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
 				}
 				else
@@ -38,7 +38,7 @@ namespace AE
 					/// TODO
 				}
 
-				contextDesc.parentWindow->attachDeviceContext(this);
+				contextDesc.parentWindow->AttachDeviceContext(this);
 			}
 
 			ContextSdl::~ContextSdl()
@@ -46,14 +46,14 @@ namespace AE
 				SDL_DestroyRenderer(mRenderer);
 			}
 
-			bool ContextSdl::beginRendering()
+			bool ContextSdl::BeginRendering()
 			{
 				SDL_RenderClear(mRenderer);
 
 				return true;
 			}
 
-			bool ContextSdl::beginRendering(const AE::Graphics::Color &clearColor)
+			bool ContextSdl::BeginRendering(const AE::Graphics::Color &clearColor)
 			{
 				SDL_SetRenderDrawColor(mRenderer, clearColor.R, clearColor.G, clearColor.B, clearColor.A);
 
@@ -62,22 +62,22 @@ namespace AE
 				return true;
 			}
 
-			void ContextSdl::drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
+			void ContextSdl::DrawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color)
 			{
 				SDL_SetRenderDrawColor(mRenderer, color.R, color.G, color.B, color.A);
 				SDL_RenderDrawLine(mRenderer, start.x(), start.y(), end.x(), end.y());
 			}
 
-			void ContextSdl::endRendering()
+			void ContextSdl::EndRendering()
 			{
 				SDL_RenderPresent(mRenderer);
 			}
 
-			void ContextSdl::render()
+			void ContextSdl::Render()
 			{
 			}
 
-			void ContextSdl::setFullScreen(bool isFullScreen)
+			void ContextSdl::SetFullScreen(bool isFullScreen)
 			{
 				if(mIsFullScreen)
 				{
@@ -92,7 +92,7 @@ namespace AE
 				}
 			}
 
-			void ContextSdl::setParentWindow(AE::OS::Window *parentWindow)
+			void ContextSdl::SetParentWindow(AE::OS::Window *parentWindow)
 			{
 				mParentWindow = parentWindow;
 

@@ -20,14 +20,13 @@ namespace AE
 			EventQueueSdl();
 			virtual ~EventQueueSdl();
 
-			bool getNextEvent();
-			bool peekNextEvent();
-			bool pollEvents();
-			void registerWindowListener(AE::OS::WindowListener *windowListener);
-			bool waitNextEvent();
+			bool GetNextEvent();
+			bool PeekNextEvent();
+			bool PollEvents();
+			bool WaitNextEvent();
 
 		private:
-			bool onEvent(SDL_Event *event);
+			bool OnEvent(SDL_Event *event);
 		};
 	}
 }

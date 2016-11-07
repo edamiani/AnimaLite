@@ -6,7 +6,7 @@ namespace AE
 {
 	namespace Graphics
 	{
-		std::unique_ptr<AE::Graphics::Image> ImageManagerSfml::createImage(const std::string &filename)
+		std::unique_ptr<AE::Graphics::Image> ImageManagerSfml::CreateImage(const std::string &filename)
 		{
 			return std::make_unique<AE::Graphics::ImageSfml>(filename);
 		}

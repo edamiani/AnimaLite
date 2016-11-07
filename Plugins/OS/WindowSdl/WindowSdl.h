@@ -27,15 +27,15 @@ namespace AE
 			WindowSdl(AE::uint id, AE::OS::WindowDesc &windowDesc);
 			~WindowSdl();
 
-			void			close() { SDL_DestroyWindow(mWindow); }
-			WindowHandle	getHandle();
-			void			show() { SDL_ShowWindow(mWindow); }
+			void			Close() { SDL_DestroyWindow(mWindow); }
+			WindowHandle	GetHandle();
+			void			Show() { SDL_ShowWindow(mWindow); }
 
-			void			onClose(AE::OS::Window *window) { if(window->getId() == mId) SDL_DestroyWindow(mWindow); }
+			void			OnClose(AE::OS::Window *window) { if(window->GetId() == mId) SDL_DestroyWindow(mWindow); }
 
-			SDL_Window*		_getSdlWindow() { return mWindow; }
+			SDL_Window*		_GetSdlWindow() { return mWindow; }
 
-			void			_setSdlWindow(SDL_Window *window) { mWindow = window; }
+			void			_SetSdlWindow(SDL_Window *window) { mWindow = window; }
 
 		protected:
 			SDL_SysWMinfo	mSysInfo;

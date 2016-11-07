@@ -13,13 +13,13 @@ namespace AE
 		{
 			mDimensions = windowDesc.dimensions;
 			mPosition = windowDesc.position;
-			mColorFormat = const_cast<AE::OS::WindowDesc &>(windowDesc).getColorFormat();
+			mColorFormat = const_cast<AE::OS::WindowDesc &>(windowDesc).GetColorFormat();
 		}
 
-		void Window::attachDeviceContext(AE::Graphics::Device::Context *deviceContext)
+		void Window::AttachDeviceContext(AE::Graphics::Device::Context *deviceContext)
 		{
 			mDeviceContext = deviceContext;
-			mDeviceContext->setParentWindow(this);
+			mDeviceContext->SetParentWindow(this);
 		}
 	}
 }

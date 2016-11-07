@@ -23,17 +23,17 @@ namespace AE
 				ContextSdl(AE::Graphics::Device::ContextDesc &contextDesc, AE::Graphics::Device::Driver *deviceDriver);
 				virtual ~ContextSdl();
 
-				bool beginRendering();
-				bool beginRendering(const AE::Graphics::Color &clearColor);
+				bool BeginRendering();
+				bool BeginRendering(const AE::Graphics::Color &clearColor);
 				//AE::uint createDrawingContext(AE::OS::Window *window, AE::Graphics::SurfaceFormat surfaceFormat);
 				//AE::Graphics::Surface* createOffscreenSurface(const AE::Math::Point2 &dimensions, AE::Graphics::SurfaceFormat surfaceFormat, bool usesVideoMemory);
-				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
-				void draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
-				void drawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);
-				void endRendering();
-				void render();
-				void setFullScreen(bool isFullScreen);
-				void setParentWindow(AE::OS::Window *parentWindow);
+				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
+				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
+				void DrawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);
+				void EndRendering();
+				void Render();
+				void SetFullScreen(bool isFullScreen);
+				void SetParentWindow(AE::OS::Window *parentWindow);
 
 			protected:
 				SDL_Renderer *mRenderer;

@@ -26,13 +26,13 @@ namespace AE
 			mWindowListeners.clear();
 		}
 
-		bool EventQueueSdl::getNextEvent()
+		bool EventQueueSdl::GetNextEvent()
 		{
 			SDL_Event event[1];
 
 			if(SDL_PeepEvents(event, 1, SDL_GETEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT) > 0)
 			{
-				onEvent(event);
+				OnEvent(event);
 
 				return true;
 			}
@@ -42,23 +42,18 @@ namespace AE
 			}
 		}
 
-		bool EventQueueSdl::peekNextEvent()
+		bool EventQueueSdl::PeekNextEvent()
 		{
 			return true;
 		}
 
-		void EventQueueSdl::registerWindowListener(AE::OS::WindowListener *windowListener)
-		{
-			mWindowListeners.push_back(windowListener);
-		}
-
-		bool EventQueueSdl::waitNextEvent()
+		bool EventQueueSdl::WaitNextEvent()
 		{
 			SDL_Event event;
 
 			if(SDL_WaitEvent(&event))
 			{
-				onEvent(&event);
+				OnEvent(&event);
 
 				return true;
 			}
@@ -68,13 +63,13 @@ namespace AE
 			}
 		}
 
-		bool EventQueueSdl::pollEvents()
+		bool EventQueueSdl::PollEvents()
 		{
 			SDL_Event event;
 
 			while(SDL_PollEvent(&event))
 			{
-				if(!onEvent(&event))
+				if(!OnEvent(&event))
 				{
 					return false;
 				}
@@ -83,7 +78,7 @@ namespace AE
 			return true;
 		}
 
-		bool EventQueueSdl::onEvent(SDL_Event *event)
+		bool EventQueueSdl::OnEvent(SDL_Event *event)
 		{
 			SDL_Window *sdlWindow = SDL_GetWindowFromID(event->window.windowID);
 			AE::OS::Window *window = reinterpret_cast<AE::OS::Window *>(SDL_GetWindowData(sdlWindow, "AnimaWindow"));
@@ -94,9 +89,9 @@ namespace AE
 				{
 					case SDL_WINDOWEVENT_CLOSE:
 					{
-						for(auto *listener : mWindowListeners)
+						for(auto &listener : mWindowListeners)
 						{
-							listener->onClose(window);
+							listener.second->OnClose(window);
 						}
 						return true;
 					}
@@ -106,42 +101,42 @@ namespace AE
 			}
 			else if(event->type == SDL_KEYDOWN)
 			{
-				for(auto *listener : mKeyListeners)
+				for(auto &listener : mKeyListeners)
 				{
 					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_DOWN, window, AE::Input::KeyInfo(AE::Input::KC_0));
-					listener->onKeyDown(keyEvent);
+					listener.second->OnKeyDown(keyEvent);
 				}
 			}
 			else if(event->type == SDL_KEYUP)
 			{
-				for(auto *listener : mKeyListeners)
+				for(auto &listener : mKeyListeners)
 				{
 					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_UP, window, AE::Input::KeyInfo(AE::Input::KC_0));
-					listener->onKeyUp(keyEvent);
+					listener.second->OnKeyUp(keyEvent);
 				}
 			}
 			else if(event->type == SDL_MOUSEBUTTONDOWN)
 			{
-				for(auto *listener : mMouseListeners)
+				for(auto &listener : mMouseListeners)
 				{
 					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_BUTTON_DOWN, window, 0, AE::Math::Point2<AE::int32>(0, 0));
-					listener->onButtonDown(mouseEvent);
+					listener.second->OnButtonDown(mouseEvent);
 				}
 			}
 			else if(event->type == SDL_MOUSEBUTTONUP)
 			{
-				for(auto *listener : mMouseListeners)
+				for(auto &listener : mMouseListeners)
 				{
 					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_BUTTON_UP, window, 0, AE::Math::Point2<AE::int32>(0, 0));
-					listener->onButtonUp(mouseEvent);
+					listener.second->OnButtonUp(mouseEvent);
 				}
 			}
 			else if(event->type == SDL_MOUSEMOTION)
 			{
-				for(auto *listener : mMouseListeners)
+				for(auto &listener : mMouseListeners)
 				{
 					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_MOVE, window, 0, AE::Math::Point2<AE::int32>(0, 0));
-					listener->onMouseMove(mouseEvent);
+					listener.second->OnMouseMove(mouseEvent);
 				}
 			}
 			else if(event->type == SDL_QUIT)

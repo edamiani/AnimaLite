@@ -32,7 +32,7 @@ namespace AE
 			}
 		}
 
-		WindowHandle WindowSdl::getHandle()
+		WindowHandle WindowSdl::GetHandle()
 		{
 			SDL_VERSION(&mSysInfo.version);
 			SDL_GetWindowWMInfo(mWindow, &mSysInfo);

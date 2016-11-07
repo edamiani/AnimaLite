@@ -24,18 +24,18 @@ namespace AE
 				Pipeline();
 				~Pipeline();
 
-				Shader* getDefaultFragmentShader() { return mDefaultFragmentShader; }
-				Shader* getDefaultVertexShader() { return mDefaultVertexShader; }
+				Shader* GetDefaultFragmentShader() { return mDefaultFragmentShader; }
+				Shader* GetDefaultVertexShader() { return mDefaultVertexShader; }
 
-				void setFragmentShader(Shader *fragmentShader) 
+				void SetFragmentShader(Shader *fragmentShader) 
 				{ 
-					assert(fragmentShader->getType() == AE::Graphics::Device::ST_FRAGMENT);
+					assert(fragmentShader->GetType() == AE::Graphics::Device::ST_FRAGMENT);
 					mFragmentShader = fragmentShader;
 				}
 
-				void setVertexShader(Shader *vertexShader)
+				void SetVertexShader(Shader *vertexShader)
 				{
-					assert(vertexShader->getType() == AE::Graphics::Device::ST_VERTEX);
+					assert(vertexShader->GetType() == AE::Graphics::Device::ST_VERTEX);
 					mFragmentShader = vertexShader;
 				}
 			};

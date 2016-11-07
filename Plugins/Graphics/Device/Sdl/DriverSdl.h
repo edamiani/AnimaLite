@@ -35,14 +35,14 @@ namespace AE
 
 				~DriverSdl() {}
 
-				AE::Graphics::Device::Context*				createDeviceContext(AE::OS::Window *window, const std::string &contextName = "");
-				AE::Graphics::Device::Context*				createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");
-				AE::Graphics::Device::IndexBuffer*			createEmptyIndexBuffer() { return nullptr; }
-				AE::Graphics::Device::VertexBuffer*			createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) { return nullptr; }
-				void										destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
-				AE::Graphics::Device::Context*				getDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
-				AE::uint									getDeviceId() { return mDeviceId; }
-				AE::Graphics::Device::DriverType			getType() { return mType; }
+				AE::Graphics::Device::Context*				CreateDeviceContext(AE::OS::Window *window, const std::string &contextName = "");
+				AE::Graphics::Device::Context*				CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");
+				AE::Graphics::Device::IndexBuffer*			CreateEmptyIndexBuffer() { return nullptr; }
+				AE::Graphics::Device::VertexBuffer*			CreateEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) { return nullptr; }
+				void										DestroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
+				AE::Graphics::Device::Context*				GetDeviceContext(AE::uint index) { return mDeviceContexts[index]; }
+				AE::uint									GetDeviceId() { return mDeviceId; }
+				AE::Graphics::Device::DriverType			GetType() { return mType; }
 
 			protected:
 				AE::int32									mBufferIdCount;

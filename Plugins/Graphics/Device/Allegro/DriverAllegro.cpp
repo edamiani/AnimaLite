@@ -20,7 +20,7 @@ namespace AE
 			{
 			}
 
-			AE::Graphics::Device::Context* DriverAllegro::createDeviceContext(AE::OS::Window *window, const std::string &contextName)
+			AE::Graphics::Device::Context* DriverAllegro::CreateDeviceContext(AE::OS::Window *window, const std::string &contextName)
 			{
 				AE::Math::Vector2 dimensions = window->getDimensions();
 				AE::Graphics::Device::Context *deviceContext = new AE::Graphics::Device::ContextAllegro(this, window);
@@ -30,22 +30,22 @@ namespace AE
 				return deviceContext;
 			}
 
-			AE::Graphics::Device::Context* DriverAllegro::createDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName)
+			AE::Graphics::Device::Context* DriverAllegro::CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName)
 			{
 				return nullptr;
 			}
 
-			AE::Graphics::Device::IndexBuffer* DriverAllegro::createEmptyIndexBuffer()
+			AE::Graphics::Device::IndexBuffer* DriverAllegro::CreateEmptyIndexBuffer()
 			{
 				return nullptr;
 			}
 
-			AE::Graphics::Device::VertexBuffer* DriverAllegro::createEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency)
+			AE::Graphics::Device::VertexBuffer* DriverAllegro::CreateEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency)
 			{
 				return nullptr;
 			}
 
-			void DriverAllegro::destroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer)
+			void DriverAllegro::DestroyVertexBuffer(AE::Graphics::Device::VertexBuffer *vertexBuffer)
 			{
 
 			}

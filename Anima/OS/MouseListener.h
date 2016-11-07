@@ -12,10 +12,12 @@ namespace AE
 			virtual ~MouseListener() {}
 
 			// Mouse events
-			virtual void onButtonDown(const AE::OS::EventMouse &event) { }
-			virtual void onButtonUp(const AE::OS::EventMouse &event) { }
-			virtual void onMouseMove(const AE::OS::EventMouse &event) { }
+			virtual void OnButtonDown(const AE::OS::EventMouse &event) { }
+			virtual void OnButtonUp(const AE::OS::EventMouse &event) { }
+			virtual void OnMouseMove(const AE::OS::EventMouse &event) { }
 		};
+
+		typedef std::unique_ptr<MouseListener> MouseListenerPtr;
 	}
 }
 

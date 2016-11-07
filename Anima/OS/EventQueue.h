@@ -5,8 +5,8 @@
 #include "Anima/OS/MouseListener.h"
 #include "Anima/OS/WindowListener.h"
 
-#include <cassert>
-#include <list>
+#include <string>
+#include <map>
 
 namespace AE
 {
@@ -20,21 +20,21 @@ namespace AE
 			EventQueue() {}
 			virtual ~EventQueue();
 
-			virtual bool getNextEvent() = 0;
-			virtual bool peekNextEvent() = 0;
-			virtual bool pollEvents() = 0;
-			virtual void registerKeyListener(AE::OS::KeyListener *keyListener);
-			virtual void registerMouseListener(AE::OS::MouseListener *mouseListener);
-			virtual void registerWindowListener(AE::OS::WindowListener *windowListener);
-			virtual void unregisterKeyListener(AE::OS::KeyListener *keyListener);
-			virtual void unregisterMouseListener(AE::OS::MouseListener *mouseListener);
-			virtual void unregisterWindowListener(AE::OS::WindowListener *windowListener);
-			virtual bool waitNextEvent() = 0;
+			virtual bool GetNextEvent() = 0;
+			virtual bool PeekNextEvent() = 0;
+			virtual bool PollEvents() = 0;
+			virtual void RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListenerPtr keyListener);
+			virtual void RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListenerPtr mouseListener);
+			virtual void RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListenerPtr windowListener);
+			virtual void UnregisterKeyListener(const std::string &listenerName);
+			virtual void UnregisterMouseListener(const std::string &listenerName);
+			virtual void UnregisterWindowListener(const std::string &listenerName);
+			virtual bool WaitNextEvent() = 0;
 
 		protected:
-			static std::list<AE::OS::KeyListener *>		mKeyListeners;
-			static std::list<AE::OS::MouseListener *>	mMouseListeners;
-			static std::list<AE::OS::WindowListener *>	mWindowListeners;
+			std::map<std::string, AE::OS::KeyListenerPtr>		mKeyListeners;
+			std::map<std::string, AE::OS::MouseListenerPtr>		mMouseListeners;
+			std::map<std::string, AE::OS::WindowListenerPtr>	mWindowListeners;
 		};
 	}
 }

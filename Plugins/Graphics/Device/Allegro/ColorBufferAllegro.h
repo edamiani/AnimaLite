@@ -18,15 +18,15 @@ namespace AE
 				ColorBufferAllegro(AE::Graphics::ColorBufferDesc const &colorBufferDesc);
 				~ColorBufferAllegro();
 
-				void				blit(AE::Graphics::ColorBuffer *sourceColorBuffer, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::uint> &position);
-				void				clear(const AE::Graphics::Color &backgroundColor);
-				void*				getData();
+				void				Blit(AE::Graphics::ColorBuffer *sourceColorBuffer, const AE::Math::Point2<AE::uint> &dimensions, const AE::Math::Point2<AE::uint> &position);
+				void				Clear(const AE::Graphics::Color &backgroundColor);
+				void*				GetData();
 				AE::Math::Point2<AE::uint>	getDimensions();
-				void*				lock(AE::Graphics::LockType lockType);
-				void				plot(const AE::Graphics::Color &color, const AE::Math::Point2<AE::uint> &position);
-				void				unlock();
+				void*				Lock(AE::Graphics::LockType lockType);
+				void				Plot(const AE::Graphics::Color &color, const AE::Math::Point2<AE::uint> &position);
+				void				Unlock();
 
-				ALLEGRO_BITMAP*		_getAllegroBitmap() { return mAllegroBitmap; }
+				ALLEGRO_BITMAP*		_GetAllegroBitmap() { return mAllegroBitmap; }
 
 			protected:
 				ALLEGRO_BITMAP		*mAllegroBitmap;
