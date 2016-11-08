@@ -23,18 +23,18 @@ namespace AE
 			virtual bool GetNextEvent() = 0;
 			virtual bool PeekNextEvent() = 0;
 			virtual bool PollEvents() = 0;
-			virtual void RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListenerPtr keyListener);
-			virtual void RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListenerPtr mouseListener);
-			virtual void RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListenerPtr windowListener);
+			virtual void RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListener *keyListener);
+			virtual void RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListener *mouseListener);
+			virtual void RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListener *windowListener);
 			virtual void UnregisterKeyListener(const std::string &listenerName);
 			virtual void UnregisterMouseListener(const std::string &listenerName);
 			virtual void UnregisterWindowListener(const std::string &listenerName);
 			virtual bool WaitNextEvent() = 0;
 
 		protected:
-			std::map<std::string, AE::OS::KeyListenerPtr>		mKeyListeners;
-			std::map<std::string, AE::OS::MouseListenerPtr>		mMouseListeners;
-			std::map<std::string, AE::OS::WindowListenerPtr>	mWindowListeners;
+			std::map<std::string, AE::OS::KeyListener *>		mKeyListeners;
+			std::map<std::string, AE::OS::MouseListener *>		mMouseListeners;
+			std::map<std::string, AE::OS::WindowListener *>		mWindowListeners;
 		};
 	}
 }

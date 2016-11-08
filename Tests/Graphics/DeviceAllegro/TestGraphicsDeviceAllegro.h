@@ -13,14 +13,16 @@
 #include "Plugins/OS/WindowSdl/WindowSdl.h"
 #include "Plugins/OS/WindowSdl/WindowManagerSdl.h"
 
-class TestListener : public AE::OS::KeyListener, public AE::OS::MouseListener
+class TestListener : public AE::OS::KeyListener, public AE::OS::MouseListener, public AE::OS::WindowListener
 {
-	void onKeyDown(const AE::OS::EventKeyboard &event);
-	void onKeyUp(const AE::OS::EventKeyboard &event);
+	void OnKeyDown(const AE::OS::EventKeyboard &event);
+	void OnKeyUp(const AE::OS::EventKeyboard &event);
 
-	void onButtonDown(const AE::OS::EventMouse &event);
-	void onButtonUp(const AE::OS::EventMouse &event);
-	void onMouseMove(const AE::OS::EventMouse &event);
+	void OnButtonDown(const AE::OS::EventMouse &event);
+	void OnButtonUp(const AE::OS::EventMouse &event);
+	void OnMouseMove(const AE::OS::EventMouse &event);
+
+	void onClose(AE::OS::WindowPtr window) { window->Close(); }
 };
 
 #endif

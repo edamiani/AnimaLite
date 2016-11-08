@@ -57,7 +57,7 @@ namespace AE
 			return window;
 		}
 
-		void WindowManagerSdl::destroyWindow(AE::OS::Window *window)
+		void WindowManagerSdl::DestroyWindow(AE::OS::Window *window)
 		{
 		}
 	}

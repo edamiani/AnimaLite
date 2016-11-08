@@ -15,19 +15,19 @@ namespace AE
 			mWindowListeners.clear();
 		}
 
-		void EventQueue::RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListenerPtr keyListener)
+		void EventQueue::RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListener *keyListener)
 		{
-			mKeyListeners[listenerName] = std::move(keyListener);
+			mKeyListeners[listenerName] = keyListener;
 		}
 		
-		void EventQueue::RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListenerPtr mouseListener)
+		void EventQueue::RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListener *mouseListener)
 		{
-			mMouseListeners[listenerName] = std::move(mouseListener);
+			mMouseListeners[listenerName] = mouseListener;
 		}
 
-		void EventQueue::RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListenerPtr windowListener)
+		void EventQueue::RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListener *windowListener)
 		{
-			mWindowListeners[listenerName] = std::move(windowListener);
+			mWindowListeners[listenerName] = windowListener;
 		}
 
 		void EventQueue::UnregisterKeyListener(const std::string &listenerName)

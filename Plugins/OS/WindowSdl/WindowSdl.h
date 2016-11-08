@@ -31,8 +31,6 @@ namespace AE
 			WindowHandle	GetHandle();
 			void			Show() { SDL_ShowWindow(mWindow); }
 
-			void			OnClose(AE::OS::Window *window) { if(window->GetId() == mId) SDL_DestroyWindow(mWindow); }
-
 			SDL_Window*		_GetSdlWindow() { return mWindow; }
 
 			void			_SetSdlWindow(SDL_Window *window) { mWindow = window; }

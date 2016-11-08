@@ -31,7 +31,7 @@ namespace AE
 
 			AE::OS::WindowPtr CreateWindow(AE::OS::WindowDesc &windowDesc);
 			AE::OS::WindowPtr CreateWindow(AE::OS::WindowDesc &windowDesc, AE::Graphics::Device::Context *deviceContext);
-			void destroyWindow(AE::OS::Window *window);
+			void DestroyWindow(AE::OS::Window *window);
 
 		private:
 			AE::uint8 mCurrentId = 0;

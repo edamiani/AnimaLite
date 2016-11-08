@@ -1,8 +1,6 @@
 #ifndef __AE_OS_WINDOW__
 #define __AE_OS_WINDOW__
 
-#include "Anima/OS/WindowListener.h"
-
 #include "Anima/OS/WindowDesc.h"
 #include "Anima/Graphics/Device/Context.h"
 
@@ -11,11 +9,6 @@
 
 namespace AE
 {
-	namespace Graphics
-	{
-		class Manager;
-	}
-
 	namespace OS
 	{
 #if defined(AE_PLATFORM_WIN32)
@@ -28,7 +21,7 @@ namespace AE
 		typedef void* WindowHandle;
 
 #endif
-		class AE_DECLSPEC Window : public AE::OS::WindowListener
+		class Window
 		{
 		public:
 			Window(AE::uint id, AE::OS::WindowDesc &windowDesc);
@@ -48,8 +41,6 @@ namespace AE
 			bool							IsFullScreen() { assert(mDeviceContext); return mDeviceContext->IsFullScreen(); }
 			void							SetFullScreen(bool IsFullScreen) { assert(mDeviceContext); mDeviceContext->SetFullScreen(IsFullScreen); }
 			virtual void					Show() = 0;
-
-			virtual void					OnClose(AE::OS::Window *window) {}
 
 		protected:
 			AE::Graphics::ColorFormat		mColorFormat;

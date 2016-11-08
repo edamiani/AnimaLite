@@ -28,7 +28,7 @@ namespace AE
 		template<class T>
 		T* RegisterPlugin(const std::string &pluginName)
 		{
-			if(mRegisteredPlugins.Find(pluginName) != mRegisteredPlugins.end())
+			if(mRegisteredPlugins.find(pluginName) != mRegisteredPlugins.end())
 				return 0;
 
 			mRegisteredPlugins[pluginName] = new T();
@@ -39,7 +39,7 @@ namespace AE
 		template<class T>
 		void UnregisterPlugin(const std::string &pluginName)
 		{
-			std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.Find(pluginName);
+			std::map<std::string, AE::Plugin *>::iterator i = mRegisteredPlugins.find(pluginName);
 
 			assert(i != mRegisteredPlugins.end());
 

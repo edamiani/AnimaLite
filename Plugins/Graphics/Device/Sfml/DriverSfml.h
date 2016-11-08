@@ -36,7 +36,7 @@ namespace AE
 
 				~DriverSfml() {}
 
-				AE::Graphics::Device::Context*				CreateDeviceContext(AE::OS::Window *window, const std::string &contextName = "");
+				AE::Graphics::Device::Context*				CreateDeviceContext(AE::OS::WindowPtr &window, const std::string &contextName = "");
 				AE::Graphics::Device::Context*				CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "");
 				AE::Graphics::Device::IndexBuffer*			CreateEmptyIndexBuffer() { return nullptr; }
 				AE::Graphics::Device::VertexBuffer*			CreateEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) { return nullptr; }

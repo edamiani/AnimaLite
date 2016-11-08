@@ -11,10 +11,10 @@ namespace AE
 	{
 		namespace Device
 		{
-			AE::Graphics::Device::Context* DriverSfml::CreateDeviceContext(AE::OS::Window *window, const std::string &contextName)
+			AE::Graphics::Device::Context* DriverSfml::CreateDeviceContext(AE::OS::WindowPtr &window, const std::string &contextName)
 			{
 				AE::Graphics::Device::ContextDesc contextDesc;
-				contextDesc.parentWindow = window;
+				contextDesc.parentWindow = window.get();
 				contextDesc.dimensions = window->GetDimensions();
 
 				auto *deviceContext = new AE::Graphics::Device::ContextSfml(contextDesc, this);

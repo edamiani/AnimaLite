@@ -20,9 +20,9 @@ namespace AE
 			virtual				~EventManager() {}
 
 			virtual bool		Install(AE::uint options) = 0;
-			virtual void		RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListenerPtr keyListener) { if(mEventQueue) mEventQueue->RegisterKeyListener(listenerName, std::move(keyListener)); }
-			virtual void		RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListenerPtr mouseListener) { if(mEventQueue) mEventQueue->RegisterMouseListener(listenerName, std::move(mouseListener)); }
-			virtual void		RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListenerPtr windowListener) { if(mEventQueue) mEventQueue->RegisterWindowListener(listenerName, std::move(windowListener)); }
+			virtual void		RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListener *keyListener) { if(mEventQueue) mEventQueue->RegisterKeyListener(listenerName, keyListener); }
+			virtual void		RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListener *mouseListener) { if(mEventQueue) mEventQueue->RegisterMouseListener(listenerName, mouseListener); }
+			virtual void		RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListener *windowListener) { if(mEventQueue) mEventQueue->RegisterWindowListener(listenerName, windowListener); }
 			virtual bool		Uninstall() = 0;
 			virtual void		UnregisterKeyListener(const std::string &listenerName) { if(mEventQueue) mEventQueue->UnregisterKeyListener(listenerName); }
 			virtual void		UnregisterMouseListener(const std::string &listenerName) { if(mEventQueue) mEventQueue->UnregisterMouseListener(listenerName); }

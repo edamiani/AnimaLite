@@ -4,19 +4,13 @@
 #include "Anima/Graphics/Device/ContextDesc.h"
 #include "Anima/Graphics/Device/Texture.h"
 #include "Anima/Graphics/Enums.h"
-//#include "Anima/Math/Vector2.h"
+#include "Anima/OS/Window.h"
 
-//#include <list>
 #include <string>
 #include <vector>
 
 namespace AE
 {
-	namespace OS
-	{
-		class Window;
-	}
-
 	namespace Graphics
 	{
 		namespace Device
@@ -34,7 +28,7 @@ namespace AE
 					: mBufferIdCount(-1), mDeviceId(deviceId), mType(driverType), mRenderablePixelBufferId(0) {}
 				~Driver() {}
 
-				virtual AE::Graphics::Device::Context*		CreateDeviceContext(AE::OS::Window *window, const std::string &contextName = "") = 0;
+				virtual AE::Graphics::Device::Context*		CreateDeviceContext(AE::OS::WindowPtr &window, const std::string &contextName = "") = 0;
 				virtual AE::Graphics::Device::Context*		CreateDeviceContext(AE::Graphics::Device::ContextDesc &contextDesc, const std::string &contextName = "") = 0;
 				virtual AE::Graphics::Device::IndexBuffer*	CreateEmptyIndexBuffer() = 0;
 				virtual AE::Graphics::Device::VertexBuffer*	CreateEmptyVertexBuffer(AE::uint vertexDeclaration, AE::Graphics::BufferUsage bufferUsage, AE::Graphics::BufferChangeFrequency bufferChangeFrequency) = 0;

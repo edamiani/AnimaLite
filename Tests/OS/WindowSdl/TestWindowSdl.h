@@ -7,5 +7,10 @@
 #include "Plugins/OS/WindowSdl/WindowSdl.h"
 #include "Plugins/OS/WindowSdl/WindowManagerSdl.h"
 
-#endif
 
+class TestListener : public AE::OS::WindowListener
+{
+	void onClose(AE::OS::WindowPtr window) { window->Close(); }
+};
+
+#endif

@@ -91,7 +91,7 @@ namespace AE
 					{
 						for(auto &listener : mWindowListeners)
 						{
-							listener.second->OnClose(window);
+							listener.second->OnClose(*window);
 						}
 						return true;
 					}
