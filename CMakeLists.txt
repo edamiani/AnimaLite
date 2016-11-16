@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 3.0)
 project (AnimaLite)
 
 option(Anima_BuildSharedLibs "Build DLLs?")
@@ -45,7 +45,7 @@ add_library(AeCore STATIC
 	Anima/PluginRoot.h
 	Anima/PluginRoot.cpp)
 	
-add_library(AeEventCore STATIC
+add_library(AeOsEventCore STATIC
 	Anima/OS/Event.h
 	Anima/OS/EventListener.h
 	Anima/OS/EventManager.h
@@ -54,15 +54,15 @@ add_library(AeEventCore STATIC
 	Anima/OS/KeyListener.h
 	Anima/OS/MouseListener.h
 	Anima/OS/WindowListener.h)
-target_link_libraries(AeEventCore AeCore)
+target_link_libraries(AeOsEventCore AeCore)
 
-add_library(AeWindowCore STATIC
+add_library(AeOsWindowCore STATIC
 	Anima/OS/Window.h
 	Anima/OS/Window.cpp
 	Anima/OS/WindowDesc.h
 	Anima/OS/WindowManager.h
 	Anima/OS/WindowManager.cpp)
-target_link_libraries(AeWindowCore AeCore)
+target_link_libraries(AeOsWindowCore AeCore)
 
 add_library(AeGraphicsImageSfml STATIC
 	Plugins/Graphics/Image/Sfml/ImageManagerSfml.h
@@ -88,6 +88,7 @@ add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/VertexShader.h)
 target_link_libraries(AeGraphicsDeviceCore AeCore)
 
+#[[
 add_library(AeGraphicsDeviceAllegro STATIC
 	Plugins/Graphics/Device/Allegro/ColorBufferAllegro.h
 	Plugins/Graphics/Device/Allegro/ColorBufferAllegro.cpp
@@ -98,11 +99,15 @@ add_library(AeGraphicsDeviceAllegro STATIC
 	Plugins/Graphics/Device/Allegro/ManagerAllegro.h
 	Plugins/Graphics/Device/Allegro/ManagerAllegro.cpp)
 target_link_libraries(AeGraphicsDeviceAllegro AeGraphicsDeviceCore "${ALLEGRO_LIB}")
+]]
 
+#[[
 if(NOT Anima_BuildSharedLibs)
 	target_compile_definitions(AeGraphicsDeviceAllegro PRIVATE ALLEGRO_STATICLINK)
 endif()
+]]
 
+#[[
 add_library(AeGraphicsDeviceSdl STATIC
 	Plugins/Graphics/Device/Sdl/ContextSdl.h
 	Plugins/Graphics/Device/Sdl/ContextSdl.cpp
@@ -111,6 +116,7 @@ add_library(AeGraphicsDeviceSdl STATIC
 	Plugins/Graphics/Device/Sdl/ManagerSdl.h
 	Plugins/Graphics/Device/Sdl/ManagerSdl.cpp)
 target_link_libraries(AeGraphicsDeviceSdl AeGraphicsDeviceCore)
+]]
 
 add_library(AeGraphicsDeviceSfml STATIC
 	Plugins/Graphics/Device/Sfml/ContextSfml.h
@@ -128,19 +134,19 @@ add_library(AeGraphicsDeviceSfml STATIC
 target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore sfml-graphics)
 target_compile_definitions(AeGraphicsDeviceSfml PRIVATE SFML_STATIC)
 
-add_library(AeEventSdl STATIC
+add_library(AeOsEventSdl STATIC
 	Plugins/OS/EventSdl/EventManagerSdl.h
 	Plugins/OS/EventSdl/EventManagerSdl.cpp
 	Plugins/OS/EventSdl/EventQueueSdl.h
 	Plugins/OS/EventSdl/EventQueueSdl.cpp)
-target_link_libraries(AeEventSdl AeEventCore "${SDL_LIB}")
+target_link_libraries(AeOsEventSdl AeOsEventCore "${SDL_LIB}")
 	
-add_library(AeWindowSdl STATIC
+add_library(AeOsWindowSdl STATIC
 	Plugins/OS/WindowSdl/WindowSdl.h 
 	Plugins/OS/WindowSdl/WindowSdl.cpp
 	Plugins/OS/WindowSdl/WindowManagerSdl.h
 	Plugins/OS/WindowSdl/WindowManagerSdl.cpp)
-target_link_libraries(AeWindowSdl AeWindowCore "${SDL_LIB}")
+target_link_libraries(AeOsWindowSdl AeOsWindowCore "${SDL_LIB}")
 
 if(Anima_BuildSharedLibs)
 	target_compile_definitions(WindowCore PRIVATE AE_EXPORT_DLL)
@@ -155,19 +161,19 @@ endif()
 #	target_link_libraries (WindowSdl SDL2-static)
 #endif()
 
-add_executable(TestWindowSdl 
+add_executable(TestWindow 
 	Tests/OS/WindowSdl/TestWindowSdl.h
 	Tests/OS/WindowSdl/TestWindowSdl.cpp)
-target_link_libraries(TestWindowSdl AeEventSdl AeWindowSdl SDL2main)
+target_link_libraries(TestWindow AeOsEventSdl AeOsWindowSdl SDL2main)
 
-add_executable(TestEventSdl 
+add_executable(TestEvent 
 	Tests/OS/EventSdl/TestEventSdl.h
 	Tests/OS/EventSdl/TestEventSdl.cpp)
-target_link_libraries(TestEventSdl AeEventSdl AeWindowSdl SDL2main)
+target_link_libraries(TestEvent AeOsEventSdl AeOsWindowSdl SDL2main)
 
-add_executable(TestGraphicsDeviceAllegro 
+add_executable(TestGraphicsDevice 
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDeviceAllegro AeGraphicsDeviceSfml AeGraphicsImageSfml AeEventSdl AeWindowSdl SDL2main)
+target_link_libraries(TestGraphicsDevice AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

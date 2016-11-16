@@ -56,8 +56,6 @@ int main(int argc, char* args[])
 
 	auto *deviceDriver = deviceManager->AcquireDeviceDriver(0, AE::Graphics::Device::DT_NONE);
 
-	//AE::Graphics::Device::ContextDesc contextDesc;
-	//contextDesc.dimensions = windowDesc.dimensions;
 	auto *deviceContext = deviceDriver->CreateDeviceContext(window);
 
 	std::unique_ptr<TestListener> testListener = std::make_unique<TestListener>();
