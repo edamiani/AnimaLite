@@ -148,6 +148,12 @@ add_library(AeOsWindowSdl STATIC
 	Plugins/OS/WindowSdl/WindowManagerSdl.cpp)
 target_link_libraries(AeOsWindowSdl AeOsWindowCore "${SDL_LIB}")
 
+add_library(AeAudioCore STATIC
+	Anima/Audio/AudioManager.h
+	Anima/Audio/Music.h
+	Anima/Audio/Sound.h)
+target_link_libraries(AeAudioCore AeCore)
+
 if(Anima_BuildSharedLibs)
 	target_compile_definitions(WindowCore PRIVATE AE_EXPORT_DLL)
 	target_compile_definitions(WindowSdl PRIVATE AE_EXPORT_DLL)
