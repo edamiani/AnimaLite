@@ -154,6 +154,12 @@ add_library(AeAudioCore STATIC
 	Anima/Audio/Sound.h)
 target_link_libraries(AeAudioCore AeCore)
 
+add_library(AeAudioSfml STATIC
+	Plugins/Audio/Sfml/AudioManagerSfml.h
+	Plugins/Audio/Sfml/MusicSfml.h
+	Plugins/Audio/Sfml/SoundSfml.h)
+target_link_libraries(AeAudioSfml AeAudioCore)
+
 if(Anima_BuildSharedLibs)
 	target_compile_definitions(WindowCore PRIVATE AE_EXPORT_DLL)
 	target_compile_definitions(WindowSdl PRIVATE AE_EXPORT_DLL)
