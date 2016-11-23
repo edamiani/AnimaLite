@@ -45,6 +45,14 @@ add_library(AeCore STATIC
 	Anima/PluginRoot.h
 	Anima/PluginRoot.cpp)
 	
+add_library(AeInputCore STATIC
+	Anima/Input/Enums.h
+	Anima/Input/Joystick.h
+	Anima/Input/Keyboard.h
+	Anima/Input/KeyInfo.h
+	Anima/Input/Mouse.h)
+target_link_libraries(AeInputCore AeCore)
+	
 add_library(AeOsEventCore STATIC
 	Anima/OS/Event.h
 	Anima/OS/EventListener.h
@@ -187,5 +195,16 @@ add_executable(TestGraphicsDevice
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
 target_link_libraries(TestGraphicsDevice AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl SDL2main)
+
+add_executable(GamePongPrototype
+	Games/PongPrototype/Game.h
+	Games/PongPrototype/Game.cpp
+	Games/PongPrototype/GameController.h
+	Games/PongPrototype/GameController.cpp
+	Games/PongPrototype/GameModel.h
+	Games/PongPrototype/GameModel.cpp
+	Games/PongPrototype/GameView.h
+	Games/PongPrototype/GameView.cpp)
+target_link_libraries(GamePongPrototype AeOsEventSdl AeOsWindowSdl SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)
