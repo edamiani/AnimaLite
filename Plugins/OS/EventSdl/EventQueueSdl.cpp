@@ -125,9 +125,23 @@ namespace AE
 			}
 			else if(event->type == SDL_MOUSEBUTTONUP)
 			{
+				AE::uint button;
+				switch (event->button.button)
+				{
+				case SDL_BUTTON_LEFT:
+					button = 0;
+					break;
+				case SDL_BUTTON_MIDDLE:
+					button = 1;
+					break;
+				case SDL_BUTTON_RIGHT:
+					button = 2;
+					break;
+				}
+
 				for(auto &listener : mMouseListeners)
 				{
-					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_BUTTON_UP, window, 0, AE::Math::Point2<AE::int32>(0, 0));
+					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_BUTTON_UP, window, button, AE::Math::Point2<AE::int32>(event->button.x, event->button.y));
 					listener.second->OnButtonUp(mouseEvent);
 				}
 			}
@@ -135,7 +149,7 @@ namespace AE
 			{
 				for(auto &listener : mMouseListeners)
 				{
-					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_MOVE, window, 0, AE::Math::Point2<AE::int32>(0, 0));
+					auto mouseEvent = AE::OS::EventMouse(AE::OS::EST_MOUSE_MOVE, window, 0, AE::Math::Point2<AE::int32>(event->button.x, event->button.y));
 					listener.second->OnMouseMove(mouseEvent);
 				}
 			}

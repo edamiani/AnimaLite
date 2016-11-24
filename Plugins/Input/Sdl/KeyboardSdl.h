@@ -1,7 +1,7 @@
-#ifndef __AE_INPUT_KEYBOARD__
-#define __AE_INPUT_KEYBOARD__
+#ifndef __AE_INPUT_KEYBOARD_SDL__
+#define __AE_INPUT_KEYBOARD_SDL__
 
-#include "Device.h"
+#include "Anima/Input/Keyboard.h"
 
 namespace AE
 {
@@ -157,13 +157,14 @@ namespace AE
 			KC_MEDIASELECT = 0xED     // Media Select
 		};
 
-		class Keyboard : public AE::Input::Device
+		class KeyboardSdl : public AE::Input::Keyboard
 		{
 		public:
-							Keyboard() {  }
-			virtual			~Keyboard() {  }
+						KeyboardSdl() {  }
+			virtual		~KeyboardSdl() {  }
 
-			virtual bool	IsKeyDown(AE::Input::KeyCode code) = 0;
+			bool		IsKeyDown(AE::Input::KeyCode code) { return true; }
+			bool		Poll() { return true; }
 		};
 	}
 }

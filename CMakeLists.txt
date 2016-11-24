@@ -54,6 +54,16 @@ add_library(AeInputCore STATIC
 	Anima/Input/Manager.h
 	Anima/Input/Mouse.h)
 target_link_libraries(AeInputCore AeCore)
+
+add_library(AeInputSdl STATIC
+	Plugins/Input/Sdl/DeviceSdl.h
+	Plugins/Input/Sdl/EnumsSdl.h
+	Plugins/Input/Sdl/JoystickSdl.h
+	Plugins/Input/Sdl/KeyboardSdl.h
+	Plugins/Input/Sdl/KeyInfoSdl.h
+	Plugins/Input/Sdl/ManagerSdl.h
+	Plugins/Input/Sdl/MouseSdl.h)
+target_link_libraries(AeInputSdl AeInputCore)
 	
 add_library(AeOsEventCore STATIC
 	Anima/OS/Event.h

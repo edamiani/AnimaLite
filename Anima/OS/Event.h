@@ -49,6 +49,13 @@ namespace AE
 			EST_WINDOW_RESIZE
 		};
 
+		enum MouseButtonType
+		{
+			MBT_LEFT = 0,
+			MBT_MIDDLE,
+			MBT_RIGHT
+		};
+
 		struct Event
 		{
 			AE::OS::Window			*sourceWindow;

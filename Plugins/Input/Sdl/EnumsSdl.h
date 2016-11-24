@@ -67,6 +67,18 @@ namespace AE
 			KC_Y,
 			KC_Z
 		};
+
+		enum MouseButtonType
+		{
+			MBT_LEFT = 0,
+			MBT_RIGHT,
+			MBT_MIDDLE,
+			MBT_BUTTON3,
+			MBT_BUTTON4,
+			MBT_BUTTON5,
+			MBT_BUTTON6,
+			MBT_BUTTON7
+		};
 	}
 }
 

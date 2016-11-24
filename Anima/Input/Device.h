@@ -11,9 +11,9 @@ namespace AE
 							Device() { mBuffered = false; }
 			virtual			~Device() {  }
 
-			bool			isBuffered() { return mBuffered; }
-			void			setBuffered(bool buffered) { mBuffered = buffered; }
-			virtual bool	poll() = 0;
+			bool			IsBuffered() { return mBuffered; }
+			void			SetBuffered(bool buffered) { mBuffered = buffered; }
+			virtual bool	Poll() = 0;
 
 		protected:
 			bool			mBuffered;

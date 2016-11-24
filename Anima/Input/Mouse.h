@@ -1,9 +1,9 @@
 #ifndef __AE_INPUT_MOUSE__
 #define __AE_INPUT_MOUSE__
 
-#include "AnimaInputDevice.h"
-#include "AnimaInputEnums.h"
-#include "AnimaMathPoint2.h"
+#include "Device.h"
+#include "Anima/OS/Event.h"
+#include "Anima/Math/Vector2.h"
 
 namespace AE
 {
@@ -12,15 +12,12 @@ namespace AE
 		class Mouse : public AE::Input::Device
 		{
 		public:
-							Mouse() {  }
-			virtual			~Mouse() {  }
+										Mouse() {  }
+			virtual						~Mouse() {  }
 
-			virtual int		getAbsoluteX() = 0;
-			virtual int		getAbsoluteY() = 0;
-			virtual AE::Math::Point2	getCoordinates() = 0;
-			virtual int		getRelativeX() = 0;
-			virtual int		getRelativeY() = 0;
-			virtual bool	isButtonDown(AE::Input::MouseButtonType button) = 0;
+			virtual AE::Math::Vector2	GetAbsolutePosition() = 0;
+			virtual AE::Math::Vector2	GetRelativePosition() = 0;
+			virtual bool				IsButtonDown(AE::OS::MouseButtonType button) = 0;
 		};
 	}
 }
