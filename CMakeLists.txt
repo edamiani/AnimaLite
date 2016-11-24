@@ -46,10 +46,12 @@ add_library(AeCore STATIC
 	Anima/PluginRoot.cpp)
 	
 add_library(AeInputCore STATIC
+	Anima/Input/Device.h
 	Anima/Input/Enums.h
 	Anima/Input/Joystick.h
 	Anima/Input/Keyboard.h
 	Anima/Input/KeyInfo.h
+	Anima/Input/Manager.h
 	Anima/Input/Mouse.h)
 target_link_libraries(AeInputCore AeCore)
 	

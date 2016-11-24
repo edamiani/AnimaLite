@@ -1,14 +1,31 @@
 #ifndef __AE_INPUT_JOYSTICK__
 #define __AE_INPUT_JOYSTICK__
 
-#include "AnimaInputDevice.h"
-#include "AnimaInputAxis.h"
+#include "Device.h"
+
 #include <vector>
 
 namespace AE
 {
 	namespace Input
 	{
+		struct Axis
+		{
+			Axis() : abs(0), rel(0), absOnly(false) {};
+
+			//! Absoulte and Relative value components
+			int abs, rel;
+
+			//! Indicates if this Axis only supports Absoulte (ie JoyStick)
+			bool absOnly;
+
+			//! Used internally by OIS
+			void clear()
+			{
+				abs = rel = 0;
+			}
+		};
+
 		//! POV / HAT Joystick component
 		struct Pov
 		{

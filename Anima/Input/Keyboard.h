@@ -1,7 +1,7 @@
 #ifndef __AE_INPUT_KEYBOARD__
 #define __AE_INPUT_KEYBOARD__
 
-#include "AnimaInputDevice.h"
+#include "Device.h"
 
 namespace AE
 {
