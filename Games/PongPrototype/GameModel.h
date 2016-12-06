@@ -13,13 +13,15 @@ public:
 	void Step(AE::Real deltaTime);
 	void Terminate();
 
-private:
+	void* GetBall() { return nullptr; }
+	void* GetOpponent() { return nullptr; }
+	void* GetPlayer() { return nullptr; }
+
 	void MoveBall(AE::Real deltaTime);
 	void MovePlayer(bool isLeft);
 	void MoveOpponent(AE::Real deltaTime);
-	
 
-
+private:
 	// Player
 	// Opponent
 	// Ball

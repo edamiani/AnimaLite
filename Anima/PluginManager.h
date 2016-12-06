@@ -14,6 +14,7 @@ namespace AE
 	class PluginManager
 	{
 	public:
+		PluginManager();
 		~PluginManager();
 
 		static AE::PluginManager*		GetInstance() { assert(mInstance != nullptr); return mInstance; }
@@ -24,6 +25,24 @@ namespace AE
 		AE::Plugin*						GetInstalledPluginByType(AE::PluginType pluginType);
 		AE::Plugin*						GetPluginByName(const std::string &pluginName);
 		AE::PluginGroup*				GetRoot() { return mRoot; }
+
+		template<class T>
+		T* GetInstalledPluginByType(AE::PluginType pluginType)
+		{
+			assert(pluginType != AE::PT_ALL && pluginType != AE::PT_GROUP && pluginType != AE::PT_IRRELEVANT && pluginType != AE::PT_ROOT);
+
+			std::map<std::string, AE::Plugin *>::iterator i;
+
+			for(i = mRegisteredPlugins.begin(); i != mRegisteredPlugins.end(); i++)
+			{
+				if((*i).second->GetType() == pluginType && (*i).second->IsInstalled())
+				{
+					return static_cast<T*>((*i).second);
+				}
+			}
+
+			return nullptr;
+		}
 
 		template<class T>
 		T* RegisterPlugin(const std::string &pluginName)
@@ -59,7 +78,7 @@ namespace AE
 		}
 
 	protected:
-		PluginManager();
+		
 
 		static AE::PluginManager		*mInstance;
 

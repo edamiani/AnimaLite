@@ -8,6 +8,7 @@ option(AnimaMath_Mathfu "Uses mathfu as the math library" ON)
 option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 
 #add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
+add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/anax")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SFML")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
@@ -16,6 +17,7 @@ add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
 include_directories("${PROJECT_SOURCE_DIR}")
 
 #include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
+include_directories("${PROJECT_SOURCE_DIR}/Dependencies/anax/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/SFML/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/dependencies/vectorial/include")
@@ -47,7 +49,6 @@ add_library(AeCore STATIC
 	
 add_library(AeInputCore STATIC
 	Anima/Input/Device.h
-	Anima/Input/Enums.h
 	Anima/Input/Joystick.h
 	Anima/Input/Keyboard.h
 	Anima/Input/KeyInfo.h
@@ -56,14 +57,32 @@ add_library(AeInputCore STATIC
 target_link_libraries(AeInputCore AeCore)
 
 add_library(AeInputSdl STATIC
-	Plugins/Input/Sdl/DeviceSdl.h
-	Plugins/Input/Sdl/EnumsSdl.h
 	Plugins/Input/Sdl/JoystickSdl.h
 	Plugins/Input/Sdl/KeyboardSdl.h
 	Plugins/Input/Sdl/KeyInfoSdl.h
 	Plugins/Input/Sdl/ManagerSdl.h
 	Plugins/Input/Sdl/MouseSdl.h)
 target_link_libraries(AeInputSdl AeInputCore)
+
+add_library(AeOsTimerCore STATIC
+	Anima/OS/Timer.h)
+target_link_libraries(AeOsTimerCore AeCore)
+
+add_library(AeOsTimerSdl STATIC
+	Plugins/OS/TimerSdl/TimerSdl.h)
+target_link_libraries(AeOsTimerSdl AeOsTimerCore)
+
+add_library(AeAiFsmCore STATIC
+	Anima/AI/FsmMachine.h
+	Anima/AI/FsmMachine.cpp
+	Anima/AI/FsmState.h)
+target_link_libraries(AeAiFsmCore AeCore)
+
+add_library(AeEcsCore STATIC
+	Anima/Ecs/Component.h
+	Anima/Ecs/EcsManager.h
+	Anima/Ecs/Entity.h)
+target_link_libraries(AeEcsCore AeCore)
 	
 add_library(AeOsEventCore STATIC
 	Anima/OS/Event.h

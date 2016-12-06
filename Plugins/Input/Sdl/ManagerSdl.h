@@ -44,8 +44,8 @@ namespace AE
 				return true;
 			}
 
-			AE::Input::Keyboard&	GetKeyboard() { return mKeyboard; }
-			AE::Input::Mouse&		GetMouse() { return mMouse; }
+			AE::Input::Keyboard*	GetKeyboard() { return &mKeyboard; }
+			AE::Input::Mouse*		GetMouse() { return &mMouse; }
 
 		private:
 			AE::Input::KeyboardSdl	mKeyboard;
