@@ -47,7 +47,7 @@ int main(int argc, char* args[])
 	auto *deviceContext = deviceDriver->CreateDeviceContext(window);
 
 	GameModel model;
-	GameView view;
+	GameView view(model);
 	GameController controller(pluginManager, model);
 
 	eventManager->RegisterWindowListener("WindowListener", &controller);

@@ -83,6 +83,12 @@ add_library(AeEcsCore STATIC
 	Anima/Ecs/EcsManager.h
 	Anima/Ecs/Entity.h)
 target_link_libraries(AeEcsCore AeCore)
+
+add_library(AeEcsAnax STATIC
+	Plugins/Ecs/Anax/ComponentAnax.h
+	Plugins/Ecs/Anax/EcsManagerAnax.h
+	Plugins/Ecs/Anax/EntityAnax.h)
+target_link_libraries(AeEcsAnax AeEcsCore anax)
 	
 add_library(AeOsEventCore STATIC
 	Anima/OS/Event.h
