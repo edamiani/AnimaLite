@@ -3,6 +3,8 @@
 
 #include "Anima/Types.h"
 
+#include "Anima/PluginOptions.h"
+
 #include <list>
 
 namespace AE
@@ -15,7 +17,7 @@ namespace AE
 		PT_ANIMATION_MANAGER,
 		PT_AUDIO_MANAGER,
 		PT_DATABASE_MANAGER,
-		PT_ECS_MANAGER
+		PT_ECS_MANAGER,
 		PT_FONT_MANAGER,
 		PT_GRAPHICS_MANAGER,
 		PT_GRAPHICS_DEVICE_MANAGER,
@@ -57,7 +59,7 @@ namespace AE
 
 		AE::Plugin*		GetParent() { return mParent; }
 		AE::PluginType	GetType() { return mPluginType; }
-		virtual bool	Install(AE::uint options) = 0;
+		virtual bool	Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
 		bool			IsAttached() { return mIsAttached; }
 		bool			IsInstalled() { return mIsInstalled; }
 		void			SetParent(AE::Plugin *parent) { mParent = parent; }

@@ -13,7 +13,7 @@ namespace AE
 								AudioManagerSfml() : AudioManager() {}
 			virtual				~AudioManagerSfml() {}
 
-			virtual bool		Install(AE::uint options) = 0;
+			virtual bool		Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
 			virtual bool		Uninstall() = 0;
 
 

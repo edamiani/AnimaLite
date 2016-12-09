@@ -1,6 +1,11 @@
 #include "GameController.h"
 
-void GameController::Step(AE::Real deltaTime)
+void GameController::OnKeyUp(const AE::OS::EventKeyboard &event)
+{
+	mIsRunning = false;
+}
+
+bool GameController::Step(AE::Real deltaTime)
 {
 	// Listen to keyboard
 	mKeyboard->Poll();

@@ -18,7 +18,7 @@ namespace AE
 			
 		}
 
-		bool EventManagerSdl::Install(AE::uint options)
+		bool EventManagerSdl::Install(AE::uint options, PluginOptions *pluginDesc = nullptr)
 		{
 			if(!SDL_WasInit(SDL_INIT_EVENTS))
 			{

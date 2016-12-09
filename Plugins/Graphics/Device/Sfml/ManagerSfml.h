@@ -27,7 +27,7 @@ namespace AE
 				ManagerSfml();
 				virtual ~ManagerSfml();
 
-				bool			Install(AE::uint options);
+				bool			Install(AE::uint options, PluginOptions *pluginDesc = nullptr);
 				bool			Uninstall();
 
 				AE::Graphics::Device::Driver*

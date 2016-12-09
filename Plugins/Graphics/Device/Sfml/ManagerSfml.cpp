@@ -31,7 +31,7 @@ namespace AE
 				delete mDeviceDrivers[0];
 			}
 
-			bool ManagerSfml::Install(AE::uint options)
+			bool ManagerSfml::Install(AE::uint options, PluginOptions *pluginDesc)
 			{
 				if(mParent != 0)
 				{

@@ -24,7 +24,7 @@ namespace AE
 			}*/
 		}
 
-		bool WindowManagerSdl::Install(AE::uint options)
+		bool WindowManagerSdl::Install(AE::uint options, PluginOptions *pluginDesc = nullptr)
 		{
 			if(mParent != 0)
 			{

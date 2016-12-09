@@ -15,11 +15,25 @@ namespace AE
 		class MouseSdl : public AE::Input::Mouse
 		{
 		public:
-								MouseSdl() {  }
-								~MouseSdl() {  }
+			MouseSdl() {  }
+			~MouseSdl() {  }
 
-			AE::Math::Vector2	GetAbsolutePosition() { SDL_GetMouseState(&mPosition.x, &mPosition.y); return mPosition; }
-			AE::Math::Vector2	GetRelativePosition() { SDL_GetRelativeMouseState(&mPosition.x, &mPosition.y); return mPosition; }
+			AE::Math::Vector2 GetAbsolutePosition() 
+			{
+				int x, y;
+				SDL_GetMouseState(&x, &y);
+
+				return AE::Math::Vector2(x, y); 
+			}
+
+			AE::Math::Vector2 GetRelativePosition() 
+			{
+				int x, y;
+				SDL_GetRelativeMouseState(&x, &y);
+
+				return AE::Math::Vector2(x, y);
+			}
+
 			bool				IsButtonDown(AE::OS::MouseButtonType button) { return mIsButtonDown[static_cast<int>(button)]; }
 			bool				Poll() { return true; }
 

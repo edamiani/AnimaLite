@@ -19,7 +19,7 @@ namespace AE
 
 			std::unique_ptr<AE::Graphics::Image> 
 						CreateImage(const std::string &filename);
-			bool		Install(AE::uint options);
+			bool		Install(AE::uint options, PluginOptions *pluginDesc = nullptr);
 			bool		Uninstall();
 		};
 	}

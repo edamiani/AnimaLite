@@ -5,6 +5,7 @@
 #include "Anima/OS/EventManager.h"
 #include "Anima/OS/MouseListener.h"
 
+#include "InputManagerSdlDesc.h"
 #include "KeyboardSdl.h"
 #include "MouseSdl.h"
 
@@ -17,19 +18,18 @@ namespace AE
 		class ManagerSdl : public AE::Input::Manager, public AE::OS::MouseListener
 		{
 		public:
-			ManagerSdl(AE::OS::EventManager &eventManager) 
-			{ 
-				eventManager.RegisterMouseListener("InputManagerSdl", this);
-			}
+			ManagerSdl() {}
 
 			virtual ~ManagerSdl() {}
 
-			bool Install(AE::uint options)
+			bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr)
 			{
 				if (!SDL_WasInit(SDL_INIT_GAMECONTROLLER))
 				{
 					SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 				}
+
+				static_cast<AE::Input::InputManagerSdlDesc *>(pluginDesc)->eventManager->RegisterMouseListener("InputManagerSdl", this);
 
 				return true;
 			}

@@ -3,6 +3,7 @@
 
 #include "GameModel.h"
 
+#include "Anima/Plugin.h"
 #include "Anima/PluginManager.h"
 #include "Anima/Types.h"
 #include "Anima/Input/Keyboard.h"
@@ -22,12 +23,14 @@ public:
 
 	~GameController() {}
 
-	void OnKeyUp() {}
-	void Step(AE::Real deltaTime);
+	bool IsRunning() { return mIsRunning; }
+	void OnKeyUp(const AE::OS::EventKeyboard &event);
+	bool Step(AE::Real deltaTime);
 
 private:
-	AE::Input::Manager	*mInputManager;
-	AE::Input::Keyboard	*mKeyboard;
+	AE::Input::Manager	*mInputManager = nullptr;
+	bool				mIsRunning = true;
+	AE::Input::Keyboard	*mKeyboard = nullptr;
 	GameModel			&mModel;
 	AE::PluginManager	&mPluginManager;
 };

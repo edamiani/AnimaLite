@@ -11,7 +11,7 @@ namespace AE
 			return std::make_unique<AE::Graphics::ImageSfml>(filename);
 		}
 
-		bool ImageManagerSfml::Install(AE::uint options)
+		bool ImageManagerSfml::Install(AE::uint options, PluginOptions *pluginDesc)
 		{
 			return true;
 		}

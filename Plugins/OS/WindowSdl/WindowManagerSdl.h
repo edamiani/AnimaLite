@@ -26,7 +26,7 @@ namespace AE
 			WindowManagerSdl();
 			~WindowManagerSdl();
 
-			bool Install(AE::uint options);
+			bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr);
 			bool Uninstall();
 
 			AE::OS::WindowPtr CreateWindow(AE::OS::WindowDesc &windowDesc);

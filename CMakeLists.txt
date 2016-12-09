@@ -44,6 +44,7 @@ add_library(AeCore STATIC
 	Anima/PluginGroup.cpp
 	Anima/PluginManager.h
 	Anima/PluginManager.cpp
+	Anima/PluginOptions.h
 	Anima/PluginRoot.h
 	Anima/PluginRoot.cpp)
 	
@@ -57,6 +58,7 @@ add_library(AeInputCore STATIC
 target_link_libraries(AeInputCore AeCore)
 
 add_library(AeInputSdl STATIC
+	Plugins/Input/Sdl/InputManagerSdlDesc.h
 	Plugins/Input/Sdl/JoystickSdl.h
 	Plugins/Input/Sdl/KeyboardSdl.h
 	Plugins/Input/Sdl/KeyInfoSdl.h

@@ -1,7 +1,7 @@
 #ifndef __AE_INPUT_KEY_INFO__
 #define __AE_INPUT_KEY_INFO__
 
-#include "Anima/Input/Enums.h"
+#include "Anima/Input/Keyboard.h"
 
 namespace AE
 {

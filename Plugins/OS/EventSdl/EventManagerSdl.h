@@ -18,7 +18,7 @@ namespace AE
 			EventManagerSdl();
 			virtual ~EventManagerSdl();
 
-			bool Install(AE::uint options);
+			bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr);
 			bool Uninstall();
 		};
 	}
