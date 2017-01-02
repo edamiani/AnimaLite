@@ -5,6 +5,8 @@
 
 #include "anax/anax.hpp"
 
+#include <memory>
+
 namespace AE
 {
 	namespace Ecs
@@ -12,11 +14,13 @@ namespace AE
 		class EcsManagerAnax : public AE::Ecs::EcsManager
 		{
 		public:
-			EcsManagerAnax() {}
+			EcsManagerAnax() { mWorld = new anax::World(); }
 			virtual ~EcsManagerAnax() {}
 
+			Entity CreateEntity();
+
 		private:
-			anax::World world;
+			anax::World *mWorld;
 		};
 	}
 }

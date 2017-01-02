@@ -3,6 +3,8 @@
 
 #include "Anima/Ecs/Entity.h"
 
+#include "anax/anax.hpp"
+
 namespace AE
 {
 	namespace Ecs
@@ -10,8 +12,11 @@ namespace AE
 		class EntityAnax : public AE::Ecs::Entity
 		{
 		public:
-					EntityAnax() {  }
-			virtual	~EntityAnax() {  }
+			EntityAnax(anax::Entity &entity) : mEntity(entity) { mEntity.activate(); }
+			virtual	~EntityAnax() { mEntity.kill(); }
+
+		private:
+			anax::Entity &mEntity;
 		};
 	}
 }

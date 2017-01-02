@@ -89,6 +89,7 @@ target_link_libraries(AeEcsCore AeCore)
 add_library(AeEcsAnax STATIC
 	Plugins/Ecs/Anax/ComponentAnax.h
 	Plugins/Ecs/Anax/EcsManagerAnax.h
+	Plugins/Ecs/Anax/EcsManagerAnax.cpp
 	Plugins/Ecs/Anax/EntityAnax.h)
 target_link_libraries(AeEcsAnax AeEcsCore anax)
 	

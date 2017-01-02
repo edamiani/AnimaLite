@@ -3,6 +3,8 @@
 
 #include "Anima/Plugin.h"
 
+#include "Anima/Ecs/Entity.h"
+
 namespace AE
 {
 	namespace Ecs
@@ -14,6 +16,9 @@ namespace AE
 		public:
 			EcsManager() : AE::Plugin(AE::PT_ECS_MANAGER) {}
 			virtual ~EcsManager() {}
+
+			virtual Entity CreateEntity() = 0;
+			virtual void RegisterComponent() = 0;
 		};
 	}
 }
