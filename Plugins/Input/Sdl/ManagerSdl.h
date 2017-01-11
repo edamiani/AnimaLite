@@ -31,6 +31,8 @@ namespace AE
 
 				static_cast<AE::Input::InputManagerSdlDesc *>(pluginDesc)->eventManager->RegisterMouseListener("InputManagerSdl", this);
 
+				mIsInstalled = true;
+
 				return true;
 			}
 

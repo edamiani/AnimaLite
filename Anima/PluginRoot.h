@@ -12,6 +12,7 @@ namespace AE
 	class PluginRoot : public AE::PluginGroup
 	{
 	public:
+		PluginRoot();
 		~PluginRoot();
 
 		AE::Plugin* Attach(AE::Plugin *pluginToAttach);
@@ -21,9 +22,9 @@ namespace AE
 		friend class PluginManager;
 
 	protected:
-		PluginRoot();
+		
 
-		bool Install(AE::uint options) { return true; }
+		bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr) { return true; }
 		bool Uninstall() { return true; }
 	};
 }

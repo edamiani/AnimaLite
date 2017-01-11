@@ -9,7 +9,7 @@ namespace AE
 {
 	PluginManager::PluginManager()
 	{
-		mRoot = new AE::PluginGroup(AE::PT_ROOT);
+		mRoot = new AE::PluginRoot();
 	}
 
 	PluginManager::~PluginManager()

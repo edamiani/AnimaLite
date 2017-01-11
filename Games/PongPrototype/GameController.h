@@ -8,6 +8,7 @@
 #include "Anima/Types.h"
 #include "Anima/Input/Keyboard.h"
 #include "Anima/Input/Manager.h"
+#include "Anima/OS/EventManager.h"
 #include "Anima/OS/KeyListener.h"
 #include "Anima/OS/MouseListener.h"
 #include "Anima/OS/WindowListener.h"
@@ -15,8 +16,9 @@
 class GameController : public AE::OS::KeyListener, public AE::OS::MouseListener, public AE::OS::WindowListener
 {
 public:
-	GameController(AE::PluginManager &pluginManager, GameModel &model) : mPluginManager(pluginManager), mModel(model) 
+	GameController(AE::PluginManager &pluginManager, GameModel *model) : mPluginManager(pluginManager), mModel(model) 
 	{
+		mEventManager = mPluginManager.GetInstalledPluginByType<AE::OS::EventManager>(AE::PT_OS_EVENT_MANAGER);
 		mInputManager = mPluginManager.GetInstalledPluginByType<AE::Input::Manager>(AE::PT_INPUT_MANAGER);
 		mKeyboard = mInputManager->GetKeyboard();
 	}
@@ -28,10 +30,11 @@ public:
 	bool Step(AE::Real deltaTime);
 
 private:
+	AE::OS::EventManager *mEventManager = nullptr;
 	AE::Input::Manager	*mInputManager = nullptr;
 	bool				mIsRunning = true;
 	AE::Input::Keyboard	*mKeyboard = nullptr;
-	GameModel			&mModel;
+	GameModel			*mModel;
 	AE::PluginManager	&mPluginManager;
 };
 

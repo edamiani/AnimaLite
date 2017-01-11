@@ -53,8 +53,8 @@ int main(int argc, char* args[])
 	auto *deviceContext = deviceDriver->CreateDeviceContext(window);
 
 	auto model = std::make_unique<GameModel>();
-	auto view = std::make_unique<GameView>(model);
-	auto controller = std::make_unique<GameController>(pluginManager, model);
+	auto view = std::make_unique<GameView>(model.get());
+	auto controller = std::make_unique<GameController>(pluginManager, model.get());
 
 	eventManager->RegisterWindowListener("WindowListener", controller.get());
 	eventManager->RegisterKeyListener("KeyListener", controller.get());
@@ -73,4 +73,6 @@ int main(int argc, char* args[])
 		model->Step(deltaTime);
 		view->RenderFrame(deltaTime);
 	}
+
+	return 0;
 }

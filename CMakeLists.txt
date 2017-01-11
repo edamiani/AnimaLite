@@ -62,6 +62,7 @@ add_library(AeInputSdl STATIC
 	Plugins/Input/Sdl/JoystickSdl.h
 	Plugins/Input/Sdl/KeyboardSdl.h
 	Plugins/Input/Sdl/KeyInfoSdl.h
+	Plugins/Input/Sdl/KeyInfoSdl.cpp
 	Plugins/Input/Sdl/ManagerSdl.h
 	Plugins/Input/Sdl/MouseSdl.h)
 target_link_libraries(AeInputSdl AeInputCore)
@@ -245,6 +246,6 @@ add_executable(GamePongPrototype
 	Games/PongPrototype/GameModel.cpp
 	Games/PongPrototype/GameView.h
 	Games/PongPrototype/GameView.cpp)
-target_link_libraries(GamePongPrototype AeOsEventSdl AeOsWindowSdl SDL2main)
+target_link_libraries(GamePongPrototype AeOsEventSdl AeOsWindowSdl AeGraphicsDeviceSfml AeGraphicsImageSfml SDL2main)
 
 #install(TARGETS SDL2 RUNTIME DESTINATION bin)

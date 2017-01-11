@@ -18,7 +18,7 @@ namespace AE
 			
 		}
 
-		bool EventManagerSdl::Install(AE::uint options, PluginOptions *pluginDesc = nullptr)
+		bool EventManagerSdl::Install(AE::uint options, PluginOptions *pluginDesc)
 		{
 			if(!SDL_WasInit(SDL_INIT_EVENTS))
 			{
@@ -26,6 +26,8 @@ namespace AE
 			}
 
 			mEventQueue = new AE::OS::EventQueueSdl();
+
+			mIsInstalled = true;
 
 			return true;
 		}

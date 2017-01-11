@@ -33,6 +33,8 @@ void GameModel::MovePlayer(bool isLeft)
 	// Move player according to speed
 	// Check for collision
 	// Change player's position if needed
+
+	std::cout << isLeft << std::endl;
 }
 
 void GameModel::MoveOpponent(AE::Real deltaTime) 

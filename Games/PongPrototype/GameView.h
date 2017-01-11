@@ -9,14 +9,14 @@
 class GameView
 {
 public:
-	GameView(GameModel &model) : mModel(model) {}
+	GameView(GameModel *model) : mModel(model) {}
 	~GameView() {}
 
 	void RenderFrame(AE::Real deltaTime);
 
 private:
 	AE::Graphics::Device::Texture	mBall;
-	GameModel						&mModel;
+	GameModel						*mModel;
 	AE::Graphics::Device::Texture	mOpponent;
 	AE::Graphics::Device::Texture	mPlayer;
 };

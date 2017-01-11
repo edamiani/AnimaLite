@@ -1,5 +1,5 @@
-#ifndef __AE_INPUT_JOYSTICK__
-#define __AE_INPUT_JOYSTICK__
+#ifndef __AE_INPUT_JOYSTICK_SDL__
+#define __AE_INPUT_JOYSTICK_SDL__
 
 #include "Device.h"
 
