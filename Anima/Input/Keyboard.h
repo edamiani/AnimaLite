@@ -14,8 +14,8 @@ namespace AE
 										Keyboard() {  }
 			virtual						~Keyboard() {  }
 
-			virtual AE::Input::KeyCode	getKeyCode(int keyCode) = 0;
-			virtual int					getKeyCode(AE::Input::KeyCode keyCode) = 0;
+			virtual AE::Input::KeyCode	GetKeyCode(int keyCode) = 0;
+			virtual int					GetKeyCode(AE::Input::KeyCode keyCode) = 0;
 			virtual bool				IsKeyDown(AE::Input::KeyCode code) = 0;
 		};
 	}

@@ -4,6 +4,8 @@
 #include "Anima/Input/Keyboard.h"
 #include "KeyInfoSdl.h"
 
+#include "Plugins/Input/Sdl/KeyInfoSdl.h"
+
 #include "Dependencies/SDL2-2.0.4/include/SDL.h"
 
 #include <map>
@@ -17,6 +19,8 @@ namespace AE
 		public:
 			KeyboardSdl() 
 			{
+				AE::Input::KeyInfoSdl::Initialize();
+
 				/*mKeyCodesSdl[AE::Input::KC_BACKSPACE] = SDLK_BACKSPACE;
 				mKeyCodesSdl[AE::Input::KC_DOWN_ARROW] = SDLK_DOWN;
 				mKeyCodesSdl[AE::Input::KC_ENTER] = SDLK_RETURN;
@@ -146,8 +150,8 @@ namespace AE
 
 			virtual		~KeyboardSdl() {  }
 
-			virtual AE::Input::KeyCode getKeyCode(int keyCode) { return AE::Input::KeyInfoSdl::mKeyCodes[keyCode]; }
-			virtual int getKeyCode(AE::Input::KeyCode keyCode) { return AE::Input::KeyInfoSdl::mKeyCodesSdl[keyCode]; }
+			virtual AE::Input::KeyCode GetKeyCode(int keyCode) { return AE::Input::KeyInfoSdl::mKeyCodes[keyCode]; }
+			virtual int GetKeyCode(AE::Input::KeyCode keyCode) { return AE::Input::KeyInfoSdl::mKeyCodesSdl[keyCode]; }
 
 			bool		IsKeyDown(AE::Input::KeyCode code) 
 			{ 

@@ -65,7 +65,7 @@ add_library(AeInputSdl STATIC
 	Plugins/Input/Sdl/KeyInfoSdl.cpp
 	Plugins/Input/Sdl/ManagerSdl.h
 	Plugins/Input/Sdl/MouseSdl.h)
-target_link_libraries(AeInputSdl AeInputCore)
+#target_link_libraries(AeInputSdl AeInputCore)
 
 add_library(AeOsTimerCore STATIC
 	Anima/OS/Timer.h)
@@ -188,7 +188,7 @@ add_library(AeOsEventSdl STATIC
 	Plugins/OS/EventSdl/EventManagerSdl.cpp
 	Plugins/OS/EventSdl/EventQueueSdl.h
 	Plugins/OS/EventSdl/EventQueueSdl.cpp)
-target_link_libraries(AeOsEventSdl AeOsEventCore "${SDL_LIB}")
+target_link_libraries(AeOsEventSdl AeOsEventCore AeInputSdl "${SDL_LIB}")
 	
 add_library(AeOsWindowSdl STATIC
 	Plugins/OS/WindowSdl/WindowSdl.h 

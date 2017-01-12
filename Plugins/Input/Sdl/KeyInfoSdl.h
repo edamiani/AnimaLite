@@ -15,6 +15,8 @@ namespace AE
 		public:
 			static std::map<int, AE::Input::KeyCode> mKeyCodes;
 			static std::map<AE::Input::KeyCode, int> mKeyCodesSdl;
+
+			static void Initialize();
 		};
 	}
 }

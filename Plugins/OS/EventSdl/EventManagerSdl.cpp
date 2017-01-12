@@ -2,6 +2,8 @@
 
 #include "Anima/Input/KeyInfo.h"
 
+#include "Plugins/Input/Sdl/KeyInfoSdl.h"
+
 #include "Dependencies/SDL2-2.0.4/include/SDL.h"
 
 namespace AE
@@ -10,7 +12,7 @@ namespace AE
 	{
 		EventManagerSdl::EventManagerSdl()
 		{
-			
+			AE::Input::KeyInfoSdl::Initialize();
 		}
 
 		EventManagerSdl::~EventManagerSdl()

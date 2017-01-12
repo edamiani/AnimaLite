@@ -1,11 +1,12 @@
 //#include "../include/AnimaOSProcessManagerWin32.h"
 //#include "../include/AnimaOSProcessWin32.h"
+#include "Plugins/Input/Sdl/KeyInfoSdl.h"
 #include "Plugins/OS/EventSdl/EventQueueSdl.h"
 //#include "WindowSdl.h"
 //#include "WindowManagerSdl.h"
 
 //#include "AnimaGraphicsManager.h"
-#include "Anima/Input/KeyInfo.h"
+//#include "Anima/Input/KeyInfo.h"
 #include "Anima/OS/Event.h"
 
 #include <cassert>
@@ -103,7 +104,7 @@ namespace AE
 			{
 				for(auto &listener : mKeyListeners)
 				{
-					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_DOWN, window, AE::Input::KeyInfo(AE::Input::KC_0));
+					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_DOWN, window, AE::Input::KeyInfoSdl::mKeyCodes[event->key.keysym.sym]);
 					listener.second->OnKeyDown(keyEvent);
 				}
 			}
@@ -111,7 +112,7 @@ namespace AE
 			{
 				for(auto &listener : mKeyListeners)
 				{
-					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_UP, window, AE::Input::KeyInfo(AE::Input::KC_0));
+					auto keyEvent = AE::OS::EventKeyboard(AE::OS::EST_KEY_UP, window, AE::Input::KeyInfoSdl::mKeyCodes[event->key.keysym.sym]);
 					listener.second->OnKeyUp(keyEvent);
 				}
 			}
