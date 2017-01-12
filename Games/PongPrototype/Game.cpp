@@ -53,7 +53,7 @@ int main(int argc, char* args[])
 	auto *deviceContext = deviceDriver->CreateDeviceContext(window);
 
 	auto model = std::make_unique<GameModel>();
-	auto view = std::make_unique<GameView>(model.get());
+	auto view = std::make_unique<GameView>(deviceContext, model.get());
 	auto controller = std::make_unique<GameController>(pluginManager, model.get());
 
 	eventManager->RegisterWindowListener("WindowListener", controller.get());

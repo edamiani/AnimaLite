@@ -1,5 +1,19 @@
 #include "GameModel.h"
 
+GameModel::GameModel()
+{
+	mPlayer = new Entity(AE::Math::Vector2(20, 160), AE::Math::Vector2(30, 160), AE::Graphics::Color(255, 128, 0, 255));
+	mOpponent = new Entity(AE::Math::Vector2(590, 160), AE::Math::Vector2(30, 160), AE::Graphics::Color(0, 160, 255, 255));
+	mBall = new Entity(AE::Math::Vector2(310, 230), AE::Math::Vector2(20, 20), AE::Graphics::Color(255, 0, 128, 255));
+}
+
+GameModel::~GameModel()
+{
+	delete mPlayer;
+	delete mOpponent;
+	delete mBall;
+}
+
 void GameModel::Setup()
 {
 	// Create scene

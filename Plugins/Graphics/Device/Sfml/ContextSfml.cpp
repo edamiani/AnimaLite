@@ -79,6 +79,23 @@ namespace AE
 				//SDL_RenderDrawLine(mRenderer, start.x(), start.y(), end.x(), end.y());
 			}
 
+			void ContextSfml::DrawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Color &color)
+			{
+				sf::Vertex quadVertices[4];
+				sf::Color sfColor = sf::Color(color.R, color.G, color.B, color.A);
+
+				quadVertices[0].position = sf::Vector2f(topLeft.x(), bottomRight.y());
+				quadVertices[0].color = sfColor;
+				quadVertices[1].position = sf::Vector2f(bottomRight.x(), bottomRight.y());
+				quadVertices[1].color = sfColor;
+				quadVertices[2].position = sf::Vector2f(bottomRight.x(), topLeft.y());
+				quadVertices[2].color = sfColor;
+				quadVertices[3].position = sf::Vector2f(topLeft.x(), topLeft.y());
+				quadVertices[3].color = sfColor;
+
+				mInnerWindow.draw(quadVertices, 4, sf::Quads);
+			}
+
 			void ContextSfml::DrawQuad(const AE::Math::Vector2 &topLeft, const AE::Math::Vector2 &bottomRight, AE::Graphics::Device::Texture &texture)
 			{
 				sf::Vertex quadVertices[4];
