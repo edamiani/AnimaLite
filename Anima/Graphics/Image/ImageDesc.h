@@ -16,10 +16,10 @@ namespace AE
 		{
 			AE::Graphics::ColorBufferDesc	colorBufferDesc;
 			std::string						file;
-			AE::Graphics::ImageType			imageType;
+			AE::Graphics::ImageFormat		imageType;
 
 			ImageDesc() :
-				imageType(AE::Graphics::IT_UNKNOWN) {}
+				imageType(AE::Graphics::IF_UNKNOWN) {}
 		};
 	}
 }

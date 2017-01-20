@@ -34,6 +34,13 @@ namespace AE
 			{
 
 			}
+
+			AE::Math::Vector2 TextureSfml::GetDimensions()
+			{
+				sf::Vector2u size = mSfmlTexture.getSize();
+
+				return AE::Math::Vector2(size.x, size.y);
+			}
 		}
 	}
 }

@@ -1,6 +1,12 @@
 cmake_minimum_required (VERSION 3.0)
 project (AnimaLite)
 
+set(wxWidgets_CONFIGURATION mswu)
+set(wxWidgets_ROOT_DIR ${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets)
+set(wxWidgets_LIB_DIR ${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets/lib/vc140_x64_dll)
+find_package(wxWidgets COMPONENTS core base REQUIRED)
+#include(${wxWidgets_USE_FILE})
+
 option(Anima_BuildSharedLibs "Build DLLs?")
 option(Anima_Temp "Build DLLs?")
 
@@ -9,6 +15,8 @@ option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 
 #add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/anax")
+add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/bullet3")
+add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/Box2D/Box2D")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SDL2-2.0.4")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/SFML")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/mathfu")
@@ -18,6 +26,8 @@ include_directories("${PROJECT_SOURCE_DIR}")
 
 #include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/anax/include")
+include_directories("${PROJECT_SOURCE_DIR}/Dependencies/bullet3/src")
+include_directories("${PROJECT_SOURCE_DIR}/Dependencies/Box2D/Box2D")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/SFML/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/dependencies/vectorial/include")
@@ -32,8 +42,8 @@ else()
 endif()
 
 if(AnimaMath_Mathfu)
+	file(WRITE Anima/Math/Matrix3.h "#ifndef __AE_MATH_MATRIX3__\n#define __AE_MATH_MATRIX3__\n\n#include \"Plugins/Math/MathMathfu/Matrix3.h\"\n\n#endif")
 	file(WRITE Anima/Math/Vector2.h "#ifndef __AE_MATH_VECTOR2__\n#define __AE_MATH_VECTOR2__\n\n#include \"Plugins/Math/MathMathfu/Vector2.h\"\n\n#endif")
-	
 	file(WRITE Anima/Math/Vector3.h "#ifndef __AE_MATH_VECTOR3__\n#define __AE_MATH_VECTOR3__\n\n#include \"Plugins/Math/MathMathfu/Vector3.h\"\n\n#endif")
 endif()
 
@@ -133,6 +143,7 @@ add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/Pipeline.h
 	Anima/Graphics/Device/Shader.h
 	Anima/Graphics/Device/Texture.h
+	Anima/Graphics/Device/Transform2.h
 	Anima/Graphics/Device/VertexBuffer.h
 	Anima/Graphics/Device/VertexShader.h)
 target_link_libraries(AeGraphicsDeviceCore AeCore)
@@ -179,7 +190,8 @@ add_library(AeGraphicsDeviceSfml STATIC
 	Plugins/Graphics/Device/Sfml/ShaderSfml.h
 	Plugins/Graphics/Device/Sfml/ShaderSfml.cpp
 	Plugins/Graphics/Device/Sfml/TextureSfml.h
-	Plugins/Graphics/Device/Sfml/TextureSfml.cpp)
+	Plugins/Graphics/Device/Sfml/TextureSfml.cpp
+	Plugins/Graphics/Device/Sfml/Transform2Sfml.h)
 target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore sfml-graphics)
 target_compile_definitions(AeGraphicsDeviceSfml PRIVATE SFML_STATIC)
 
@@ -236,6 +248,11 @@ add_executable(TestGraphicsDevice
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
 target_link_libraries(TestGraphicsDevice AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl SDL2main)
+
+add_executable(TestPhysicsBox2D 
+	Tests/Physics/Box2D/TestPhysicsBox2D.h
+	Tests/Physics/Box2D/TestPhysicsBox2D.cpp)
+target_link_libraries(TestPhysicsBox2D AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl SDL2main Box2D)
 
 add_executable(GamePongPrototype
 	Games/PongPrototype/Game.h

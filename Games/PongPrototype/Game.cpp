@@ -52,7 +52,7 @@ int main(int argc, char* args[])
 
 	auto *deviceContext = deviceDriver->CreateDeviceContext(window);
 
-	auto model = std::make_unique<GameModel>();
+	auto model = std::make_unique<GameModel>(window->GetDimensions());
 	auto view = std::make_unique<GameView>(deviceContext, model.get());
 	auto controller = std::make_unique<GameController>(pluginManager, model.get());
 
@@ -67,7 +67,8 @@ int main(int argc, char* args[])
 
 	while(controller->IsRunning())
 	{
-		AE::uint32 deltaTime = timer->GetIntervalFromLastMark();
+		timer->Mark();
+		AE::Real deltaTime = timer->GetIntervalFromLastMark() / 1000.f;
 
 		controller->Step(deltaTime);
 		model->Step(deltaTime);

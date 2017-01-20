@@ -13,19 +13,23 @@ public:
 	{ }
 
 	AE::Graphics::Color GetColor() { return mColor; }
-	AE::Math::Vector2 GetDimensions() { return mDimensions; }
-	AE::Math::Vector2 GetPosition() { return mPosition; }
+	AE::Math::Vector2	GetDimensions() { return mDimensions; }
+	AE::Math::Vector2	GetPosition() { return mPosition; }
+	AE::Math::Vector2	GetVelocity() { return mVelocity; }
+	void				SetPosition(const AE::Math::Vector2 &position) { mPosition = position; }
+	void				SetVelocity(const AE::Math::Vector2 &velocity) { mVelocity = velocity; }
 	
 protected:
 	AE::Graphics::Color mColor;
-	AE::Math::Vector2 mDimensions;
-	AE::Math::Vector2 mPosition;
+	AE::Math::Vector2	mDimensions;
+	AE::Math::Vector2	mPosition;
+	AE::Math::Vector2	mVelocity;
 };
 
 class GameModel
 {
 public:
-	GameModel();
+	GameModel(AE::Math::Vector2 sceneDimensions);
 	~GameModel();
 
 	void Setup();
@@ -51,6 +55,9 @@ private:
 	// Right wall
 	// Player goal
 	// Opponent goal
+
+
+	AE::Math::Vector2 mSceneDimensions;
 };
 
 #endif

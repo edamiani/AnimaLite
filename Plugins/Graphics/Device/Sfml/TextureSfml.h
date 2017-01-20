@@ -23,6 +23,8 @@ namespace AE
 				TextureSfml(const AE::Graphics::Image &image);
 				~TextureSfml();
 
+				AE::Math::Vector2 GetDimensions();
+
 				sf::Texture&		GetSfmlTexture() { return mSfmlTexture; }
 				const sf::Texture&	GetSfmlTexture() const { return mSfmlTexture; }
 				sf::Texture*		GetSfmlTexturePtr() { return &mSfmlTexture; }

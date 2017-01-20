@@ -14,11 +14,11 @@ bool GameController::Step(AE::Real deltaTime)
 
 	// Listen to keyboard
 	mKeyboard->Poll();
-	if(mKeyboard->IsKeyDown(AE::Input::KC_LEFT_ARROW))
+	if(mKeyboard->IsKeyDown(AE::Input::KC_UP_ARROW))
 	{
 		mModel->MovePlayer(true);
 	}
-	else if(mKeyboard->IsKeyDown(AE::Input::KC_RIGHT_ARROW))
+	else if(mKeyboard->IsKeyDown(AE::Input::KC_DOWN_ARROW))
 	{
 		mModel->MovePlayer(false);
 	}

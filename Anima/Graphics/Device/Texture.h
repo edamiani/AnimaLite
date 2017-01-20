@@ -16,6 +16,8 @@ namespace AE
 			public:
 				Texture() {}
 				virtual ~Texture() {}
+
+				virtual AE::Math::Vector2 GetDimensions() = 0;
 			};
 
 			typedef std::unique_ptr<AE::Graphics::Device::Texture> TexturePtr;

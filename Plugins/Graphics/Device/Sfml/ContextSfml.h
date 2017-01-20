@@ -26,7 +26,7 @@ namespace AE
 
 				bool BeginRendering();
 				bool BeginRendering(const AE::Graphics::Color &clearColor);
-				void Draw(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position);
+				void DrawTexture(AE::Graphics::Device::TexturePtr const &texture, const AE::Math::Vector2 &position);
 				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer) {}
 				void Draw3dObject(AE::Graphics::RenderOperationType operationType, AE::Graphics::Device::VertexBuffer *vertexBuffer, AE::Graphics::Device::IndexBuffer *indexBuffer) {}
 				void DrawLine(AE::Math::Vector2 &start, AE::Math::Vector2 &end, const AE::Graphics::Color &color);
@@ -39,7 +39,7 @@ namespace AE
 
 			protected:
 				sf::Context mSfmlContext;
-				sf::RenderWindow mInnerWindow;
+				sf::RenderWindow mSfmlWindow;
 				sf::Vertex mQuadVertices[4];
 			};
 		}

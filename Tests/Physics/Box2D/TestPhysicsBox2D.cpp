@@ -1,4 +1,4 @@
-#include "TestGraphicsDeviceAllegro.h"
+#include "TestPhysicsBox2D.h"
 
 #include "Plugins/Graphics/Device/Sfml/TextureSfml.h"
 #include "Plugins/Graphics/Image/Sfml/ImageSfml.h"
@@ -29,6 +29,13 @@ void TestListener::OnButtonUp(const AE::OS::EventMouse &event)
 void TestListener::OnMouseMove(const AE::OS::EventMouse &event)
 {
 	std::cout << "onMouseMove!" << std::endl;
+}
+
+void TestListener::BeginContact(b2Contact* contact) 
+{ 
+	B2_NOT_USED(contact);
+
+	std::cout << "Contact!" << std::endl;
 }
 
 int main(int argc, char* args[])
@@ -71,11 +78,30 @@ int main(int argc, char* args[])
 	auto image = imageManager->CreateImage("Gandalf.png");
 	auto texture = deviceDriver->CreateTexture(image->GetDimensions(), image->GetData());
 
-	while(eventQueue->PollEvents()) 
+	b2Vec2 gravity;
+	gravity.Set(0.0f, -10.0f);
+	b2World *world = new b2World(gravity);
+	world->SetContactListener(testListener.get());
+
+	AE::Math::Vector2 dimensions = texture->GetDimensions();
+
+	b2Transform transform;
+	transform.Set(b2Vec2(50 + dimensions.x() / 2, 50 + dimensions.y() / 2), 0);
+
+	b2Transform transform2;
+	transform2.Set(b2Vec2(150 + dimensions.x() / 2, 50 + dimensions.y() / 2), 0);
+
+	b2PolygonShape polygon, polygon2;
+	polygon.SetAsBox(dimensions.x() / 2, dimensions.y() / 2);
+	polygon2.SetAsBox(dimensions.x() / 2, dimensions.y() / 2);
+	bool result = b2TestOverlap(&polygon, 0, &polygon2, 0, transform, transform2);
+
+	while(eventQueue->PollEvents())
 	{ 
 		deviceContext->BeginRendering(AE::Graphics::Color(128, 0, 0, 255));
 
 		deviceContext->DrawTexture(texture, AE::Math::Vector2(50, 50));
+		deviceContext->DrawTexture(texture, AE::Math::Vector2(350, 50));
 		//deviceContext->drawQuad(AE::Math::Vector2(50, 50), AE::Math::Vector2(500, 500), texture);
 
 		deviceContext->EndRendering();

@@ -20,7 +20,7 @@ namespace AE
 			void						*mData;
 			AE::Math::Vector2			mDimensions;
 			std::string					mFile;
-			AE::Graphics::ImageType		mImageType;
+			AE::Graphics::ImageFormat	mImageFormat;
 
 		public:
 			Image(const std::string &filename) :

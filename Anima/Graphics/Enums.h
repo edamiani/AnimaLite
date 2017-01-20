@@ -110,14 +110,14 @@ namespace AE
 			GMO_IMAGE_JPG	= 0x1001
 		};
 
-		enum ImageType
+		enum ImageFormat
 		{
-			IT_UNKNOWN	= 0x0000,
-			IT_JPEG		= 0x0001,
-			IT_PNG		= 0x0002,
-			IT_RAW		= 0x0004,
-			IT_TGA		= 0x0008,
-			IT_TIFF		= 0x0010
+			IF_UNKNOWN	= 0x0000,
+			IF_JPEG		= 0x0001,
+			IF_PNG		= 0x0002,
+			IF_RAW		= 0x0004,
+			IF_TGA		= 0x0008,
+			IF_TIFF		= 0x0010
 		};
 
 		enum LockType
