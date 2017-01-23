@@ -43,6 +43,7 @@ endif()
 
 if(AnimaMath_Mathfu)
 	file(WRITE Anima/Math/Matrix3.h "#ifndef __AE_MATH_MATRIX3__\n#define __AE_MATH_MATRIX3__\n\n#include \"Plugins/Math/MathMathfu/Matrix3.h\"\n\n#endif")
+	file(WRITE Anima/Math/Transform2.h "#ifndef __AE_MATH_TRANSFORM2__\n#define __AE_MATH_TRANSFORM2__\n\n#include \"Plugins/Math/MathMathfu/Transform2.h\"\n\n#endif")
 	file(WRITE Anima/Math/Vector2.h "#ifndef __AE_MATH_VECTOR2__\n#define __AE_MATH_VECTOR2__\n\n#include \"Plugins/Math/MathMathfu/Vector2.h\"\n\n#endif")
 	file(WRITE Anima/Math/Vector3.h "#ifndef __AE_MATH_VECTOR3__\n#define __AE_MATH_VECTOR3__\n\n#include \"Plugins/Math/MathMathfu/Vector3.h\"\n\n#endif")
 endif()
@@ -66,6 +67,13 @@ add_library(AeInputCore STATIC
 	Anima/Input/Manager.h
 	Anima/Input/Mouse.h)
 target_link_libraries(AeInputCore AeCore)
+
+add_library(AeMathMathfu STATIC
+	Plugins/Math/MathMathfu/Matrix3.h
+	Plugins/Math/MathMathfu/Transform2.h
+	Plugins/Math/MathMathfu/Vector2.h
+	Plugins/Math/MathMathfu/Vector3.h)
+target_link_libraries(AeMathMathfu AeCore)
 
 add_library(AeInputSdl STATIC
 	Plugins/Input/Sdl/InputManagerSdlDesc.h
@@ -143,7 +151,6 @@ add_library(AeGraphicsDeviceCore STATIC
 	Anima/Graphics/Device/Pipeline.h
 	Anima/Graphics/Device/Shader.h
 	Anima/Graphics/Device/Texture.h
-	Anima/Graphics/Device/Transform2.h
 	Anima/Graphics/Device/VertexBuffer.h
 	Anima/Graphics/Device/VertexShader.h)
 target_link_libraries(AeGraphicsDeviceCore AeCore)
@@ -190,8 +197,7 @@ add_library(AeGraphicsDeviceSfml STATIC
 	Plugins/Graphics/Device/Sfml/ShaderSfml.h
 	Plugins/Graphics/Device/Sfml/ShaderSfml.cpp
 	Plugins/Graphics/Device/Sfml/TextureSfml.h
-	Plugins/Graphics/Device/Sfml/TextureSfml.cpp
-	Plugins/Graphics/Device/Sfml/Transform2Sfml.h)
+	Plugins/Graphics/Device/Sfml/TextureSfml.cpp)
 target_link_libraries(AeGraphicsDeviceSfml AeGraphicsDeviceCore sfml-graphics)
 target_compile_definitions(AeGraphicsDeviceSfml PRIVATE SFML_STATIC)
 
