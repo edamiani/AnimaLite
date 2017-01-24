@@ -14,7 +14,7 @@ namespace AE
 		class Transform2
 		{
 		public:
-			Transform2(const AE::Math::Vector2 &dimensions) { }
+			Transform2() { mTransform = mathfu::Matrix<AE::Real, 3, 3>::Identity(); }
 			virtual ~Transform2() { }
 
 			AE::Math::Matrix3 GetMatrix()
@@ -28,21 +28,21 @@ namespace AE
 
 			virtual Transform2& Rotate(AE::Real angle)
 			{
-				mTransform = mathfu::Matrix<AE::Real, 3, 3>::RotationZ(angle);
+				mTransform = mTransform * mathfu::Matrix<AE::Real, 3, 3>::RotationZ(angle);
 
 				return *this;
 			}
 
 			virtual Transform2& Scale(AE::Math::Vector2 &scale)
 			{
-				mTransform = mathfu::Matrix<AE::Real, 3, 3>::FromScaleVector(mathfu::Vector<float, 2>(scale.x(), scale.y()));
+				mTransform = mTransform * mathfu::Matrix<AE::Real, 3, 3>::FromScaleVector(mathfu::Vector<float, 2>(scale.x(), scale.y()));
 
 				return *this;
 			}
 
 			virtual Transform2& Translate(AE::Math::Vector2 &translate)
 			{
-				mTransform = mathfu::Matrix<AE::Real, 3, 3>::FromTranslationVector(mathfu::Vector<float, 2>(translate.x(), translate.y()));
+				mTransform = mTransform * mathfu::Matrix<AE::Real, 3, 3>::FromTranslationVector(mathfu::Vector<float, 2>(translate.x(), translate.y()));
 
 				return *this;
 			}

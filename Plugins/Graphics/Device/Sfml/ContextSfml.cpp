@@ -58,22 +58,24 @@ namespace AE
 
 				sf::Vertex quadVertices[4];
 
-				sf::Vector2u dimensions = sfmlTexture->getSize();
-				/*quadVertices[0].position = sf::Vector2f(position.x(), position.y());
-				quadVertices[0].texCoords = sf::Vector2f(0, 0);
-				quadVertices[1].position = sf::Vector2f(position.x(), position.y() + dimensions.y);
-				quadVertices[1].texCoords = sf::Vector2f(0, dimensions.y);
-				quadVertices[2].position = sf::Vector2f(position.x() + dimensions.x, position.y());
-				quadVertices[2].texCoords = sf::Vector2f(dimensions.x, 0);
-				quadVertices[3].position = sf::Vector2f(position.x() + dimensions.x, position.y() + dimensions.y);
-				quadVertices[3].texCoords = sf::Vector2f(dimensions.x, dimensions.y);*/
-				quadVertices[0].position = sf::Vector2f(0, 0);
+				sf::Vector2i dimensions = (sf::Vector2i)sfmlTexture->getSize();
+
+				/*quadVertices[0].position = sf::Vector2f(0, 0);
 				quadVertices[0].texCoords = sf::Vector2f(0, 0);
 				quadVertices[1].position = sf::Vector2f(0, dimensions.y);
 				quadVertices[1].texCoords = sf::Vector2f(0, dimensions.y);
 				quadVertices[2].position = sf::Vector2f(dimensions.x, 0);
 				quadVertices[2].texCoords = sf::Vector2f(dimensions.x, 0);
 				quadVertices[3].position = sf::Vector2f(dimensions.x, dimensions.y);
+				quadVertices[3].texCoords = sf::Vector2f(dimensions.x, dimensions.y);*/
+
+				quadVertices[0].position = sf::Vector2f(-dimensions.x / 2.0f, -dimensions.y / 2.0f);
+				quadVertices[0].texCoords = sf::Vector2f(0, 0);
+				quadVertices[1].position = sf::Vector2f(-dimensions.x / 2.0f, dimensions.y / 2.0f);
+				quadVertices[1].texCoords = sf::Vector2f(0, dimensions.y);
+				quadVertices[2].position = sf::Vector2f(dimensions.x / 2.0f, -dimensions.y / 2.0f);
+				quadVertices[2].texCoords = sf::Vector2f(dimensions.x, 0);
+				quadVertices[3].position = sf::Vector2f(dimensions.x / 2.0f, dimensions.y / 2.0f);
 				quadVertices[3].texCoords = sf::Vector2f(dimensions.x, dimensions.y);
 
 				sf::RenderStates renderStates;
@@ -81,9 +83,9 @@ namespace AE
 
 				AE::Math::Matrix3 m = transform.GetMatrix();
 				sf::Transform sfmlTransform(
-					m(0, 0), m(0, 1), m(0, 2),
-					m(1, 0), m(1, 1), m(1, 2),
-					m(2, 0), m(2, 1), m(2, 2)
+					m(0, 0), m(1, 0), m(2, 0),
+					m(0, 1), m(1, 1), m(2, 1),
+					m(0, 2), m(1, 2), m(2, 2)
 				);
 
 				renderStates.transform = sfmlTransform;

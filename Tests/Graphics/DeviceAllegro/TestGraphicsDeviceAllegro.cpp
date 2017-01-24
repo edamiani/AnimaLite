@@ -1,10 +1,11 @@
 #include "TestGraphicsDeviceAllegro.h"
 
-#include "Plugins/Graphics/Device/Sfml/TextureSfml.h"
-#include "Plugins/Graphics/Image/Sfml/ImageSfml.h"
+#include "Anima/Math/Transform2.h"
 
 #include <iostream>
 #include <memory>
+
+using namespace AE::Math;
 
 void TestListener::OnKeyDown(const AE::OS::EventKeyboard &event)
 {
@@ -71,11 +72,42 @@ int main(int argc, char* args[])
 	auto image = imageManager->CreateImage("Gandalf.png");
 	auto texture = deviceDriver->CreateTexture(image->GetDimensions(), image->GetData());
 
+	//Transform2 transform;
+
+	float angle = 0;
+	float scale = 0.9f;
+	float multiplier = -1;
+
+	//transform = transform.Translate(Vector2(-image->GetDimensions().x() / 2.0f, -image->GetDimensions().y() / 2.0f))
+		//.Rotate(0.5f)
+						 //.Translate(Vector2(image->GetDimensions().x() / 2.0f, image->GetDimensions().y() / 2.0f));
+		;
+	//transform = transform.Translate(Vector2(50, 50)).Rotate(0.5f);
+	//transform = transform.Scale(Vector2(0.5f, 0.5f));
+
 	while(eventQueue->PollEvents()) 
 	{ 
 		deviceContext->BeginRendering(AE::Graphics::Color(128, 0, 0, 255));
 
-		deviceContext->DrawTexture(texture, AE::Math::Vector2(50, 50));
+		Transform2 transform;
+		/*transform = transform.Translate(Vector2(image->GetDimensions().x() / 2.0f, image->GetDimensions().y() / 2.0f))
+			.Rotate(angle);*/
+		transform = transform
+			.Translate(Vector2(150, 150))
+			.Rotate(angle)
+			.Translate(Vector2(50, 50))
+			.Scale(Vector2(scale, scale))
+			;
+		//transform = transform.Rotate(angle);
+		deviceContext->DrawTexture(texture, transform);
+		angle += 0.001f;
+		scale += 0.001f * multiplier;
+
+		if(scale < 0.5f || scale > 0.9)
+		{
+			multiplier *= -1;
+		}
+
 		//deviceContext->drawQuad(AE::Math::Vector2(50, 50), AE::Math::Vector2(500, 500), texture);
 
 		deviceContext->EndRendering();
