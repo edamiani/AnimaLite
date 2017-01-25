@@ -101,6 +101,20 @@ add_library(AeAiFsmCore STATIC
 	Anima/AI/FsmState.h)
 target_link_libraries(AeAiFsmCore AeCore)
 
+add_library(AeAnimationCore STATIC
+	Anima/Animation/Animation.h
+	Anima/Animation/AnimationManager.h
+	Anima/Animation/Easing.h
+	Anima/Animation/Range.h)
+target_link_libraries(AeAnimationCore AeCore)
+
+add_library(AeAnimationChoreograph STATIC
+	Plugins/Animation/Choreograph/AnimationChoreograph.h
+	Plugins/Animation/Choreograph/AnimationManagerChoreograph.h
+	Plugins/Animation/Choreograph/EasingChoreograph.h
+	Plugins/Animation/Choreograph/RangeChoreograph.h)
+target_link_libraries(AeAnimationChoreograph AeAnimationCore Choreograph)
+
 add_library(AeEcsCore STATIC
 	Anima/Ecs/Component.h
 	Anima/Ecs/EcsManager.h
