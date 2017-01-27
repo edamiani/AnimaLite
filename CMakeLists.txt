@@ -269,7 +269,7 @@ target_link_libraries(TestEvent AeOsEventSdl AeOsWindowSdl SDL2main)
 add_executable(TestGraphicsDevice 
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
 	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDevice AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl SDL2main)
+target_link_libraries(TestGraphicsDevice AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl Choreograph SDL2main)
 
 add_executable(TestPhysicsBox2D 
 	Tests/Physics/Box2D/TestPhysicsBox2D.h

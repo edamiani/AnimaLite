@@ -48,6 +48,9 @@ int main(int argc, char* args[])
 	auto *imageManager = pluginManager->RegisterPlugin<AE::Graphics::ImageManagerSfml>("ImageManagerSfml");
 	imageManager->Install(AE::NO_OPTIONS);
 
+	auto *animationManager = pluginManager->RegisterPlugin<AE::Animation::AnimationManagerChoreograph>("AnimationManagerChoreograph");
+	animationManager->Install(AE::NO_OPTIONS);
+
 	AE::OS::WindowDesc windowDesc;
 	windowDesc.dimensions = AE::Math::Vector2(640, 480);
 	windowDesc.position = AE::Math::Vector2(50, 50);
@@ -62,8 +65,8 @@ int main(int argc, char* args[])
 	std::unique_ptr<TestListener> testListener = std::make_unique<TestListener>();
 
 	eventManager->RegisterWindowListener("WindowListener", testListener.get());
-	eventManager->RegisterKeyListener("WindowListener", testListener.get());
-	eventManager->RegisterMouseListener("WindowListener", testListener.get());
+	eventManager->RegisterKeyListener("KeyListener", testListener.get());
+	eventManager->RegisterMouseListener("MouseListener", testListener.get());
 
 	window->Show();
 
@@ -72,30 +75,31 @@ int main(int argc, char* args[])
 	auto image = imageManager->CreateImage("Gandalf.png");
 	auto texture = deviceDriver->CreateTexture(image->GetDimensions(), image->GetData());
 
-	//Transform2 transform;
-
 	float angle = 0;
 	float scale = 0.9f;
 	float multiplier = -1;
 
-	//transform = transform.Translate(Vector2(-image->GetDimensions().x() / 2.0f, -image->GetDimensions().y() / 2.0f))
-		//.Rotate(0.5f)
-						 //.Translate(Vector2(image->GetDimensions().x() / 2.0f, image->GetDimensions().y() / 2.0f));
-		;
-	//transform = transform.Translate(Vector2(50, 50)).Rotate(0.5f);
-	//transform = transform.Scale(Vector2(0.5f, 0.5f));
+	AE::Animation::AnimationPtr animation = animationManager->CreateAnimation<AE::int16>(AE::Animation::Range<AE::int16>(1, 3), 2.0);
+
+	std::unique_ptr<AE::OS::TimerSdl> timer(new AE::OS::TimerSdl());
+	timer->Start();
 
 	while(eventQueue->PollEvents()) 
-	{ 
+	{
+		timer->Mark();
+		AE::uint32 deltaTime = timer->GetIntervalFromLastMark();
+
+		animation->Step(deltaTime / 1000.0f);
+
 		deviceContext->BeginRendering(AE::Graphics::Color(128, 0, 0, 255));
 
 		Transform2 transform;
 		/*transform = transform.Translate(Vector2(image->GetDimensions().x() / 2.0f, image->GetDimensions().y() / 2.0f))
 			.Rotate(angle);*/
 		transform = transform
-			.Translate(Vector2(150, 150))
+			//.Translate(Vector2(150, 150))
 			.Rotate(angle)
-			.Translate(Vector2(50, 50))
+			//.Translate(Vector2(50, 50))
 			.Scale(Vector2(scale, scale))
 			;
 		//transform = transform.Rotate(angle);
@@ -108,19 +112,14 @@ int main(int argc, char* args[])
 			multiplier *= -1;
 		}
 
-		//deviceContext->drawQuad(AE::Math::Vector2(50, 50), AE::Math::Vector2(500, 500), texture);
-
 		deviceContext->EndRendering();
 	}
 
-	windowManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
-
-	eventManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
-
-	deviceManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::Graphics::Device::ManagerSfml>("GraphicsSfml");
+	pluginManager->UnregisterPlugin<AE::Graphics::ImageManagerSfml>("ImageManagerSfml");
+	pluginManager->UnregisterPlugin<AE::Animation::AnimationManagerChoreograph>("AnimationManagerChoreograph");
 
 	return 0;
 }

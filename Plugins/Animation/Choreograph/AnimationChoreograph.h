@@ -2,6 +2,7 @@
 #define __AE_ANIMATION_CHOREOGRAPH__
 
 #include "Anima/Types.h"
+#include "Anima/Animation/Animation.h"
 
 #include "Plugins/Animation/Choreograph/RangeChoreograph.h"
 
@@ -12,22 +13,34 @@ namespace AE
 	namespace Animation
 	{
 		template <typename T>
-		class AnimationChoreograph
+		class AnimationChoreograph : public AE::Animation::Animation
 		{
 		public:
-			AnimationChoreograph(const AE::Animation::Range<T> &range, AE::Real duration)
+			AnimationChoreograph(AE::Animation::Range<T> &range, AE::Real duration) 
 			{ 
 				mOutput = new choreograph::Output<T>(range.GetFrom());
-				mMotionOptions = mTimeline.apply(mOutput);
-				mMotionOptions.then<choreograph::RampTo>(range.GetTo(), duration);
+				mTimeline.apply(mOutput)
+					.then<choreograph::RampTo>(range.GetTo(), duration);
+				//mMotionOptions = mTimeline.apply(mOutput);
+				//mMotionOptions.then<choreograph::RampTo>(range.GetTo(), duration);
 			}
 
 			~AnimationChoreograph() { }
 
+			T& GetCurrentValue()
+			{
+				return *(static_cast<T*>(mTimeline.getTarget()));
+			}
+
+			void Step(AE::Real deltaTime)
+			{
+				mTimeline.step(deltaTime);
+			}
+
 		protected:
-			choreograph::MotionOptions<t>  mMotionOptions;
-			choreograph::Output<T> *mOutput;
-			choreograph::Timeline mTimeline;
+			//choreograph::MotionOptions<T>	mMotionOptions;
+			choreograph::Output<T>			*mOutput;
+			choreograph::Timeline			mTimeline;
 		};
 	}
 }

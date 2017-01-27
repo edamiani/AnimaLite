@@ -11,13 +11,15 @@ namespace AE
 {
 	namespace Graphics
 	{
+		typedef std::unique_ptr<AE::Graphics::Image> ImagePtr;
+
 		class ImageManager : public AE::Plugin
 		{
 		public:
 			ImageManager() : Plugin(AE::PT_IMAGE_MANAGER) {}
 			virtual ~ImageManager() {}
 
-			virtual std::unique_ptr<AE::Graphics::Image> CreateImage(const std::string &filename) = 0;
+			virtual ImagePtr	CreateImage(const std::string &filename) = 0;
 			virtual bool		Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
 			virtual bool		Uninstall() = 0;
 		};

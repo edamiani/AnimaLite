@@ -13,11 +13,15 @@ namespace AE
 
 		bool ImageManagerSfml::Install(AE::uint options, PluginOptions *pluginDesc)
 		{
+			mIsInstalled = true;
+
 			return true;
 		}
 
 		bool ImageManagerSfml::Uninstall()
 		{
+			mIsInstalled = false;
+
 			return true;
 		}
 	}

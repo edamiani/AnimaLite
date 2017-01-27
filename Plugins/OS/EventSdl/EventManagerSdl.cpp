@@ -36,14 +36,14 @@ namespace AE
 
 		bool EventManagerSdl::Uninstall()
 		{
-			if(SDL_WasInit(SDL_INIT_EVENTS))
-			{
-				SDL_QuitSubSystem(SDL_INIT_EVENTS);
-			}
-
 			if(mEventQueue)
 			{
 				delete mEventQueue;
+			}
+
+			if(SDL_WasInit(SDL_INIT_EVENTS))
+			{
+				SDL_QuitSubSystem(SDL_INIT_EVENTS);
 			}
 
 			return true;

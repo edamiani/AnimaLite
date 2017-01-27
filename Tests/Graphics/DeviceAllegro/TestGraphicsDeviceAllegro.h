@@ -6,10 +6,11 @@
 #include "Anima/OS/KeyListener.h"
 #include "Anima/OS/MouseListener.h"
 
+#include "Plugins/Animation/Choreograph/AnimationManagerChoreograph.h"
 #include "Plugins/Graphics/Device/Sfml/ManagerSfml.h"
 #include "Plugins/Graphics/Image/Sfml/ImageManagerSfml.h"
-
 #include "Plugins/OS/EventSdl/EventManagerSdl.h"
+#include "Plugins/OS/TimerSdl/TimerSdl.h"
 #include "Plugins/OS/WindowSdl/WindowSdl.h"
 #include "Plugins/OS/WindowSdl/WindowManagerSdl.h"
 
