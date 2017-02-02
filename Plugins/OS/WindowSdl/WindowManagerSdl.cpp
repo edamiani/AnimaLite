@@ -26,18 +26,23 @@ namespace AE
 
 		bool WindowManagerSdl::Install(AE::uint options, PluginOptions *pluginDesc)
 		{
-			if(mParent != 0)
+			if(!SDL_WasInit(SDL_INIT_VIDEO))
 			{
-				mIsInstalled = true;
-
-				return true;
+				SDL_InitSubSystem(SDL_INIT_VIDEO);
 			}
-			else
-				return false;
+
+			mIsInstalled = true;
+
+			return true;
 		}
 
 		bool WindowManagerSdl::Uninstall()
 		{
+			if(SDL_WasInit(SDL_INIT_VIDEO))
+			{
+				SDL_QuitSubSystem(SDL_INIT_VIDEO);
+			}
+
 			mIsInstalled = false;
 
 			return true;

@@ -39,7 +39,10 @@ namespace AE
 			const std::string&				GetTitle() { return mWindowTitle; }
 			AE::int8*						GetType() { return mType; }
 			bool							IsFullScreen() { assert(mDeviceContext); return mDeviceContext->IsFullScreen(); }
+			void							SetDimensions(const AE::Math::Vector2 &dimensions) { mDimensions = dimensions; }
 			void							SetFullScreen(bool IsFullScreen) { assert(mDeviceContext); mDeviceContext->SetFullScreen(IsFullScreen); }
+			void							SetPosition(const AE::Math::Vector2 &position) { mPosition = position; }
+			void							SetTitle(const std::string &title) { mWindowTitle = title; }
 			virtual void					Show() = 0;
 
 		protected:

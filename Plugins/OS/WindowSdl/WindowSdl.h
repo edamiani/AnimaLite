@@ -25,6 +25,7 @@ namespace AE
 		{
 		public:
 			WindowSdl(AE::uint id, AE::OS::WindowDesc &windowDesc);
+			WindowSdl(AE::uint id, AE::OS::WindowHandle handle);
 			~WindowSdl();
 
 			void			Close() { SDL_DestroyWindow(mWindow); }

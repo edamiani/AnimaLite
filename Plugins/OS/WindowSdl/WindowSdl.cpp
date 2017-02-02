@@ -24,6 +24,26 @@ namespace AE
 			SDL_SetWindowData(mWindow, "AnimaWindow", this);
 		}
 
+		WindowSdl::WindowSdl(AE::uint id, AE::OS::WindowHandle handle)
+			: Window(id)
+		{
+			mType[0] = 'S';
+			mType[1] = 'D';
+			mType[2] = 'L';
+			mType[3] = '\0';
+
+			mIsFullScreen = false;
+
+			mWindow = SDL_CreateWindowFrom((void *)handle);
+
+			if(!mWindow)
+			{
+				std::cout << "WindowSdl::WindowSdl: " << SDL_GetError() << std::endl;
+			}
+
+			SDL_SetWindowData(mWindow, "AnimaWindow", this);
+		}
+
 		WindowSdl::~WindowSdl()
 		{
 			if(mWindow)

@@ -1,11 +1,11 @@
 cmake_minimum_required (VERSION 3.0)
 project (AnimaLite)
 
-set(wxWidgets_CONFIGURATION mswu)
+set(wxWidgets_CONFIGURATION mswud)
 set(wxWidgets_ROOT_DIR ${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets)
-set(wxWidgets_LIB_DIR ${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets/lib/vc140_x64_dll)
+set(wxWidgets_LIB_DIR ${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets/lib/vc_lib)
 find_package(wxWidgets COMPONENTS core base REQUIRED)
-#include(${wxWidgets_USE_FILE})
+include(${wxWidgets_USE_FILE})
 
 option(Anima_BuildSharedLibs "Build DLLs?")
 option(Anima_Temp "Build DLLs?")
@@ -33,6 +33,8 @@ include_directories("${PROJECT_SOURCE_DIR}/Dependencies/Choreograph/src")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/SFML/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/mathfu/dependencies/vectorial/include")
+#include_directories("${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets/lib/vc_lib/mswud")
+#include_directories("${PROJECT_SOURCE_DIR}/Dependencies/wxWidgets/include")
 #include_directories("${PROJECT_SOURCE_DIR}/Dependencies/DevIL/DevIL/include")
 
 if(Anima_BuildSharedLibs)
@@ -260,6 +262,12 @@ add_executable(TestWindow
 	Tests/OS/WindowSdl/TestWindowSdl.h
 	Tests/OS/WindowSdl/TestWindowSdl.cpp)
 target_link_libraries(TestWindow AeOsEventSdl AeOsWindowSdl SDL2main)
+
+add_executable(TestWindowWxWidgets
+	Tests/OS/WindowWxWidgets/TestWindowWxWidgets.h
+	Tests/OS/WindowWxWidgets/TestWindowWxWidgets.cpp)
+target_link_libraries(TestWindowWxWidgets AeGraphicsDeviceSfml AeOsWindowSdl ${wxWidgets_LIBRARIES} SDL2main)
+target_compile_definitions(TestWindowWxWidgets PRIVATE _CRT_SECURE_NO_WARNINGS __WXMSW_ wxUSE_MENUS wxUSE_GUI wxUSE_MSGDLG wxUSE_STATUSBAR)
 
 add_executable(TestEvent 
 	Tests/OS/EventSdl/TestEventSdl.h
