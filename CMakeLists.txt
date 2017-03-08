@@ -258,10 +258,10 @@ endif()
 #	target_link_libraries (WindowSdl SDL2-static)
 #endif()
 
-add_executable(TestWindow 
-	Tests/OS/WindowSdl/TestWindowSdl.h
-	Tests/OS/WindowSdl/TestWindowSdl.cpp)
-target_link_libraries(TestWindow AeOsEventSdl AeOsWindowSdl SDL2main)
+add_executable(TestCh02-Window 
+	Tests/Ch02-Window/Ch02-Window.h
+	Tests/Ch02-Window/Ch02-Window.cpp)
+target_link_libraries(TestCh02-Window AeOsEventSdl AeOsWindowSdl SDL2main)
 
 add_executable(TestWindowWxWidgets
 	Tests/OS/WindowWxWidgets/TestWindowWxWidgets.h
@@ -269,20 +269,25 @@ add_executable(TestWindowWxWidgets
 target_link_libraries(TestWindowWxWidgets AeGraphicsDeviceSfml AeOsWindowSdl ${wxWidgets_LIBRARIES} SDL2main)
 target_compile_definitions(TestWindowWxWidgets PRIVATE _CRT_SECURE_NO_WARNINGS __WXMSW_ wxUSE_MENUS wxUSE_GUI wxUSE_MSGDLG wxUSE_STATUSBAR)
 
-add_executable(TestEvent 
-	Tests/OS/EventSdl/TestEventSdl.h
-	Tests/OS/EventSdl/TestEventSdl.cpp)
-target_link_libraries(TestEvent AeOsEventSdl AeOsWindowSdl SDL2main)
+add_executable(TestCh02-Event 
+	Tests/Ch02-Event/Ch02-Event.h
+	Tests/Ch02-Event/Ch02-Event.cpp)
+target_link_libraries(TestCh02-Event AeOsEventSdl AeOsWindowSdl SDL2main)
 
-add_executable(TestGraphicsDevice 
-	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.h
-	Tests/Graphics/Deviceallegro/TestGraphicsDeviceAllegro.cpp)
-target_link_libraries(TestGraphicsDevice AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl Choreograph SDL2main)
+add_executable(TestCh03-Rendering 
+	Tests/Ch03-Rendering/Ch03-Rendering.h
+	Tests/Ch03-Rendering/Ch03-Rendering.cpp)
+target_link_libraries(TestCh03-Rendering AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl Choreograph SDL2main)
 
 add_executable(TestPhysicsBox2D 
 	Tests/Physics/Box2D/TestPhysicsBox2D.h
 	Tests/Physics/Box2D/TestPhysicsBox2D.cpp)
 target_link_libraries(TestPhysicsBox2D AeGraphicsDeviceSfml AeGraphicsImageSfml AeOsEventSdl AeOsWindowSdl SDL2main Box2D)
+
+add_executable(TestCh04-Input
+	Tests/Ch04-Input/Ch04-Input.h
+	Tests/Ch04-Input/Ch04-Input.cpp)
+target_link_libraries(TestCh04-Input AeInputSdl AeOsEventSdl AeOsWindowSdl SDL2main)
 
 add_executable(GamePongPrototype
 	Games/PongPrototype/Game.h
