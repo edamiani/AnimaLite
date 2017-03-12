@@ -65,6 +65,7 @@ add_library(AeCore STATIC
 	
 add_library(AeInputCore STATIC
 	Anima/Input/Device.h
+	Anima/Input/InputManagerDesc.h
 	Anima/Input/Joystick.h
 	Anima/Input/Keyboard.h
 	Anima/Input/KeyInfo.h
@@ -80,7 +81,6 @@ add_library(AeMathMathfu STATIC
 target_link_libraries(AeMathMathfu AeCore)
 
 add_library(AeInputSdl STATIC
-	Plugins/Input/Sdl/InputManagerSdlDesc.h
 	Plugins/Input/Sdl/JoystickSdl.h
 	Plugins/Input/Sdl/KeyboardSdl.h
 	Plugins/Input/Sdl/KeyInfoSdl.h
@@ -136,6 +136,7 @@ add_library(AeOsEventCore STATIC
 	Anima/OS/EventManager.h
 	Anima/OS/EventQueue.h
 	Anima/OS/EventQueue.cpp
+	Anima/OS/JoystickListener.h
 	Anima/OS/KeyListener.h
 	Anima/OS/MouseListener.h
 	Anima/OS/WindowListener.h)

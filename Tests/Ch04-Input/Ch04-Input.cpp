@@ -1,32 +1,7 @@
-#include "TestEventSdl.h"
+#include "Ch04-Input.h"
 
 #include <iostream>
 #include <memory>
-
-void TestListener::OnKeyDown(const AE::OS::EventKeyboard &event)
-{
-	std::cout << "onKeyDown!" << std::endl;
-}
-
-void TestListener::OnKeyUp(const AE::OS::EventKeyboard &event)
-{
-	std::cout << "onKeyUp!" << std::endl;
-}
-
-void TestListener::OnButtonDown(const AE::OS::EventMouse &event)
-{
-	std::cout << "onButtonDown!" << std::endl;
-}
-
-void TestListener::OnButtonUp(const AE::OS::EventMouse &event)
-{
-	std::cout << "onButtonUp!" << std::endl;
-}
-
-void TestListener::OnMouseMove(const AE::OS::EventMouse &event)
-{
-	std::cout << "onMouseMove!" << std::endl;
-}
 
 int main(int argc, char* args[])
 {
@@ -34,6 +9,9 @@ int main(int argc, char* args[])
 
 	auto *eventManager = pluginManager->RegisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 	eventManager->Install(AE::NO_OPTIONS);
+
+	auto *inputManager = pluginManager->RegisterPlugin<AE::Input::ManagerSdl>("InputSdl");
+	inputManager->Install(AE::NO_OPTIONS, new AE::Input::InputManagerDesc(eventManager));
 
 	auto *windowManager = pluginManager->RegisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
 	windowManager->Install(AE::NO_OPTIONS);
@@ -48,19 +26,30 @@ int main(int argc, char* args[])
 	auto testListener = std::make_unique<TestListener>();
 
 	eventManager->RegisterWindowListener("WindowListener", testListener.get());
-	eventManager->RegisterKeyListener("KeyListener", testListener.get());
-	eventManager->RegisterMouseListener("MouseListener", testListener.get());
 
 	window->Show();
 
 	AE::OS::EventQueue *eventQueue = eventManager->GetEventQueue();
 
-	while(eventQueue->PollEvents()) { }
+	//AE::Input::Joystick *joystick = inputManager->GetJoystick();
+	AE::Input::Keyboard *keyboard = inputManager->GetKeyboard();
+	AE::Input::Mouse *mouse = inputManager->GetMouse();
 
-	windowManager->Uninstall();
+	while(eventQueue->PollEvents()) 
+	{
+		if(keyboard->IsKeyDown(AE::Input::KC_X))
+		{
+			std::cout << "X key pressed!" << std::endl;
+		}
+	}
+
+	//windowManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
 
-	eventManager->Uninstall();
+	//inputManager->Uninstall();
+	pluginManager->UnregisterPlugin<AE::Input::ManagerSdl>("InputSdl");
+
+	//eventManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 
 	return 0;

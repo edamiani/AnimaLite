@@ -27,6 +27,18 @@ namespace AE
 				SDL_InitSubSystem(SDL_INIT_EVENTS);
 			}
 
+			if(!SDL_WasInit(SDL_INIT_JOYSTICK))
+			{
+				SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+			}
+
+			int numJoysticks = SDL_NumJoysticks();
+
+			for(int i = 0; i < numJoysticks; i++)
+			{
+				SDL_JoystickOpen(i);
+			}
+
 			mEventQueue = new AE::OS::EventQueueSdl();
 
 			mIsInstalled = true;
@@ -44,6 +56,11 @@ namespace AE
 			if(SDL_WasInit(SDL_INIT_EVENTS))
 			{
 				SDL_QuitSubSystem(SDL_INIT_EVENTS);
+			}
+
+			if(SDL_WasInit(SDL_INIT_JOYSTICK))
+			{
+				SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 			}
 
 			return true;

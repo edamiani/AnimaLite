@@ -100,6 +100,52 @@ namespace AE
 						return true;
 				}
 			}
+			else if(event->type == SDL_JOYAXISMOTION)
+			{
+				if(event->jaxis.value < -2000 || event->jaxis.value > 2000)
+				{
+					for(auto &listener : mJoystickListeners)
+					{
+						auto joyEvent = AE::OS::EventJoystick(AE::OS::EST_JOYSTICK_AXIS, window);
+						joyEvent.joystickId = event->jdevice.which;
+						joyEvent.axisId = event->jaxis.axis;
+						joyEvent.value = event->jaxis.value;
+						listener.second->OnAxisMove(joyEvent);
+					}
+				}
+			}
+			else if(event->type == SDL_JOYBUTTONDOWN)
+			{
+				for(auto &listener : mJoystickListeners)
+				{
+					auto joyEvent = AE::OS::EventJoystick(AE::OS::EST_JOYSTICK_BUTTON_DOWN, window);
+					joyEvent.joystickId = event->jdevice.which;
+					joyEvent.buttonId = event->jbutton.button;
+					listener.second->OnButtonDown(joyEvent);
+				}
+			}
+			else if(event->type == SDL_JOYBUTTONUP)
+			{
+				for(auto &listener : mJoystickListeners)
+				{
+					auto joyEvent = AE::OS::EventJoystick(AE::OS::EST_JOYSTICK_BUTTON_DOWN, window);
+					joyEvent.joystickId = event->jdevice.which;
+					joyEvent.buttonId = event->jbutton.button;
+					listener.second->OnButtonUp(joyEvent);
+				}
+			}
+
+			else if(event->type == SDL_JOYHATMOTION)
+			{
+				for(auto &listener : mJoystickListeners)
+				{
+					auto joyEvent = AE::OS::EventJoystick(AE::OS::EST_JOYSTICK_HAT, window);
+					joyEvent.joystickId = event->jdevice.which;
+					joyEvent.hatId = event->jhat.hat;
+					joyEvent.value = event->jhat.value;
+					listener.second->OnHatMove(joyEvent);
+				}
+			}
 			else if(event->type == SDL_KEYDOWN)
 			{
 				for(auto &listener : mKeyListeners)

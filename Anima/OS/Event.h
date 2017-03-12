@@ -28,6 +28,7 @@ namespace AE
 			EST_JOYSTICK_BUTTON_DOWN,
 			EST_JOYSTICK_BUTTON_UP,
 			EST_JOYSTICK_CONFIGURATION,
+			EST_JOYSTICK_HAT,
 			EST_KEY_DOWN,
 			EST_KEY_TRANSLATION,
 			EST_KEY_UP,
@@ -69,9 +70,10 @@ namespace AE
 		struct EventJoystick : public AE::OS::Event
 		{
 			AE::uint axisId;
-			AE::uint id;
-			AE::uint stickId;
-			AE::Real position;
+			AE::uint buttonId;
+			AE::uint joystickId;
+			AE::uint hatId;
+			AE::Real value;
 
 			EventJoystick(AE::OS::EventSubType _subType, AE::OS::Window *_sourceWindow)
 				: Event(AE::OS::ET_JOYSTICK, _subType, _sourceWindow) {}

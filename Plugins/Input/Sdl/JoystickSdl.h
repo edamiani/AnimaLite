@@ -1,7 +1,8 @@
 #ifndef __AE_INPUT_JOYSTICK_SDL__
 #define __AE_INPUT_JOYSTICK_SDL__
 
-#include "Device.h"
+#include "Anima/Types.h"
+#include "Anima/Input/Joystick.h"
 
 #include <vector>
 
@@ -18,18 +19,12 @@ namespace AE
 
 			//! Indicates if this Axis only supports Absoulte (ie JoyStick)
 			bool absOnly;
-
-			//! Used internally by OIS
-			void clear()
-			{
-				abs = rel = 0;
-			}
 		};
 
 		//! POV / HAT Joystick component
-		struct Pov
+		struct Hat
 		{
-			Pov() : direction(0) {}
+			Hat() : direction(0) {}
 
 			static const int Centered  = 0x00000000;
 			static const int North     = 0x00000001;
@@ -57,15 +52,15 @@ namespace AE
 			All members are valid for both buffered and non buffered mode
 			Sticks with zero values are not present on the device
 		*/
-		struct JoyStickState
+		struct JoystickState
 		{
-			JoyStickState() : buttons(0) { clear(); }
+			JoystickState() : buttons(0) { clear(); }
 
 			//! Represents all the single axes on the device
 			std::vector<Axis> mAxes;
 
 			//! Represents the value of a POV. Maximum of 4
-			Pov mPOV[4];
+			Hat mHats[4];
 
 			//! Represent the max sliders
 			Slider mSliders[4];
@@ -91,18 +86,17 @@ namespace AE
 			}
 		};
 
-		class Joystick : public AE::Input::Device
+		class Joystick : public AE::Input::Joystick
 		{
 		public:
 							Joystick() {  }
 			virtual			~Joystick() {  }
 
-			virtual int		getAxis(int axisNum) = 0;
-			virtual int		getAxisX() = 0;
-			virtual int		getAxisY() = 0;
-			virtual int		getMaxAxisValue() = 0;
-			virtual int		getMinAxisValue() = 0;
-			virtual bool	isButtonDown(short buttton) = 0;
+			virtual AE::int32	GetAxisValue(AE::uint axisNum) = 0;
+			virtual AE::int32	GetHatValue(AE::uint povNum) = 0;
+			virtual AE::int32	GetMaxAxisValue() = 0;
+			virtual AE::int32	GetMinAxisValue() = 0;
+			virtual bool		IsButtonDown(AE::uint buttton) = 0;
 		};
 	}
 }

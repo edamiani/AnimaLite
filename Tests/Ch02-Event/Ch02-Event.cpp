@@ -1,7 +1,27 @@
-#include "TestEventSdl.h"
+#include "Ch02-Event.h"
 
 #include <iostream>
 #include <memory>
+
+void TestListener::OnAxisMove(const AE::OS::EventJoystick &event)
+{
+	std::cout << event.joystickId << "   " << event.axisId << "   " << event.value << std::endl;
+}
+
+void TestListener::OnButtonDown(const AE::OS::EventJoystick &event)
+{
+	std::cout << "Joy  button down   " << event.joystickId << "   " << event.buttonId << event.value << std::endl;
+}
+
+void TestListener::OnButtonUp(const AE::OS::EventJoystick &event)
+{ 
+	std::cout << "Joy  button up   " << event.joystickId << "   " << event.buttonId << std::endl;
+}
+
+void TestListener::OnHatMove(const AE::OS::EventJoystick &event)
+{
+	std::cout << event.joystickId << "   " << event.hatId << "   " << event.value << std::endl;
+}
 
 void TestListener::OnKeyDown(const AE::OS::EventKeyboard &event)
 {
@@ -48,6 +68,7 @@ int main(int argc, char* args[])
 	auto testListener = std::make_unique<TestListener>();
 
 	eventManager->RegisterWindowListener("WindowListener", testListener.get());
+	eventManager->RegisterJoystickListener("JoystickListener", testListener.get());
 	eventManager->RegisterKeyListener("KeyListener", testListener.get());
 	eventManager->RegisterMouseListener("MouseListener", testListener.get());
 
@@ -57,10 +78,10 @@ int main(int argc, char* args[])
 
 	while(eventQueue->PollEvents()) { }
 
-	windowManager->Uninstall();
+	//windowManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");
-
-	eventManager->Uninstall();
+	
+	//eventManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::EventManagerSdl>("EventSdl");
 
 	return 0;

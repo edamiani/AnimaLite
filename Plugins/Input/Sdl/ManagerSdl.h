@@ -2,14 +2,16 @@
 #define __ANIMA_INPUT_MANAGER_SDL__
 
 #include "Anima/Input/Manager.h"
+#include "Anima/Input/InputManagerDesc.h"
 #include "Anima/OS/EventManager.h"
 #include "Anima/OS/MouseListener.h"
 
-#include "InputManagerSdlDesc.h"
 #include "KeyboardSdl.h"
 #include "MouseSdl.h"
 
 #include "Dependencies/SDL2-2.0.4/include/SDL.h"
+
+#include <cassert>
 
 namespace AE
 {
@@ -22,14 +24,16 @@ namespace AE
 
 			virtual ~ManagerSdl() {}
 
-			bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr)
+			bool Install(AE::uint options, PluginOptions *pluginDesc)
 			{
+				assert(pluginDesc != nullptr);
+
 				if (!SDL_WasInit(SDL_INIT_GAMECONTROLLER))
 				{
 					SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 				}
 
-				static_cast<AE::Input::InputManagerSdlDesc *>(pluginDesc)->eventManager->RegisterMouseListener("InputManagerSdl", this);
+				static_cast<AE::Input::InputManagerDesc *>(pluginDesc)->eventManager->RegisterMouseListener("InputManagerSdl", this);
 
 				mIsInstalled = true;
 

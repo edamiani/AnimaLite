@@ -20,6 +20,7 @@ namespace AE
 			virtual				~EventManager() {}
 
 			virtual bool		Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
+			virtual void		RegisterJoystickListener(const std::string &listenerName, AE::OS::JoystickListener *joystickListener) { if(mEventQueue) mEventQueue->RegisterJoystickListener(listenerName, joystickListener); }
 			virtual void		RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListener *keyListener) { if(mEventQueue) mEventQueue->RegisterKeyListener(listenerName, keyListener); }
 			virtual void		RegisterMouseListener(const std::string &listenerName, AE::OS::MouseListener *mouseListener) { if(mEventQueue) mEventQueue->RegisterMouseListener(listenerName, mouseListener); }
 			virtual void		RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListener *windowListener) { if(mEventQueue) mEventQueue->RegisterWindowListener(listenerName, windowListener); }

@@ -15,6 +15,11 @@ namespace AE
 			mWindowListeners.clear();
 		}
 
+		void EventQueue::RegisterJoystickListener(const std::string &listenerName, AE::OS::JoystickListener *joystickListener)
+		{
+			mJoystickListeners[listenerName] = joystickListener;
+		}
+
 		void EventQueue::RegisterKeyListener(const std::string &listenerName, AE::OS::KeyListener *keyListener)
 		{
 			mKeyListeners[listenerName] = keyListener;
@@ -28,6 +33,11 @@ namespace AE
 		void EventQueue::RegisterWindowListener(const std::string &listenerName, AE::OS::WindowListener *windowListener)
 		{
 			mWindowListeners[listenerName] = windowListener;
+		}
+
+		void EventQueue::UnregisterJoystickListener(const std::string &listenerName)
+		{
+			//mKeyListeners.remove(keyListener);
 		}
 
 		void EventQueue::UnregisterKeyListener(const std::string &listenerName)

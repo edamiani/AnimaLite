@@ -27,9 +27,9 @@ namespace AE
 		};
 
 		//! POV / HAT Joystick component
-		struct Pov
+		struct Hat
 		{
-			Pov() : direction(0) {}
+			Hat() : direction(0) {}
 
 			static const int Centered  = 0x00000000;
 			static const int North     = 0x00000001;
@@ -44,31 +44,20 @@ namespace AE
 			int direction;
 		};
 
-		//! A sliding axis - only used in Win32 Right Now
-		struct Slider
-		{
-			Slider() : abX(0), abY(0) {};
-			//! true if pushed, false otherwise
-			int abX, abY;
-		};
-
 		/**
 			Represents the state of the joystick
 			All members are valid for both buffered and non buffered mode
 			Sticks with zero values are not present on the device
 		*/
-		struct JoyStickState
+		struct JoystickState
 		{
-			JoyStickState() : buttons(0) { clear(); }
+			JoystickState() : buttons(0) { clear(); }
 
 			//! Represents all the single axes on the device
 			std::vector<Axis> mAxes;
 
 			//! Represents the value of a POV. Maximum of 4
-			Pov mPOV[4];
-
-			//! Represent the max sliders
-			Slider mSliders[4];
+			Hat mHats[4];
 
 			//! Represents All Buttons By Bit (max buttons = 32)
 			int buttons;
@@ -94,15 +83,14 @@ namespace AE
 		class Joystick : public AE::Input::Device
 		{
 		public:
-							Joystick() {  }
-			virtual			~Joystick() {  }
+								Joystick() {  }
+			virtual				~Joystick() {  }
 
-			virtual int		getAxis(int axisNum) = 0;
-			virtual int		getAxisX() = 0;
-			virtual int		getAxisY() = 0;
-			virtual int		getMaxAxisValue() = 0;
-			virtual int		getMinAxisValue() = 0;
-			virtual bool	isButtonDown(short buttton) = 0;
+			virtual AE::int32	GetAxisValue(AE::uint axisNum) = 0;
+			virtual AE::int32	GetMaxAxisValue() = 0;
+			virtual AE::int32	GetMinAxisValue() = 0;
+			virtual AE::int32	GetHatValue(AE::uint povNum) = 0;
+			virtual bool		IsButtonDown(AE::uint buttton) = 0;
 		};
 	}
 }
