@@ -4,99 +4,26 @@
 #include "Anima/Types.h"
 #include "Anima/Input/Joystick.h"
 
+#include "Dependencies/SDL2-2.0.4/include/SDL.h"
+
 #include <vector>
 
 namespace AE
 {
 	namespace Input
 	{
-		struct Axis
-		{
-			Axis() : abs(0), rel(0), absOnly(false) {};
-
-			//! Absoulte and Relative value components
-			int abs, rel;
-
-			//! Indicates if this Axis only supports Absoulte (ie JoyStick)
-			bool absOnly;
-		};
-
-		//! POV / HAT Joystick component
-		struct Hat
-		{
-			Hat() : direction(0) {}
-
-			static const int Centered  = 0x00000000;
-			static const int North     = 0x00000001;
-			static const int South     = 0x00000010;
-			static const int East      = 0x00000100;
-			static const int West      = 0x00001000;
-			static const int NorthEast = 0x00000101;
-			static const int SouthEast = 0x00000110;
-			static const int NorthWest = 0x00001001;
-			static const int SouthWest = 0x00001010;
-
-			int direction;
-		};
-
-		//! A sliding axis - only used in Win32 Right Now
-		struct Slider
-		{
-			Slider() : abX(0), abY(0) {};
-			//! true if pushed, false otherwise
-			int abX, abY;
-		};
-
-		/**
-			Represents the state of the joystick
-			All members are valid for both buffered and non buffered mode
-			Sticks with zero values are not present on the device
-		*/
-		struct JoystickState
-		{
-			JoystickState() : buttons(0) { clear(); }
-
-			//! Represents all the single axes on the device
-			std::vector<Axis> mAxes;
-
-			//! Represents the value of a POV. Maximum of 4
-			Hat mHats[4];
-
-			//! Represent the max sliders
-			Slider mSliders[4];
-
-			//! Represents All Buttons By Bit (max buttons = 32)
-			int buttons;
-
-			//! Button Bit Test - returns true if down
-			inline int buttonDown( int button ) const
-			{
-				return ((buttons & ( 1L << button )) == 0) ? false : true;
-			}
-
-			//! internal method
-			void clear()
-			{
-				buttons = 0;
-				for( std::vector<Axis>::iterator i = mAxes.begin(), e = mAxes.end(); i != e; ++i )
-				{
-					(*i).absOnly = true;	//Currently, joysticks only report Abs
-					(*i).clear();
-				}
-			}
-		};
-
-		class Joystick : public AE::Input::Joystick
+		class JoystickSdl : public AE::Input::Joystick
 		{
 		public:
-							Joystick() {  }
-			virtual			~Joystick() {  }
+						JoystickSdl(AE::int32 id) : Joystick(id) {  }
+			virtual		~JoystickSdl() {  }
 
-			virtual AE::int32	GetAxisValue(AE::uint axisNum) = 0;
-			virtual AE::int32	GetHatValue(AE::uint povNum) = 0;
-			virtual AE::int32	GetMaxAxisValue() = 0;
-			virtual AE::int32	GetMinAxisValue() = 0;
-			virtual bool		IsButtonDown(AE::uint buttton) = 0;
+			AE::int32	GetAxisValue(AE::uint axisNum) { return SDL_JoystickGetAxis(SDL_JoystickFromInstanceID(mId), axisNum); }
+			AE::int32	GetHatValue(AE::uint hatNum) { return SDL_JoystickGetHat(SDL_JoystickFromInstanceID(mId), hatNum); }
+			AE::int32	GetNumAxes() { return SDL_JoystickNumAxes(SDL_JoystickFromInstanceID(mId)); }
+			AE::int32	GetNumButtons() { return SDL_JoystickNumButtons(SDL_JoystickFromInstanceID(mId)); }
+			AE::int32	GetNumHats() { return SDL_JoystickNumHats(SDL_JoystickFromInstanceID(mId)); }
+			bool		IsButtonDown(AE::uint button) { return SDL_JoystickGetButton(SDL_JoystickFromInstanceID(mId), button); }
 		};
 	}
 }
