@@ -41,6 +41,16 @@ int main(int argc, char* args[])
 		{
 			std::cout << "X key pressed!" << std::endl;
 		}
+
+		if(mouse->IsButtonDown(AE::OS::MBT_LEFT))
+		{
+			std::cout << "Left button pressed!" << std::endl;
+		}
+
+		if(mouse->IsButtonDown(AE::OS::MBT_RIGHT))
+		{
+			std::cout << "Right button pressed!" << std::endl;
+		}
 	}
 
 	//windowManager->Uninstall();

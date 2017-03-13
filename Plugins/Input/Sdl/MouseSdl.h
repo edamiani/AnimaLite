@@ -34,7 +34,28 @@ namespace AE
 				return AE::Math::Vector2(x, y);
 			}
 
-			bool				IsButtonDown(AE::OS::MouseButtonType button) { return mIsButtonDown[static_cast<int>(button)]; }
+			bool				IsButtonDown(AE::OS::MouseButtonType button) 
+			{ 
+				int buttons = SDL_GetMouseState(nullptr, nullptr);
+
+				bool result = false;
+
+				switch(button)
+				{
+				case AE::OS::MBT_LEFT:
+					result = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+					break;
+				case AE::OS::MBT_MIDDLE:
+					result = buttons & SDL_BUTTON(SDL_BUTTON_MIDDLE);
+					break;
+				case AE::OS::MBT_RIGHT:
+					result = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+					break;
+				}
+
+				return result;
+			}
+
 			bool				Poll() { return true; }
 
 			void				OnButtonDown(const AE::OS::EventMouse &event) { mIsButtonDown[event.buttonPressed] = true; }
