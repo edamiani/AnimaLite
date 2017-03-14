@@ -6,6 +6,7 @@
 #include "Anima/OS/EventManager.h"
 #include "Anima/OS/MouseListener.h"
 
+#include "JoystickSdl.h"
 #include "KeyboardSdl.h"
 #include "MouseSdl.h"
 
@@ -28,9 +29,17 @@ namespace AE
 			{
 				assert(pluginDesc != nullptr);
 
-				if (!SDL_WasInit(SDL_INIT_GAMECONTROLLER))
+				if(!SDL_WasInit(SDL_INIT_JOYSTICK))
 				{
-					SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
+					SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+				}
+
+				int numJoysticks = SDL_NumJoysticks();
+
+				for(int i = 0; i < numJoysticks; i++)
+				{
+					SDL_JoystickOpen(i);
+					mJoysticks.push_back(new JoystickSdl(i));
 				}
 
 				static_cast<AE::Input::InputManagerDesc *>(pluginDesc)->eventManager->RegisterMouseListener("InputManagerSdl", this);
@@ -47,13 +56,22 @@ namespace AE
 					SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 				}
 
+				for(auto joystick : mJoysticks)
+				{
+					delete joystick;
+				}
+				mJoysticks.clear();
+
 				return true;
 			}
 
+			AE::Input::Joystick*	GetJoystick(AE::uint index) { return mJoysticks[index]; }
 			AE::Input::Keyboard*	GetKeyboard() { return &mKeyboard; }
 			AE::Input::Mouse*		GetMouse() { return &mMouse; }
+			AE::uint				GetNumJoysticks() { return mJoysticks.size(); }
 
 		private:
+			std::vector<AE::Input::Joystick *>		mJoysticks;
 			AE::Input::KeyboardSdl	mKeyboard;
 			AE::Input::MouseSdl		mMouse;
 		};

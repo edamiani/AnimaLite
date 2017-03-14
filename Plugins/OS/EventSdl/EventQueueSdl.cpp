@@ -22,6 +22,7 @@ namespace AE
 
 		EventQueueSdl::~EventQueueSdl()
 		{
+			mJoystickListeners.clear();
 			mKeyListeners.clear();
 			mMouseListeners.clear();
 			mWindowListeners.clear();

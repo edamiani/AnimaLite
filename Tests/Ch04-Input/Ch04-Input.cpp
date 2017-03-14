@@ -31,12 +31,22 @@ int main(int argc, char* args[])
 
 	AE::OS::EventQueue *eventQueue = eventManager->GetEventQueue();
 
-	//AE::Input::Joystick *joystick = inputManager->GetJoystick();
+	AE::Input::Joystick *joystick = nullptr;
+	if(inputManager->GetNumJoysticks() > 0)
+	{
+		joystick = inputManager->GetJoystick(0);
+	}
+
 	AE::Input::Keyboard *keyboard = inputManager->GetKeyboard();
 	AE::Input::Mouse *mouse = inputManager->GetMouse();
 
 	while(eventQueue->PollEvents()) 
 	{
+		if(joystick && joystick->IsButtonDown(0))
+		{
+			std::cout << "Button 0 pressed!" << std::endl;
+		}
+
 		if(keyboard->IsKeyDown(AE::Input::KC_X))
 		{
 			std::cout << "X key pressed!" << std::endl;
