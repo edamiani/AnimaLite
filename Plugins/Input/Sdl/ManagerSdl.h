@@ -27,8 +27,6 @@ namespace AE
 
 			bool Install(AE::uint options, PluginOptions *pluginDesc)
 			{
-				assert(pluginDesc != nullptr);
-
 				if(!SDL_WasInit(SDL_INIT_JOYSTICK))
 				{
 					SDL_InitSubSystem(SDL_INIT_JOYSTICK);
@@ -42,8 +40,6 @@ namespace AE
 					mJoysticks.push_back(new JoystickSdl(i));
 				}
 
-				static_cast<AE::Input::InputManagerDesc *>(pluginDesc)->eventManager->RegisterMouseListener("InputManagerSdl", this);
-
 				mIsInstalled = true;
 
 				return true;
@@ -51,9 +47,9 @@ namespace AE
 
 			bool Uninstall()
 			{
-				if (SDL_WasInit(SDL_INIT_GAMECONTROLLER))
+				if (SDL_WasInit(SDL_INIT_JOYSTICK))
 				{
-					SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+					SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 				}
 
 				for(auto joystick : mJoysticks)

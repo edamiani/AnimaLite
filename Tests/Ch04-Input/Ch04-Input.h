@@ -1,5 +1,5 @@
-#ifndef __TEST_EVENT_SDL__
-#define __TEST_EVENT_SDL__
+#ifndef __TEST_CH04_INPUT__
+#define __TEST_CH04_INPUT__
 
 #include "Anima/PluginManager.h"
 

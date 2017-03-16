@@ -34,7 +34,7 @@ namespace AE
 				return AE::Math::Vector2(x, y);
 			}
 
-			bool				IsButtonDown(AE::OS::MouseButtonType button) 
+			bool IsButtonDown(AE::OS::MouseButtonType button) 
 			{ 
 				int buttons = SDL_GetMouseState(nullptr, nullptr);
 
@@ -57,9 +57,6 @@ namespace AE
 			}
 
 			bool				Poll() { return true; }
-
-			void				OnButtonDown(const AE::OS::EventMouse &event) { mIsButtonDown[event.buttonPressed] = true; }
-			void				OnButtonUp(const AE::OS::EventMouse &event) { mIsButtonDown[event.buttonPressed] = false; }
 
 		private:
 			AE::Math::Vector2	mPosition;
