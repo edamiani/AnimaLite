@@ -234,17 +234,28 @@ add_library(AeOsWindowSdl STATIC
 	Plugins/OS/WindowSdl/WindowManagerSdl.cpp)
 target_link_libraries(AeOsWindowSdl AeOsWindowCore "${SDL_LIB}")
 
-add_library(AeAudioCore STATIC
-	Anima/Audio/AudioManager.h
-	Anima/Audio/Music.h
-	Anima/Audio/Sound.h)
-target_link_libraries(AeAudioCore AeCore)
+add_library(AeAudioLoaderCore STATIC
+	Anima/Audio/AudioLoaderManager.h
+	Anima/Audio/AudioBuffer.h
+	Anima/Audio/AudioStream.h)
+target_link_libraries(AeAudioLoaderCore AeCore)
 
-add_library(AeAudioSfml STATIC
+add_library(AeAudioPlayerCore STATIC
+	Anima/Audio/AudioPlayerManager.h
+	Anima/Audio/AudioPlayer.h)
+target_link_libraries(AeAudioPlayerCore AeCore)
+
+add_library(AeAudioSpatialCore STATIC
+	Anima/Audio/AudioSpatialManager.h
+	Anima/Audio/AudioSource.h
+	Anima/Audio/AudioListener.h)
+target_link_libraries(AeAudioSpatialCore AeCore)
+
+add_library(AeAudioLoaderSfml STATIC
 	Plugins/Audio/Sfml/AudioManagerSfml.h
 	Plugins/Audio/Sfml/MusicSfml.h
 	Plugins/Audio/Sfml/SoundSfml.h)
-target_link_libraries(AeAudioSfml AeAudioCore)
+target_link_libraries(AeAudioLoaderSfml AeAudioLoaderCore)
 
 if(Anima_BuildSharedLibs)
 	target_compile_definitions(WindowCore PRIVATE AE_EXPORT_DLL)
