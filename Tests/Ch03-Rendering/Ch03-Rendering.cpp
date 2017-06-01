@@ -1,4 +1,4 @@
-#include "TestGraphicsDeviceAllegro.h"
+#include "Ch03-Rendering.h"
 
 #include "Anima/Math/Transform2.h"
 

@@ -76,7 +76,8 @@ int main(int argc, char* args[])
 
 	AE::OS::EventQueue *eventQueue = eventManager->GetEventQueue();
 
-	while(eventQueue->PollEvents()) { }
+	AE::MainLoop *mainLoop = new AE::MainLoop(pluginManager);
+	mainLoop->Run();
 
 	//windowManager->Uninstall();
 	pluginManager->UnregisterPlugin<AE::OS::WindowManagerSdl>("WindowSdl");

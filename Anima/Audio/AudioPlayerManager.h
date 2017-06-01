@@ -1,5 +1,5 @@
-#ifndef __AE_AUDIO_MANAGER__
-#define __AE_AUDIO_MANAGER__
+#ifndef __AE_AUDIO_PLAYER_MANAGER__
+#define __AE_AUDIO_PLAYER_MANAGER__
 
 #include "Anima/Plugin.h"
 
@@ -7,11 +7,11 @@ namespace AE
 {
 	namespace Audio
 	{
-		class AudioManager : public AE::Plugin
+		class AudioPlayerManager : public AE::Plugin
 		{
 		public:
-								AudioManager() : Plugin(AE::PT_AUDIO_MANAGER) {}
-			virtual				~AudioManager() {}
+								AudioPlayerManager() : Plugin(AE::PT_AUDIO_PLAYER_MANAGER) {}
+			virtual				~AudioPlayerManager() {}
 
 			virtual bool		Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
 			virtual bool		Uninstall() = 0;
@@ -19,7 +19,7 @@ namespace AE
 
 
 		protected:
-			
+
 		};
 	}
 }

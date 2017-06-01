@@ -1,25 +1,15 @@
-#ifndef __AE_AUDIO_MANAGER__
-#define __AE_AUDIO_MANAGER__
-
-#include "Anima/Plugin.h"
+#ifndef __AE_AUDIO_STREAM__
+#define __AE_AUDIO_STREAM__
 
 namespace AE
 {
 	namespace Audio
 	{
-		class AudioManager : public AE::Plugin
+		class AudioStream
 		{
 		public:
-								AudioManager() : Plugin(AE::PT_AUDIO_MANAGER) {}
-			virtual				~AudioManager() {}
-
-			virtual bool		Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
-			virtual bool		Uninstall() = 0;
-
-
-
-		protected:
-			
+								AudioStream() {}
+			virtual				~AudioStream() {}
 		};
 	}
 }

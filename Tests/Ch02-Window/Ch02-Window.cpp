@@ -1,4 +1,4 @@
-#include "TestWindowSdl.h"
+#include "Ch02-Window.h"
 
 int main(int argc, char* args[])
 {

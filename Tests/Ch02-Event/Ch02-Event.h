@@ -1,6 +1,7 @@
 #ifndef __TEST_EVENT_SDL__
 #define __TEST_EVENT_SDL__
 
+#include "Anima/MainLoop.h"
 #include "Anima/PluginManager.h"
 
 #include "Anima/OS/JoystickListener.h"

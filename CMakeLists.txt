@@ -53,6 +53,8 @@ if(AnimaMath_Mathfu)
 endif()
 
 add_library(AeCore STATIC
+	Anima/MainLoop.h
+	Anima/MainLoop.cpp
 	Anima/Plugin.h
 	Anima/Plugin.cpp
 	Anima/PluginGroup.h
