@@ -1,5 +1,5 @@
-#ifndef __TEST_EVENT_SDL__
-#define __TEST_EVENT_SDL__
+#ifndef __TEST_CH02_EVENT__
+#define __TEST_CH02_EVENT__
 
 #include "Anima/MainLoop.h"
 #include "Anima/PluginManager.h"
