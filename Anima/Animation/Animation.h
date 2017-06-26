@@ -9,19 +9,22 @@ namespace AE
 {
 	namespace Animation
 	{
+		template <typename T>
 		class Animation
 		{
 		public:
 			Animation() { }
 			~Animation() { }
 
+			virtual const T& GetCurrentValue() = 0;
 			virtual void Step(AE::Real deltaTime) = 0;
 
 		protected:
 
 		};
 
-		typedef std::unique_ptr<AE::Animation::Animation> AnimationPtr;
+		//typedef std::unique_ptr<AE::Animation::Animation<int>> AnimationPtr;
+		template<class T> using AnimationPtr = std::unique_ptr<AE::Animation::Animation<T>>;
 	}
 }
 

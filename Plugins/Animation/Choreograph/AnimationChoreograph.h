@@ -13,13 +13,13 @@ namespace AE
 	namespace Animation
 	{
 		template <typename T>
-		class AnimationChoreograph : public AE::Animation::Animation
+		class AnimationChoreograph : public AE::Animation::Animation<T>
 		{
 		public:
 			AnimationChoreograph(AE::Animation::Range<T> &range, AE::Real duration) 
 			{ 
-				mOutput = new choreograph::Output<T>(range.GetFrom());
-				mTimeline.apply(mOutput)
+				mOutput = choreograph::Output<T>(range.GetFrom());
+				mTimeline.apply(&mOutput)
 					.then<choreograph::RampTo>(range.GetTo(), duration);
 				//mMotionOptions = mTimeline.apply(mOutput);
 				//mMotionOptions.then<choreograph::RampTo>(range.GetTo(), duration);
@@ -27,9 +27,9 @@ namespace AE
 
 			~AnimationChoreograph() { }
 
-			T& GetCurrentValue()
+			const T& GetCurrentValue()
 			{
-				return *(static_cast<T*>(mTimeline.getTarget()));
+				return mOutput.value();
 			}
 
 			void Step(AE::Real deltaTime)
@@ -39,7 +39,7 @@ namespace AE
 
 		protected:
 			//choreograph::MotionOptions<T>	mMotionOptions;
-			choreograph::Output<T>			*mOutput;
+			choreograph::Output<T>			mOutput;
 			choreograph::Timeline			mTimeline;
 		};
 	}

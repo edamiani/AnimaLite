@@ -79,7 +79,7 @@ int main(int argc, char* args[])
 	float scale = 0.9f;
 	float multiplier = -1;
 
-	AE::Animation::AnimationPtr animation = animationManager->CreateAnimation<AE::int16>(AE::Animation::Range<AE::int16>(1, 3), 2.0);
+	AE::Animation::AnimationPtr<AE::int16> animation = animationManager->CreateAnimation<AE::int16>(AE::Animation::Range<AE::int16>(1, 3), 2.0);
 
 	std::unique_ptr<AE::OS::TimerSdl> timer(new AE::OS::TimerSdl());
 	timer->Start();
@@ -90,6 +90,7 @@ int main(int argc, char* args[])
 		AE::uint32 deltaTime = timer->GetIntervalFromLastMark();
 
 		animation->Step(deltaTime / 1000.0f);
+		std::cout << animation->GetCurrentValue() << std::endl;
 
 		deviceContext->BeginRendering(AE::Graphics::Color(128, 0, 0, 255));
 
@@ -97,7 +98,7 @@ int main(int argc, char* args[])
 		/*transform = transform.Translate(Vector2(image->GetDimensions().x() / 2.0f, image->GetDimensions().y() / 2.0f))
 			.Rotate(angle);*/
 		transform = transform
-			//.Translate(Vector2(150, 150))
+			.Translate(Vector2(150, 150))
 			.Rotate(angle)
 			//.Translate(Vector2(50, 50))
 			.Scale(Vector2(scale, scale))

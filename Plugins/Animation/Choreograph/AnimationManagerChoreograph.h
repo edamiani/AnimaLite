@@ -18,9 +18,9 @@ namespace AE
 			~AnimationManagerChoreograph() { }
 
 			template <typename T>
-			AE::Animation::AnimationPtr CreateAnimation(AE::Animation::Range<T> &range, AE::Real duration)
+			AE::Animation::AnimationPtr<T> CreateAnimation(AE::Animation::Range<T> &range, AE::Real duration)
 			{
-				std::unique_ptr<AE::Animation::Animation> animation(new AnimationChoreograph<T>(range, duration));
+				std::unique_ptr<AE::Animation::Animation<T>> animation(new AnimationChoreograph<T>(range, duration));
 
 				return animation;
 			}

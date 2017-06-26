@@ -9,7 +9,7 @@ namespace AE
 {
 	namespace Ecs
 	{
-		class EcsManager
+		class EcsManager : public AE::Plugin
 		{
 		protected:
 

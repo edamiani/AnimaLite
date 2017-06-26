@@ -17,7 +17,7 @@ namespace AE
 			~AnimationManager() { }
 
 			template <typename T>
-			AE::Animation::AnimationPtr CreateAnimation(const AE::Animation::Range<T> &range, AE::Real duration) = 0;
+			AE::Animation::AnimationPtr<T> CreateAnimation(const AE::Animation::Range<T> &range, AE::Real duration) = 0;
 
 			virtual bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
 			virtual bool Uninstall() = 0;
