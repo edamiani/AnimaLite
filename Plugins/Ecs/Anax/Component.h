@@ -11,14 +11,16 @@ namespace AE
 {
 	namespace Ecs
 	{
-		class ComponentAnax : public anax::Component
+		class Component : public anax::Component
 		{
 		public:
-						ComponentAnax() {  }
-			virtual		~ComponentAnax() {  }
+						Component() {  }
+			virtual		~Component() {  }
+
+			void Step(AE::Real deltaTime) {}
 		};
 
-		class ComponentWrapperAnax : public AE::Ecs::Component
+		/*class ComponentWrapperAnax : public AE::Ecs::Component
 		{
 		public:
 			ComponentWrapperAnax(ComponentAnax &component) : mComponentAnax(component) {}
@@ -28,7 +30,7 @@ namespace AE
 
 		private:
 			ComponentAnax mComponentAnax;
-		};
+		};*/
 	}
 }
 

@@ -13,6 +13,9 @@ option(Anima_Temp "Build DLLs?")
 option(AnimaMath_Mathfu "Uses mathfu as the math library" ON)
 option(AnimaMath_Eigen "Uses Eigen as the math library" OFF)
 
+option(AnimaEcs_Anax "Uses Anax as the entity-component library" ON)
+option(AnimaEcs_EntityX "Uses EntityX as the entity-component library" OFF)
+
 #add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/allegro")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/anax")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/Dependencies/bullet3")
@@ -50,6 +53,12 @@ if(AnimaMath_Mathfu)
 	file(WRITE Anima/Math/Transform2.h "#ifndef __AE_MATH_TRANSFORM2__\n#define __AE_MATH_TRANSFORM2__\n\n#include \"Plugins/Math/MathMathfu/Transform2.h\"\n\n#endif")
 	file(WRITE Anima/Math/Vector2.h "#ifndef __AE_MATH_VECTOR2__\n#define __AE_MATH_VECTOR2__\n\n#include \"Plugins/Math/MathMathfu/Vector2.h\"\n\n#endif")
 	file(WRITE Anima/Math/Vector3.h "#ifndef __AE_MATH_VECTOR3__\n#define __AE_MATH_VECTOR3__\n\n#include \"Plugins/Math/MathMathfu/Vector3.h\"\n\n#endif")
+endif()
+
+if(AnimaEcs_EntityX)
+	file(WRITE Anima/Ecs/Component.h "#ifndef __AE_ECS_COMPONENT__\n#define __AE_ECS_COMPONENT__\n\n#include \"Plugins/Ecs/Anax/Component.h\"\n\n#endif")
+else()
+	file(WRITE Anima/Ecs/Component.h "#ifndef __AE_ECS_COMPONENT__\n#define __AE_ECS_COMPONENT__\n\n#include \"Plugins/Ecs/Anax/Component.h\"\n\n#endif")
 endif()
 
 add_library(AeCore STATIC
@@ -122,11 +131,12 @@ target_link_libraries(AeAnimationChoreograph AeAnimationCore Choreograph)
 add_library(AeEcsCore STATIC
 	Anima/Ecs/Component.h
 	Anima/Ecs/EcsManager.h
-	Anima/Ecs/Entity.h)
+	Anima/Ecs/Entity.h
+	Anima/Ecs/System.h)
 target_link_libraries(AeEcsCore AeCore)
 
 add_library(AeEcsAnax STATIC
-	Plugins/Ecs/Anax/ComponentAnax.h
+	Plugins/Ecs/Anax/Component.h
 	Plugins/Ecs/Anax/EcsManagerAnax.h
 	Plugins/Ecs/Anax/EcsManagerAnax.cpp
 	Plugins/Ecs/Anax/EntityAnax.h)
