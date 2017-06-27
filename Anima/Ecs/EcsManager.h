@@ -19,6 +19,9 @@ namespace AE
 
 			virtual Entity CreateEntity() = 0;
 			virtual void RegisterComponent() = 0;
+
+			virtual bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr) = 0;
+			virtual bool Uninstall() = 0;
 		};
 	}
 }

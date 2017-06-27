@@ -30,6 +30,7 @@ include_directories("${PROJECT_SOURCE_DIR}")
 
 #include_directories("${PROJECT_SOURCE_DIR}/Dependencies/allegro/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/anax/include")
+include_directories("${PROJECT_BINARY_DIR}/Dependencies/anax/include")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/bullet3/src")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/Box2D/Box2D")
 include_directories("${PROJECT_SOURCE_DIR}/Dependencies/Choreograph/src")
@@ -59,6 +60,7 @@ if(AnimaEcs_EntityX)
 	file(WRITE Anima/Ecs/Component.h "#ifndef __AE_ECS_COMPONENT__\n#define __AE_ECS_COMPONENT__\n\n#include \"Plugins/Ecs/Anax/Component.h\"\n\n#endif")
 else()
 	file(WRITE Anima/Ecs/Component.h "#ifndef __AE_ECS_COMPONENT__\n#define __AE_ECS_COMPONENT__\n\n#include \"Plugins/Ecs/Anax/Component.h\"\n\n#endif")
+	file(WRITE Anima/Ecs/System.h "#ifndef __AE_ECS_SYSTEM__\n#define __AE_ECS_COMPONENT__\n\n#include \"Plugins/Ecs/Anax/System.h\"\n\n#endif")
 endif()
 
 add_library(AeCore STATIC
@@ -139,8 +141,9 @@ add_library(AeEcsAnax STATIC
 	Plugins/Ecs/Anax/Component.h
 	Plugins/Ecs/Anax/EcsManagerAnax.h
 	Plugins/Ecs/Anax/EcsManagerAnax.cpp
-	Plugins/Ecs/Anax/EntityAnax.h)
-target_link_libraries(AeEcsAnax AeEcsCore anax)
+	Plugins/Ecs/Anax/EntityAnax.h
+	Plugins/Ecs/Anax/System.h)
+target_link_libraries(AeEcsAnax anax)
 	
 add_library(AeOsEventCore STATIC
 	Anima/OS/Event.h
@@ -312,6 +315,11 @@ add_executable(TestCh04-Input
 	Tests/Ch04-Input/Ch04-Input.h
 	Tests/Ch04-Input/Ch04-Input.cpp)
 target_link_libraries(TestCh04-Input AeInputSdl AeOsEventSdl AeOsWindowSdl SDL2main)
+
+add_executable(TestCh05-Entity-Component
+	Tests/Ch05-Entity-Component/Ch05-Entity-Component.h
+	Tests/Ch05-Entity-Component/Ch05-Entity-Component.cpp)
+target_link_libraries(TestCh05-Entity-Component AeGraphicsDeviceSfml AeGraphicsImageSfml AeInputSdl AeOsEventSdl AeOsWindowSdl AeEcsAnax Choreograph SDL2main)
 
 add_executable(GamePongPrototype
 	Games/PongPrototype/Game.h

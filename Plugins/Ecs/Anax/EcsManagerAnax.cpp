@@ -12,5 +12,10 @@ namespace AE
 
 			return EntityAnax(entity);
 		}
+
+		void EcsManagerAnax::RegisterComponent()
+		{
+
+		}
 	}
 }

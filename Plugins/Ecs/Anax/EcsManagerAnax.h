@@ -18,6 +18,21 @@ namespace AE
 			virtual ~EcsManagerAnax() {}
 
 			Entity CreateEntity();
+			void RegisterComponent();
+
+			bool Install(AE::uint options, PluginOptions *pluginDesc = nullptr)
+			{
+				mIsInstalled = true;
+
+				return true;
+			}
+
+			bool Uninstall()
+			{
+				mIsInstalled = false;
+
+				return true;
+			}
 
 		private:
 			anax::World *mWorld;
